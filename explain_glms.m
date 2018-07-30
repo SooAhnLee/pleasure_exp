@@ -14,24 +14,24 @@ global bgcolor white orange red  %color
             Screen('DrawLine', theWindow, white, anchor_lms(1,i), H*(3/4)-scale_H/4, anchor_lms(1,i), H*(3/4)+scale_H/4, 2);
             Screen('DrawLine', theWindow, white, anchor_lms(2,i), H*(3/4)-scale_H/4, anchor_lms(2,i), H*(3/4)+scale_H/4, 2);
         end
-        DrawFormattedText(theWindow, double('불쾌감'), lb-70, H*(3/4)+10, white);
-        DrawFormattedText(theWindow, double('쾌감'), rb+20, H*(3/4)+10, white);
-        DrawFormattedText(theWindow, double('중립'), W/2-20, H*(3/4)+scale_H/2*1.5);
+        DrawFormattedText(theWindow, double('불쾌'), lb-70, H*(3/4)+10, white);
+        DrawFormattedText(theWindow, double('유쾌'), rb+20, H*(3/4)+10, white);
+        DrawFormattedText(theWindow, double('중립'), W/2-30, H*(3/4)+scale_H/2*1.6);
         Screen('DrawLine', theWindow, white, W/2, H*(3/4)-scale_H/3, W/2, H*(3/4)+scale_H/3, 6);
         Screen('DrawLine', theWindow, white, lb, H*(3/4)-scale_H/2, lb, H*(3/4)+scale_H/2, 6);
         Screen('DrawLine', theWindow, white, rb, H*(3/4)-scale_H/2, rb, H*(3/4)+scale_H/2, 6);
         
         %         DrawFormattedText(theWindow, double('거의 느껴지지 않음'), anchor_lms(1,1)-scale_W/5, H*(3/4)+scale_H/4, white,2,[],[],1);
-        DrawFormattedText(theWindow, double('약함'), anchor_lms(1,2)-scale_W/5, H*(3/4)+scale_H/2, white, [],[],[],1);
-        DrawFormattedText(theWindow, double('중간'), anchor_lms(1,3)-scale_W/5, H*(3/4)+scale_H/2, white, [],[],[],1);
-        DrawFormattedText(theWindow, double('강함'), anchor_lms(1,4)-scale_W/5, H*(3/4)+scale_H/2, white, [],[],[],1);
-        DrawFormattedText(theWindow, double('매우 강함'), anchor_lms(1,5)-scale_W/5, H*(3/4)+scale_H/2, white, 2,[],[],1);
+        DrawFormattedText(theWindow, double('약함'), anchor_lms(1,2)-scale_W/6, H*(3/4)+scale_H/2, white, [],[],[],1);
+        DrawFormattedText(theWindow, double('중간'), anchor_lms(1,3)-scale_W/6, H*(3/4)+scale_H/2, white, [],[],[],1);
+        DrawFormattedText(theWindow, double('강함'), anchor_lms(1,4)-scale_W/6, H*(3/4)+scale_H/2, white, [],[],[],1);
+        DrawFormattedText(theWindow, double('매우 강함'), anchor_lms(1,5)-scale_W/6, H*(3/4)+scale_H/2, white, 2,[],[],1);
         
         %         DrawFormattedText(theWindow, double('거의 느껴지지 않음'), anchor_lms(2,1), H*(3/4)+scale_H/4, white,2,[],[],1);
-        DrawFormattedText(theWindow, double('약함'), anchor_lms(2,2)-scale_W/5, H*(3/4)+scale_H/2, white, [],[],[],1);
-        DrawFormattedText(theWindow, double('중간'), anchor_lms(2,3)-scale_W/5, H*(3/4)+scale_H/2, white, [],[],[],1);
-        DrawFormattedText(theWindow, double('강함'), anchor_lms(2,4)-scale_W/5, H*(3/4)+scale_H/2, white, [],[],[],1);
-        DrawFormattedText(theWindow, double('매우 강함'), anchor_lms(2,5)-scale_W/5, H*(3/4)+scale_H/2, white, 2,[],[],1);
+        DrawFormattedText(theWindow, double('약함'), anchor_lms(2,2)-scale_W/6, H*(3/4)+scale_H/2, white, [],[],[],1);
+        DrawFormattedText(theWindow, double('중간'), anchor_lms(2,3)-scale_W/6, H*(3/4)+scale_H/2, white, [],[],[],1);
+        DrawFormattedText(theWindow, double('강함'), anchor_lms(2,4)-scale_W/6, H*(3/4)+scale_H/2, white, [],[],[],1);
+        DrawFormattedText(theWindow, double('매우 강함'), anchor_lms(2,5)-scale_W/6, H*(3/4)+scale_H/2, white, 2,[],[],1);
         
         Screen('Flip', theWindow);
         

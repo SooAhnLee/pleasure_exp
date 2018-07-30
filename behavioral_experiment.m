@@ -16,19 +16,19 @@ cd(basedir); addpath(genpath(basedir));
 global theWindow W H window_ratio  %window property
 global lb rb scale_W scale_H anchor_lms  %rating scale
 global bgcolor white orange red  %color 
- 
- 
+
+  
 screens = Screen('Screens');  
-window_num = screens(1);
+window_num = screens(end);
 % Screen('Preference', 'SkipSyncTests', 0);
-screen_mode = 'test';
-window_ratio = 3; 
+screen_mode = 'full';
+window_ratio = 1.11  ; 
 window_info = Screen('Resolution', window_num);
 switch screen_mode
     case 'full'
-        window_rect = [0 0 window_info.width window_info.height]; % full screen
+        window_rect = [0 0 window_info.width window_info.height]/window_ratio; % full screen
         fontsize = 32;
-    case 'semifull'
+    case 'semifull'   
         window_rect = [0 0 window_info.width-100 window_info.height-100]; % a little bit distance
     case 'middle'
         window_rect = [0 0 window_info.width/2 window_info.height/2];
@@ -41,7 +41,7 @@ switch screen_mode
 end
  
 % color
-bgcolor = 50; 
+bgcolor = 50;   
 white = 255;
 red = [158 1 66];
 orange = [255 164 0];
@@ -84,7 +84,7 @@ HideCursor;
 % Explain
 explain_glms
  
- 
+  
 % Practice
 practice_glms 
     
@@ -106,11 +106,12 @@ while true
             break  
         end
 end 
- 
+   
+rec_i = 0;
 start_t = GetSecs;
 SetMouse(x,y)
  
-while GetSecs - start_t <= 5 %duration (secs)
+while true
     rec_i = rec_i + 1;
     [x,~,button] = GetMouse(theWindow); %record only x value
      
@@ -120,13 +121,21 @@ while GetSecs - start_t <= 5 %duration (secs)
         x = rb;
     end
     
+    msgtxt = '해당 자극이 얼마나 유쾌/불쾌한지에 대해 평가해주세요.';
+    DrawFormattedText(theWindow, double(msgtxt), 'center', H*(1/4), white);
     Screen('DrawLine', theWindow, white, lb, H*(3/4), rb, H*(3/4), 4); %rating scale
     % penWidth: 0.125~7.000
     Screen('DrawLine', theWindow, white, W/2, H*(3/4)-scale_H/3, W/2, H*(3/4)+scale_H/3, 6);
+    DrawFormattedText(theWindow, double('불쾌'), lb-50, H*(3/4)+10, white);
     Screen('DrawLine', theWindow, white, lb, H*(3/4)-scale_H/2, lb, H*(3/4)+scale_H/2, 6);
+    DrawFormattedText(theWindow, double('유쾌'), rb+20, H*(3/4)+10, white);
     Screen('DrawLine', theWindow, white, rb, H*(3/4)-scale_H/2, rb, H*(3/4)+scale_H/2, 6);
-    Screen('DrawLine', theWindow, orange, x, H*(3/4)-scale_H/1.5, x, H*(3/4)+scale_H/1.5, 6); %rating bar
+    Screen('DrawLine', theWindow, orange, x, H*(3/4)-scale_H/2, x, H*(3/4)+scale_H/2, 6); %rating bar
     Screen('Flip', theWindow);
+    
+    if button(1) == 1 
+        break  %click to stop 
+    end
     
     cur_t = GetSecs;
     data.dat.time_fromstart(rec_i,1) = cur_t-start_t;

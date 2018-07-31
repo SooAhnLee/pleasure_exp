@@ -1,7 +1,7 @@
 clc;
 clear;
 close all;
- 
+
 %% Subject info & add directory
  
 sid = input('\nSubject ID? : ', 's');
@@ -17,16 +17,16 @@ global theWindow W H window_ratio  %window property
 global lb rb scale_W scale_H anchor_lms  %rating scale
 global bgcolor white orange red  %color 
 
-  
+
 screens = Screen('Screens');  
-window_num = screens(end);
-% Screen('Preference', 'SkipSyncTests', 0);
-screen_mode = 'full';
-window_ratio = 1.11  ; 
+window_num = screens(end); 
+Screen('Preference', 'SkipSyncTests', 1);
+screen_mode = 'testmode'; 
+window_ratio = 1.5  ; 
 window_info = Screen('Resolution', window_num);
 switch screen_mode
     case 'full'
-        window_rect = [0 0 window_info.width window_info.height]/window_ratio; % full screen
+        window_rect = [0 0 window_info.width window_info.height]; % full screen
         fontsize = 32;
     case 'semifull'   
         window_rect = [0 0 window_info.width-100 window_info.height-100]; % a little bit distance
@@ -38,6 +38,9 @@ switch screen_mode
     case 'test'
         window_rect = [0 0 window_info.width window_info.height]/window_ratio;
         fontsize = 20;
+    case 'testmode'
+        window_rect = [0 0 1280 800];
+        fontsize = 26 ;
 end
  
 % color
@@ -45,17 +48,17 @@ bgcolor = 50;
 white = 255;
 red = [158 1 66];
 orange = [255 164 0];
- 
+
 % size
 W = window_rect(3); % width
 H = window_rect(4); % height
  
-lb = W*(1/8); % rating scale left bounds 1/4
-rb = W*(7/8); % rating scale right bounds 3/4
+lb = W*(1/6); % rating scale left bounds 1/4
+rb = W*(5/6); % rating scale right bounds 3/4
  
-scale_W = W*0.1;
+scale_W = (rb-lb)*0.1;
 scale_H = H*0.1;
- 
+
 anchor_lms = [W/2-0.01*(W/2-lb) W/2-0.06*(W/2-lb) W/2-0.18*(W/2-lb) W/2-0.35*(W/2-lb) W/2-0.5*(W/2-lb);
     W/2+0.01*(W/2-lb) W/2+0.06*(W/2-lb) W/2+0.18*(W/2-lb) W/2+0.35*(W/2-lb) W/2+0.5*(W/2-lb)];
 %W/2-lb = rb-W/2
@@ -67,9 +70,9 @@ theWindow = Screen('OpenWindow', window_num, bgcolor, window_rect);
 %font = 'Helvetica';
 font = 'NanumBarunGothic';
 Screen('Preference', 'TextEncodingLocale', 'ko_KR.UTF-8');
- 
+  
 %Screen('TextFont', theWindow, font);
-Screen('TextSize', theWindow, fontsize);
+Screen('TextSize', theWindow, fontsize); 
  
  
 %  Start
@@ -85,7 +88,7 @@ HideCursor;
 explain_glms
  
   
-% Practice
+% Practice 
 practice_glms 
     
 sca;
@@ -121,16 +124,16 @@ while true
         x = rb;
     end
     
-    msgtxt = '해당 자극이 얼마나 유쾌/불쾌한지에 대해 평가해주세요.';
-    DrawFormattedText(theWindow, double(msgtxt), 'center', H*(1/4), white);
-    Screen('DrawLine', theWindow, white, lb, H*(3/4), rb, H*(3/4), 4); %rating scale
+    msgtxt = '해당 자극이 얼마나 유쾌/불쾌한지에 대해 평가해주세요.\n 실험을 끝내려면 버튼을 눌러주세요.';
+    DrawFormattedText(theWindow, double(msgtxt), 'center', H*(1/4), white, [], [], [], 2 );
+    Screen('DrawLine', theWindow, white, lb, H*(5/8), rb, H*(5/8), 4); %rating scale
     % penWidth: 0.125~7.000
-    Screen('DrawLine', theWindow, white, W/2, H*(3/4)-scale_H/3, W/2, H*(3/4)+scale_H/3, 6);
-    DrawFormattedText(theWindow, double('불쾌'), lb-50, H*(3/4)+10, white);
-    Screen('DrawLine', theWindow, white, lb, H*(3/4)-scale_H/2, lb, H*(3/4)+scale_H/2, 6);
-    DrawFormattedText(theWindow, double('유쾌'), rb+20, H*(3/4)+10, white);
-    Screen('DrawLine', theWindow, white, rb, H*(3/4)-scale_H/2, rb, H*(3/4)+scale_H/2, 6);
-    Screen('DrawLine', theWindow, orange, x, H*(3/4)-scale_H/2, x, H*(3/4)+scale_H/2, 6); %rating bar
+    Screen('DrawLine', theWindow, white, W/2, H*(5/8)-scale_H/3, W/2, H*(5/8)+scale_H/3, 6);
+    DrawFormattedText(theWindow, double('불쾌'), lb-60, H*(5/8)+10, white);
+    Screen('DrawLine', theWindow, white, lb, H*(5/8)-scale_H/2, lb, H*(5/8)+scale_H/2, 6);
+    DrawFormattedText(theWindow, double('유쾌'), rb+20, H*(5/8)+10, white);
+    Screen('DrawLine', theWindow, white, rb, H*(5/8)-scale_H/2, rb, H*(5/8)+scale_H/2, 6);
+    Screen('DrawLine', theWindow, orange, x, H*(5/8)-scale_H/2, x, H*(5/8)+scale_H/2, 6); %rating bar
     Screen('Flip', theWindow);
     
     if button(1) == 1 
@@ -147,7 +150,7 @@ end
 ShowCursor;
 Screen('Clear');
 Screen('CloseAll');
- 
+
  
 %% show the graph
 plot(data.dat.time_fromstart, data.dat.cont_rating)

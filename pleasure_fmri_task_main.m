@@ -116,9 +116,9 @@ bgcolor = 100;
 window_ratio = 3;
 
 screens = Screen('Screens');
-window_num = screens(1);
+window_num = screens(end);
 Screen('Preference', 'SkipSyncTests', 1);
-screen_mode = 'test';
+screen_mode = 'testmode';
 window_info = Screen('Resolution', window_num);
 switch screen_mode
     case 'full'
@@ -134,14 +134,17 @@ switch screen_mode
     case 'test'
         window_rect = [0 0 window_info.width window_info.height]/window_ratio;
         fontsize = 20;
+    case 'testmode'
+        window_rect = [0 0 1240 800];
+        fontsize = 26;
 end
 
 % size
 W = window_rect(3); % width
 H = window_rect(4); % height
 
-lb = W*(1/8); % rating scale left bounds 1/8
-rb = W*(7/8); % rating scale right bounds 7/8
+lb = W*(1/6); % rating scale left bounds 1/6
+rb = W*(5/6); % rating scale right bounds 5/6
 
 scale_W = W*0.1;
 scale_H = H*0.1;
@@ -191,7 +194,7 @@ try
     if explain
         
         x = W/2; %center
-        y = H*(3/4); %center*(3/2)
+        y = H*(5/8); %center*(3/2)
         
         while true % Button
             msgtxt = '지금부터 실험이 시작됩니다. 먼저, 실험을 진행하기에 앞서 평가 척도에 대한 설명을 진행하겠습니다.\n\n참가자는 모든 준비가 완료되면 버튼을 눌러주시기 바랍니다.';
@@ -207,30 +210,30 @@ try
         while true % Space
             msgtxt = '평가 예제 : 실험자는 평가 방법에 대해 충분히 설명한 후, 스페이스바를 눌러주시기 바랍니다.';
             DrawFormattedText(theWindow, double(msgtxt), 'center', H*(1/4), white, [], [], [], 2);
-            Screen('DrawLine', theWindow, white, lb, H*(3/4), rb, H*(3/4), 4); %rating scale
+            Screen('DrawLine', theWindow, white, lb, H*(5/8), rb, H*(5/8), 4); %rating scale
             % penWidth: 0.125~7.000
             for i = 2:5
-                Screen('DrawLine', theWindow, white, anchor_lms(1,i), H*(3/4)-scale_H/4, anchor_lms(1,i), H*(3/4)+scale_H/4, 2);
-                Screen('DrawLine', theWindow, white, anchor_lms(2,i), H*(3/4)-scale_H/4, anchor_lms(2,i), H*(3/4)+scale_H/4, 2);
+                Screen('DrawLine', theWindow, white, anchor_lms(1,i), H*(5/8)-scale_H/4, anchor_lms(1,i), H*(5/8)+scale_H/4, 2);
+                Screen('DrawLine', theWindow, white, anchor_lms(2,i), H*(5/8)-scale_H/4, anchor_lms(2,i), H*(5/8)+scale_H/4, 2);
             end
-            DrawFormattedText(theWindow, double('불쾌감'), lb-70, H*(3/4)+10, white);
-            DrawFormattedText(theWindow, double('쾌감'), rb+20, H*(3/4)+10, white);
-            DrawFormattedText(theWindow, double('중립'), W/2-20, H*(3/4)+scale_H/2*1.5);
-            Screen('DrawLine', theWindow, white, W/2, H*(3/4)-scale_H/3, W/2, H*(3/4)+scale_H/3, 6);
-            Screen('DrawLine', theWindow, white, lb, H*(3/4)-scale_H/2, lb, H*(3/4)+scale_H/2, 6);
-            Screen('DrawLine', theWindow, white, rb, H*(3/4)-scale_H/2, rb, H*(3/4)+scale_H/2, 6);
+            DrawFormattedText(theWindow, double('불쾌감'), lb-70, H*(5/8)+10, white);
+            DrawFormattedText(theWindow, double('쾌감'), rb+20, H*(5/8)+10, white);
+            DrawFormattedText(theWindow, double('중립'), W/2-20, H*(5/8)+scale_H/2*1.5);
+            Screen('DrawLine', theWindow, white, W/2, H*(5/8)-scale_H/3, W/2, H*(5/8)+scale_H/3, 6);
+            Screen('DrawLine', theWindow, white, lb, H*(5/8)-scale_H/2, lb, H*(5/8)+scale_H/2, 6);
+            Screen('DrawLine', theWindow, white, rb, H*(5/8)-scale_H/2, rb, H*(5/8)+scale_H/2, 6);
             
-            %         DrawFormattedText(theWindow, double('거의 느껴지지 않음'), anchor_lms(1,1)-scale_W/5, H*(3/4)+scale_H/4, white,2,[],[],1);
-            DrawFormattedText(theWindow, double('약함'), anchor_lms(1,2)-scale_W/5, H*(3/4)+scale_H/2, white, [],[],[],1);
-            DrawFormattedText(theWindow, double('중간'), anchor_lms(1,3)-scale_W/5, H*(3/4)+scale_H/2, white, [],[],[],1);
-            DrawFormattedText(theWindow, double('강함'), anchor_lms(1,4)-scale_W/5, H*(3/4)+scale_H/2, white, [],[],[],1);
-            DrawFormattedText(theWindow, double('매우 강함'), anchor_lms(1,5)-scale_W/5, H*(3/4)+scale_H/2, white, 2,[],[],1);
+            %         DrawFormattedText(theWindow, double('거의 느껴지지 않음'), anchor_lms(1,1)-scale_W/5, H*(5/8)+scale_H/4, white,2,[],[],1);
+            DrawFormattedText(theWindow, double('약함'), anchor_lms(1,2)-scale_W/5, H*(5/8)+scale_H/2, white, [],[],[],1);
+            DrawFormattedText(theWindow, double('중간'), anchor_lms(1,3)-scale_W/5, H*(5/8)+scale_H/2, white, [],[],[],1);
+            DrawFormattedText(theWindow, double('강함'), anchor_lms(1,4)-scale_W/5, H*(5/8)+scale_H/2, white, [],[],[],1);
+            DrawFormattedText(theWindow, double('매우 강함'), anchor_lms(1,5)-scale_W/5, H*(5/8)+scale_H/2, white, 2,[],[],1);
             
-            %         DrawFormattedText(theWindow, double('거의 느껴지지 않음'), anchor_lms(2,1), H*(3/4)+scale_H/4, white,2,[],[],1);
-            DrawFormattedText(theWindow, double('약함'), anchor_lms(2,2)-scale_W/5, H*(3/4)+scale_H/2, white, [],[],[],1);
-            DrawFormattedText(theWindow, double('중간'), anchor_lms(2,3)-scale_W/5, H*(3/4)+scale_H/2, white, [],[],[],1);
-            DrawFormattedText(theWindow, double('강함'), anchor_lms(2,4)-scale_W/5, H*(3/4)+scale_H/2, white, [],[],[],1);
-            DrawFormattedText(theWindow, double('매우 강함'), anchor_lms(2,5)-scale_W/5, H*(3/4)+scale_H/2, white, 2,[],[],1);
+            %         DrawFormattedText(theWindow, double('거의 느껴지지 않음'), anchor_lms(2,1), H*(5/8)+scale_H/4, white,2,[],[],1);
+            DrawFormattedText(theWindow, double('약함'), anchor_lms(2,2)-scale_W/5, H*(5/8)+scale_H/2, white, [],[],[],1);
+            DrawFormattedText(theWindow, double('중간'), anchor_lms(2,3)-scale_W/5, H*(5/8)+scale_H/2, white, [],[],[],1);
+            DrawFormattedText(theWindow, double('강함'), anchor_lms(2,4)-scale_W/5, H*(5/8)+scale_H/2, white, [],[],[],1);
+            DrawFormattedText(theWindow, double('매우 강함'), anchor_lms(2,5)-scale_W/5, H*(5/8)+scale_H/2, white, 2,[],[],1);
             
             Screen('Flip', theWindow);
             
@@ -249,12 +252,12 @@ try
     if practice
         
         x = W/2; %center
-        y = H*(3/4); %center*(3/2)
+        y = H*(5/8); %center*(3/2)
         SetMouse(x,y)
         
         while true % Space
             msgtxt = '평가 예제 : 참가자는 충분히 평가 방법을 연습한 후, 연습이 끝나면 버튼을 눌러주시기 바랍니다.';
-            DrawFormattedText(theWindow, double(rating_types_pls.prompts_ex{3}), 'center', H*(1/4), white, [], [], [], 2);
+            DrawFormattedText(theWindow, double(msgtxt), 'center', H*(1/4), white, [], [], [], 2);
             
             [x,~,button] = GetMouse(theWindow);
             [~,~,keyCode] = KbCheck;
@@ -272,12 +275,12 @@ try
             end
             
             
-            Screen('DrawLine', theWindow, white, lb, H*(3/4), rb, H*(3/4), 4); %rating scale
+            Screen('DrawLine', theWindow, white, lb, H*(5/8), rb, H*(5/8), 4); %rating scale
             % penWidth: 0.125~7.000
-            Screen('DrawLine', theWindow, white, W/2, H*(3/4)-scale_H/3, W/2, H*(3/4)+scale_H/3, 6);
-            Screen('DrawLine', theWindow, white, lb, H*(3/4)-scale_H/2, lb, H*(3/4)+scale_H/2, 6);
-            Screen('DrawLine', theWindow, white, rb, H*(3/4)-scale_H/2, rb, H*(3/4)+scale_H/2, 6);
-            Screen('DrawLine', theWindow, orange, x, H*(3/4)-scale_H/2, x, H*(3/4)+scale_H/2, 6); %rating bar
+            Screen('DrawLine', theWindow, white, W/2, H*(5/8)-scale_H/3, W/2, H*(5/8)+scale_H/3, 6);
+            Screen('DrawLine', theWindow, white, lb, H*(5/8)-scale_H/2, lb, H*(5/8)+scale_H/2, 6);
+            Screen('DrawLine', theWindow, white, rb, H*(5/8)-scale_H/2, rb, H*(5/8)+scale_H/2, 6);
+            Screen('DrawLine', theWindow, orange, x, H*(5/8)-scale_H/2, x, H*(5/8)+scale_H/2, 6); %rating bar
             Screen('Flip', theWindow);
             
         end
@@ -353,7 +356,7 @@ try
         
         rec_i = 0;
         x = W/2; %center
-        y = H*(3/4); %center*(3/2)
+        y = H*(5/8); %center*(3/2)
         SetMouse(x,y)
         
         while GetSecs - run_start_t < S.dur
@@ -366,14 +369,14 @@ try
                 x = rb;
             end
             
-            Screen('DrawLine', theWindow, white, lb, H*(3/4), rb, H*(3/4), 4); %rating scale
+            Screen('DrawLine', theWindow, white, lb, H*(5/8), rb, H*(5/8), 4); %rating scale
             % penWidth: 0.125~7.000
-            Screen('DrawLine', theWindow, white, W/2, H*(3/4)-scale_H/3, W/2, H*(3/4)+scale_H/3, 6);
-            DrawFormattedText(theWindow, double('불쾌'), lb-50, H*(3/4)+10, white);
-            Screen('DrawLine', theWindow, white, lb, H*(3/4)-scale_H/2, lb, H*(3/4)+scale_H/2, 6);
-            DrawFormattedText(theWindow, double('유쾌'), rb+20, H*(3/4)+10, white);
-            Screen('DrawLine', theWindow, white, rb, H*(3/4)-scale_H/2, rb, H*(3/4)+scale_H/2, 6);
-            Screen('DrawLine', theWindow, orange, x, H*(3/4)-scale_H/2, x, H*(3/4)+scale_H/2, 6); %rating bar
+            Screen('DrawLine', theWindow, white, W/2, H*(5/8)-scale_H/3, W/2, H*(5/8)+scale_H/3, 6);
+            DrawFormattedText(theWindow, double('불쾌'), lb-50, H*(5/8)+10, white);
+            Screen('DrawLine', theWindow, white, lb, H*(5/8)-scale_H/2, lb, H*(5/8)+scale_H/2, 6);
+            DrawFormattedText(theWindow, double('유쾌'), rb+20, H*(5/8)+10, white);
+            Screen('DrawLine', theWindow, white, rb, H*(5/8)-scale_H/2, rb, H*(5/8)+scale_H/2, 6);
+            Screen('DrawLine', theWindow, orange, x, H*(5/8)-scale_H/2, x, H*(5/8)+scale_H/2, 6); %rating bar
             
             run_cur_t = GetSecs;
             data.dat.run_time_fromstart(rec_i,1) = run_cur_t-run_start_t;
@@ -382,10 +385,10 @@ try
             
             % Behavioral task
             if any(S.changecolor <= run_cur_t - run_start_t & run_cur_t - run_start_t <= S.changecolor + S.changetime) % It takes 1 sec from the S.changecolor
-                Screen('DrawLine', theWindow, red, x, H*(3/4)-scale_H/2, x, H*(3/4)+scale_H/2, 6); %rating bar turns in red
+                Screen('DrawLine', theWindow, red, x, H*(5/8)-scale_H/2, x, H*(5/8)+scale_H/2, 6); %rating bar turns in red
                 data.dat.changecolor_stim(rec_i) = 1;
             else
-                Screen('DrawLine', theWindow, orange, x, H*(3/4)-scale_H/2, x, H*(3/4)+scale_H/2, 6); %rating bar returns to its own color
+                Screen('DrawLine', theWindow, orange, x, H*(5/8)-scale_H/2, x, H*(5/8)+scale_H/2, 6); %rating bar returns to its own color
                 data.dat.changecolor_stim(rec_i) = 0;
             end
             
@@ -443,10 +446,19 @@ try
             end
             
             scale = scales{scale_i};
-            
-            x = W/2; %center
-            y = H*(3/4); %center*(3/2)
             SetMouse(x,y)
+            
+            [lb, rb, one_directional] = draw_scale_pls(scale);
+            if one_directional
+                lb = W*(1/4);
+                rb = W*(3/4);
+                SetMouse(W*(1/4), H*(5/8));
+            else
+                lb = W*(1/6);
+                rb = W*(5/6);
+                SetMouse(W/2, H*(5/8));
+            end
+            
             Screen(theWindow, 'FillRect', bgcolor, window_rect);
             
             start_t = GetSecs;
@@ -465,7 +477,7 @@ try
                 if x < lb; x = lb; elseif x > rb; x = rb; end
                 
                 DrawFormattedText(theWindow, rating_types_pls.prompts{ratetype}, 'center', H*(1/4), white, [], [], [], 2);
-                Screen('DrawLine', theWindow, orange, x, H*(3/4)-scale_H/2, x, H*(3/4)+scale_H/2, 6); %rating bar
+                Screen('DrawLine', theWindow, orange, x, H*(5/8)-scale_H/2, x, H*(5/8)+scale_H/2, 6); %rating bar
                 Screen('Flip', theWindow);
                 
                 if button(1)
@@ -486,28 +498,10 @@ try
             while true
                 draw_scale_pls(scale);
                 DrawFormattedText(theWindow, rating_types_pls.prompts{ratetype}, 'center', H*(1/4), white, [], [], [], 2);
-                Screen('DrawLine', theWindow, red, x, H*(3/4)-scale_H/2, x, H*(3/4)+scale_H/2, 6);
+                Screen('DrawLine', theWindow, red, x, H*(5/8)-scale_H/2, x, H*(5/8)+scale_H/2, 6);
                 Screen('Flip', theWindow);
                 freeze_cur_t = GetSecs;
                 if freeze_cur_t - freeze_t > 0.5
-                    break
-                end
-            end
-            
-            %     Move to the next
-            if scale_i ~= numel(scales)
-                msgtxt = '편하게 손을 놓고 다음 질문을 기다리시기 바랍니다.';
-            elseif scale_i == numel(scales)
-                msgtxt = '질문이 끝났습니다.';
-            end
-            msgtxt = double(msgtxt); % korean to double
-            DrawFormattedText(theWindow, msgtxt, 'center', 'center', white, [], [], [], 2);
-            Screen('Flip', theWindow);
-            
-            start_t = GetSecs;
-            while true
-                cur_t = GetSecs;
-                if cur_t - start_t >= 2  % postrun_between_t
                     break
                 end
             end

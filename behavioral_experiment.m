@@ -7,6 +7,7 @@ close all;
 sid = input('\nSubject ID? : ', 's');
 sid = strtrim(sid);
 subjnum = input('\nSubject number? : ');
+stimtype = input('\nStimulus type? : ', 's');
  
 basedir = pwd;
 cd(basedir); addpath(genpath(basedir));
@@ -20,9 +21,9 @@ global bgcolor white orange red  %color
 
 screens = Screen('Screens');  
 window_num = screens(end); 
-Screen('Preference', 'SkipSyncTests', 1);
+Screen('Preference', 'SkipSyncTests', 0);
 screen_mode = 'testmode'; 
-window_ratio = 1.5  ; 
+window_ratio = 1.11  ; 
 window_info = Screen('Resolution', window_num);
 switch screen_mode
     case 'full'
@@ -39,8 +40,8 @@ switch screen_mode
         window_rect = [0 0 window_info.width window_info.height]/window_ratio;
         fontsize = 20;
     case 'testmode'
-        window_rect = [0 0 1280 800];
-        fontsize = 26 ;
+        window_rect = [0 0 1800 960];
+        fontsize = 30;
 end
  
 % color
@@ -78,7 +79,7 @@ Screen('TextSize', theWindow, fontsize);
 %  Start
 rec_i = 0;
 x = W/2; %center 
-y = H*(3/4); %center*(3/2)
+y = H*(5/8); %center*(3/2)
  
  
 HideCursor;
@@ -99,7 +100,7 @@ Screen('CloseAll');
 % start the screen
 theWindow = Screen('OpenWindow', window_num, bgcolor, window_rect);
 HideCursor;
- 
+
 % Continuous rating 
 while true
     DrawFormattedText(theWindow, double('지금부터 실험을 시작합니다. 시작하려면 스페이스바를 눌러주세요.'), 'center', 'center', white);
@@ -112,6 +113,7 @@ end
    
 rec_i = 0;
 start_t = GetSecs;
+x = W/2; y = H*(5/8);
 SetMouse(x,y)
  
 while true
@@ -145,7 +147,7 @@ while true
     data.dat.cont_rating(rec_i,1) = (x-W/2)/(rb-lb).*2;
     
 end
- 
+
  
 ShowCursor;
 Screen('Clear');
@@ -161,11 +163,12 @@ ylim([-1 1])
 savedir = fullfile(basedir, 'Behav_Data');
 nowtime = clock;
 subjtime = sprintf('%.2d%.2d%.2d', nowtime(1), nowtime(2), nowtime(3));
- 
+
 data.subject = sid;
-data.datafile = fullfile(savedir, [subjtime, '_', sid, '_subj', sprintf('%.3d', subjnum), '_behav_dat', '.mat']);  
+data.datafile = fullfile(savedir, [subjtime, '_', sid, '_subj', sprintf('%.3d', subjnum), '_behav_dat_', stimtype, '.mat']);  
 data.version = 'Pleasure_v1_08-01-2018_Cocoanlab';
 data.dat.time_fromstart(rec_i,1) = cur_t-start_t;
 data.dat.cont_rating(rec_i,1) = (x-W/2)/(rb-lb).*2;
+data.dat.stimtype = stimtype;
  
 save(data.datafile, 'data');

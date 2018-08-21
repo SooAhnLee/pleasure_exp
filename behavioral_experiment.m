@@ -11,7 +11,20 @@ stimtype = input('\nStimulus type? : ', 's');
  
 basedir = pwd;
 cd(basedir); addpath(genpath(basedir));
- 
+
+%% Save the behavioral data
+
+savedir = fullfile(basedir, 'Behav_Data');
+nowtime = clock;
+subjtime = sprintf('%.2d%.2d%.2d', nowtime(1), nowtime(2), nowtime(3));
+
+data.subject = sid;
+data.datafile = fullfile(savedir, [subjtime, '_', sid, '_subj', sprintf('%.3d', subjnum), '_behav_dat_', stimtype, '.mat']);  
+data.version = 'Pleasure_v1_08-01-2018_Cocoanlab';
+data.dat.stimtype = stimtype;
+
+save(data.datafile, 'data');
+
 %% Basic settings, Explain & Practice
  
 global theWindow W H window_ratio  %window property
@@ -23,10 +36,10 @@ screens = Screen('Screens');
 window_num = screens(end); 
 Screen('Preference', 'SkipSyncTests', 0);
 screen_mode = 'testmode'; 
-window_ratio = 1.11  ; 
+window_ratio = 1.11;  
 window_info = Screen('Resolution', window_num);
-switch screen_mode
-    case 'full'
+switch screen_mode 
+    case 'full' 
         window_rect = [0 0 window_info.width window_info.height]; % full screen
         fontsize = 32;
     case 'semifull'   
@@ -38,9 +51,9 @@ switch screen_mode
         fontsize = 10;
     case 'test'
         window_rect = [0 0 window_info.width window_info.height]/window_ratio;
-        fontsize = 20;
+        fontsize = 20; 
     case 'testmode'
-        window_rect = [0 0 1800 960];
+        window_rect = [0 0 1240 800];
         fontsize = 30;
 end
  
@@ -75,20 +88,14 @@ Screen('Preference', 'TextEncodingLocale', 'ko_KR.UTF-8');
 %Screen('TextFont', theWindow, font);
 Screen('TextSize', theWindow, fontsize); 
  
- 
-%  Start
-rec_i = 0;
+%Start
 x = W/2; %center 
-y = H*(5/8); %center*(3/2)
- 
- 
+y = H*(5/8); %center*(3/2) 
 HideCursor;
- 
  
 % Explain
 explain_glms
- 
-  
+
 % Practice 
 practice_glms 
     
@@ -106,13 +113,14 @@ while true
     DrawFormattedText(theWindow, double('지금부터 실험을 시작합니다. 시작하려면 스페이스바를 눌러주세요.'), 'center', 'center', white);
     Screen('Flip', theWindow);
     [~,~,keyCode] = KbCheck;
-        if keyCode(KbName('space')) == 1
+        if keyCode(KbName('space')) == 1 
             break  
         end
 end 
+ 
    
 rec_i = 0;
-start_t = GetSecs;
+start_t = GetSecs; 
 x = W/2; y = H*(5/8);
 SetMouse(x,y)
  
@@ -126,7 +134,7 @@ while true
         x = rb;
     end
     
-    msgtxt = '해당 자극이 얼마나 유쾌/불쾌한지에 대해 평가해주세요.\n 실험을 끝내려면 버튼을 눌러주세요.';
+    msgtxt = '마우스를 좌우로 움직여 해당 자극이 얼마나 유쾌/불쾌한지에 대해 평가해주세요.\n 실험을 끝내려면 클릭해주세요.';
     DrawFormattedText(theWindow, double(msgtxt), 'center', H*(1/4), white, [], [], [], 2 );
     Screen('DrawLine', theWindow, white, lb, H*(5/8), rb, H*(5/8), 4); %rating scale
     % penWidth: 0.125~7.000
@@ -148,27 +156,17 @@ while true
     
 end
 
- 
-ShowCursor;
-Screen('Clear');
-Screen('CloseAll');
+data.dat.time_fromstart(rec_i,1) = cur_t-start_t;
+data.dat.cont_rating(rec_i,1) = (x-W/2)/(rb-lb).*2;
 
+save(data.datafile, '-append', 'data');
+
+  
+ShowCursor;
+Screen('Clear'); 
+Screen('CloseAll');
  
+
 %% show the graph
 plot(data.dat.time_fromstart, data.dat.cont_rating)
 ylim([-1 1])
- 
-%% Save the behavioral data
- 
-savedir = fullfile(basedir, 'Behav_Data');
-nowtime = clock;
-subjtime = sprintf('%.2d%.2d%.2d', nowtime(1), nowtime(2), nowtime(3));
-
-data.subject = sid;
-data.datafile = fullfile(savedir, [subjtime, '_', sid, '_subj', sprintf('%.3d', subjnum), '_behav_dat_', stimtype, '.mat']);  
-data.version = 'Pleasure_v1_08-01-2018_Cocoanlab';
-data.dat.time_fromstart(rec_i,1) = cur_t-start_t;
-data.dat.cont_rating(rec_i,1) = (x-W/2)/(rb-lb).*2;
-data.dat.stimtype = stimtype;
- 
-save(data.datafile, 'data');

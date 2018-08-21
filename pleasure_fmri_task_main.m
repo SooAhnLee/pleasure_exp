@@ -77,7 +77,7 @@ end
 %% SETUP : Create paradigm according to subject information
 
 S.type = type;
-% S.dur = 15*60 - 10; % 15 mins - 10 secs for disdaq
+% S.dur = 15*60 - 15; % 15 mins - 15 secs for disdaq
 S.dur = 10;
 
 S.changecolor = [10:60:S.dur];
@@ -187,15 +187,11 @@ HideCursor;
 %% Start
 
 try
-    %% (Explain) Continuous
-    
-    % Explain scale with visualization
+    %% (Explain) Continuous & Overall
     
     if explain
         
-        x = W/2; %center
-        y = H*(5/8); %center*(3/2)
-        
+        % Explain bi-directional scale with visualization
         while true % Button
             msgtxt = '지금부터 실험이 시작됩니다. 먼저, 실험을 진행하기에 앞서 평가 척도에 대한 설명을 진행하겠습니다.\n\n참가자는 모든 준비가 완료되면 버튼을 눌러주시기 바랍니다.';
             DrawFormattedText(theWindow, double(msgtxt), 'center', H*(1/4), white, [], [], [], 2);
@@ -208,6 +204,7 @@ try
         end
         
         while true % Space
+            
             msgtxt = '평가 예제 : 실험자는 평가 방법에 대해 충분히 설명한 후, 스페이스바를 눌러주시기 바랍니다.';
             DrawFormattedText(theWindow, double(msgtxt), 'center', H*(1/4), white, [], [], [], 2);
             Screen('DrawLine', theWindow, white, lb, H*(5/8), rb, H*(5/8), 4); %rating scale
@@ -218,7 +215,7 @@ try
             end
             DrawFormattedText(theWindow, double('불쾌감'), lb-70, H*(5/8)+10, white);
             DrawFormattedText(theWindow, double('쾌감'), rb+20, H*(5/8)+10, white);
-            DrawFormattedText(theWindow, double('중립'), W/2-20, H*(5/8)+scale_H/2*1.5);
+            DrawFormattedText(theWindow, double('중립'), W/2-20, H*(5/8)+scale_H/1.2);
             Screen('DrawLine', theWindow, white, W/2, H*(5/8)-scale_H/3, W/2, H*(5/8)+scale_H/3, 6);
             Screen('DrawLine', theWindow, white, lb, H*(5/8)-scale_H/2, lb, H*(5/8)+scale_H/2, 6);
             Screen('DrawLine', theWindow, white, rb, H*(5/8)-scale_H/2, rb, H*(5/8)+scale_H/2, 6);
@@ -242,20 +239,57 @@ try
                 break
             elseif keyCode(KbName('q')) == 1
                 abort_experiment('manual');
+                break
             end
         end
         
+        
+        % Explain one-directional scale with visualization
+        while true % Space
+            
+            msgtxt = '평가 예제 : 실험자는 평가 방법에 대해 충분히 설명한 후, 스페이스바를 눌러주시기 바랍니다.';
+            DrawFormattedText(theWindow, double(msgtxt), 'center', H*(1/4), white, [], [], [], 2);
+            Screen('DrawLine', theWindow, white, lb, H*(5/8), rb, H*(5/8), 4); %rating scale
+
+            DrawFormattedText(theWindow, double('전혀'), lb-50, H*(5/8)+10, white);
+            DrawFormattedText(theWindow, double('최대'), rb+20, H*(5/8)+10, white);
+            Screen('DrawLine', theWindow, white, lb, H*(5/8)-scale_H/3, lb, H*(5/8)+scale_H/3, 6);
+            Screen('DrawLine', theWindow, white, rb, H*(5/8)-scale_H/2, rb, H*(5/8)+scale_H/2, 6);
+            
+            Screen('DrawLine', theWindow, white, lb+(rb-lb)*0.06, H*(5/8)-scale_H/4, lb+(rb-lb)*0.06, H*(5/8)+scale_H/4, 6);
+            Screen('DrawLine', theWindow, white, lb+(rb-lb)*0.18, H*(5/8)-scale_H/4, lb+(rb-lb)*0.18, H*(5/8)+scale_H/4, 6);
+            Screen('DrawLine', theWindow, white, lb+(rb-lb)*0.35, H*(5/8)-scale_H/4, lb+(rb-lb)*0.35, H*(5/8)+scale_H/4, 6);
+            Screen('DrawLine', theWindow, white, lb+(rb-lb)*0.5, H*(5/8)-scale_H/4, lb+(rb-lb)*0.5, H*(5/8)+scale_H/4, 6);
+            
+            DrawFormattedText(theWindow, double('약함'), lb+(rb-lb)*0.06-10, H*(5/8)+scale_H/2, white);
+            DrawFormattedText(theWindow, double('중간'), lb+(rb-lb)*0.18-10, H*(5/8)+scale_H/2, white);
+            DrawFormattedText(theWindow, double('강함'), lb+(rb-lb)*0.35-10, H*(5/8)+scale_H/2, white);
+            DrawFormattedText(theWindow, double('매우 강함'), lb+(rb-lb)*0.5-10, H*(5/8)+scale_H/2, white, 2,[],[],1);
+            
+            Screen('Flip', theWindow);
+            
+            [~,~,keyCode] = KbCheck;
+            if keyCode(KbName('space')) == 1
+                break
+            elseif keyCode(KbName('q')) == 1
+                abort_experiment('manual');
+                break
+            end
+        end
+        
+        
     end
     
-    %% (Practice) Continuous
+    %% (Practice) Continuous & Overall
     
     if practice
         
-        x = W/2; %center
-        y = H*(5/8); %center*(3/2)
+        % bi-directional
+        x = W/2;
+        y = H*(5/8);
         SetMouse(x,y)
         
-        while true % Space
+        while true % button
             msgtxt = '평가 예제 : 참가자는 충분히 평가 방법을 연습한 후, 연습이 끝나면 버튼을 눌러주시기 바랍니다.';
             DrawFormattedText(theWindow, double(msgtxt), 'center', H*(1/4), white, [], [], [], 2);
             
@@ -268,13 +302,6 @@ try
                 x = rb;
             end
             
-            if button(1) == 1
-                break
-            elseif keyCode(KbName('q')) == 1
-                abort_experiment('manual');
-            end
-            
-            
             Screen('DrawLine', theWindow, white, lb, H*(5/8), rb, H*(5/8), 4); %rating scale
             % penWidth: 0.125~7.000
             Screen('DrawLine', theWindow, white, W/2, H*(5/8)-scale_H/3, W/2, H*(5/8)+scale_H/3, 6);
@@ -282,6 +309,48 @@ try
             Screen('DrawLine', theWindow, white, rb, H*(5/8)-scale_H/2, rb, H*(5/8)+scale_H/2, 6);
             Screen('DrawLine', theWindow, orange, x, H*(5/8)-scale_H/2, x, H*(5/8)+scale_H/2, 6); %rating bar
             Screen('Flip', theWindow);
+            
+            if button(1) == 1
+                break
+            elseif keyCode(KbName('q')) == 1
+                abort_experiment('manual');
+                break
+            end
+            
+        end
+        
+        
+        % one-directional
+        x = W*(1/4);
+        y = H*(5/8);
+        SetMouse(x,y)
+        
+        while true % button
+            msgtxt = '평가 예제 : 참가자는 충분히 평가 방법을 연습한 후, 연습이 끝나면 버튼을 눌러주시기 바랍니다.';
+            DrawFormattedText(theWindow, double(msgtxt), 'center', H*(1/4), white, [], [], [], 2);
+            
+            [x,~,button] = GetMouse(theWindow);
+            [~,~,keyCode] = KbCheck;
+            
+            if x < W*(1/4)
+                x = W*(1/4);
+            elseif x > W*(3/4)
+                x = W*(3/4);
+            end
+            
+            Screen('DrawLine', theWindow, white, W*(1/4), H*(5/8), W*(3/4), H*(5/8), 4); %rating scale
+            % penWidth: 0.125~7.000
+            Screen('DrawLine', theWindow, white, W*(1/4), H*(5/8)-scale_H/3, W*(1/4), H*(5/8)+scale_H/3, 6);
+            Screen('DrawLine', theWindow, white, W*(3/4), H*(5/8)-scale_H/2, W*(3/4), H*(5/8)+scale_H/2, 6);
+            Screen('DrawLine', theWindow, orange, x, H*(5/8)-scale_H/2, x, H*(5/8)+scale_H/2, 6); %rating bar
+            Screen('Flip', theWindow);
+            
+            if button(1) == 1
+                break
+            elseif keyCode(KbName('q')) == 1
+                abort_experiment('manual');
+                break
+            end
             
         end
         
@@ -301,6 +370,7 @@ try
                 break
             elseif keyCode(KbName('q')) == 1
                 abort_experiment('manual');
+                break
             end
         end
         
@@ -314,23 +384,19 @@ try
                 break
             elseif keyCode(KbName('q')) == 1
                 abort_experiment('manual');
+                break
             end
         end
         
-        %% For disdaq : 10 secs --> NEED MODIFY??
-        % For disdaq ("시작합니다…") : 4 secs
+        %% For disdaq : 15 secs
+        % For disdaq ("시작합니다…") : 5 secs
         data.runscan_starttime = GetSecs;
         Screen(theWindow, 'FillRect', bgcolor, window_rect);
         DrawFormattedText(theWindow, double('시작합니다…'), 'center', 'center', white, [], [], [], 1.2);
         Screen('Flip', theWindow);
-        waitsec_fromstarttime(data.runscan_starttime, 4);
+        waitsec_fromstarttime(data.runscan_starttime, 5);
         
-        [~,~,keyCode] = KbCheck;
-        if keyCode(KbName('q')) == 1
-            abort_experiment('manual');
-        end
-        
-        % For disdaq (blank / EYELINK & BIOPAC START) : 6 secs
+        % For disdaq (blank / EYELINK & BIOPAC START) : 10 secs
         Screen(theWindow,'FillRect',bgcolor, window_rect);
         Screen('Flip', theWindow);
         
@@ -347,7 +413,7 @@ try
             BIOPAC_trigger(ljHandle, biopac_channel, 'off');
         end
         
-        waitsec_fromstarttime(data.runscan_starttime, 10);  % 4+6
+        waitsec_fromstarttime(data.runscan_starttime, 15);  % 5+10
         
         %% Continuous rating
         
@@ -402,6 +468,7 @@ try
             [~,~,keyCode] = KbCheck;
             if keyCode(KbName('q')) == 1
                 abort_experiment('manual');
+                break
             end
             
         end
@@ -439,25 +506,9 @@ try
                     Eyelink('Message','Postrun Start');
                 end
                 
-                [~,~,keyCode] = KbCheck;
-                if keyCode(KbName('q')) == 1
-                    abort_experiment('manual');
-                end
             end
             
             scale = scales{scale_i};
-            SetMouse(x,y)
-            
-            [lb, rb, one_directional] = draw_scale_pls(scale);
-            if one_directional
-                lb = W*(1/4);
-                rb = W*(3/4);
-                SetMouse(W*(1/4), H*(5/8));
-            else
-                lb = W*(1/6);
-                rb = W*(5/6);
-                SetMouse(W/2, H*(5/8));
-            end
             
             Screen(theWindow, 'FillRect', bgcolor, window_rect);
             
@@ -467,13 +518,22 @@ try
             rec_i = 0;
             ratetype = strcmp(rating_types_pls.alltypes, scale);
             
-            [x,~,button] = GetMouse(theWindow);
+            [lb, rb, start_center] = draw_scale_pls(scale);
+            if start_center  % bi-directional
+                lb = W*(1/6);
+                rb = W*(5/6);
+                SetMouse(W/2, H*(5/8));
+            else  % one-directional
+                lb = W*(1/4);
+                rb = W*(3/4);
+                SetMouse(W*(1/4), H*(5/8));
+            end
             
             % Get ratings
             while true
                 rec_i = rec_i + 1;
                 [x,~,button] = GetMouse(theWindow);
-                draw_scale_pls(scale);
+                [lb, rb, start_center] = draw_scale_pls(scale);
                 if x < lb; x = lb; elseif x > rb; x = rb; end
                 
                 DrawFormattedText(theWindow, rating_types_pls.prompts{ratetype}, 'center', H*(1/4), white, [], [], [], 2);
@@ -489,14 +549,18 @@ try
                 
                 cur_t = GetSecs;
                 eval(['data.dat.' scale '_time_fromstart(rec_i,1) = cur_t-start_t;']);
-                eval(['data.dat.' scale '_cont_rating(rec_i,1) = (x-lb)./(rb-lb);']);
+                eval(['data.dat.' scale '_cont_rating(rec_i,1) = (x-lb)/(rb-lb);']);
                 
             end
+            
+            end_t = GetSecs;
+            eval(['data.dat.' scale '_rating = (x-lb)/(rb-lb);']);
+            eval(['data.dat.' scale '_RT = end_t - start_t;']);
             
             % Freeze the screen 0.5 second with red line if overall type
             freeze_t = GetSecs;
             while true
-                draw_scale_pls(scale);
+                [lb, rb, start_center] = draw_scale_pls(scale);
                 DrawFormattedText(theWindow, rating_types_pls.prompts{ratetype}, 'center', H*(1/4), white, [], [], [], 2);
                 Screen('DrawLine', theWindow, red, x, H*(5/8)-scale_H/2, x, H*(5/8)+scale_H/2, 6);
                 Screen('Flip', theWindow);

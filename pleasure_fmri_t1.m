@@ -1,4 +1,4 @@
-function pleasure_fmri_t1(SID, SubjNum, order)
+function pleasure_fmri_t1(SID, SubjNum)
 
 %% SETUP : Basic parameters
 
@@ -52,7 +52,7 @@ window_ratio = 3;
 screens = Screen('Screens');
 window_num = screens(1);
 Screen('Preference', 'SkipSyncTests', 1);
-screen_mode = 'test';
+screen_mode = 'testmode';
 window_info = Screen('Resolution', window_num);
 switch screen_mode
     case 'full'
@@ -68,6 +68,9 @@ switch screen_mode
     case 'test'
         window_rect = [0 0 window_info.width window_info.height]/window_ratio;
         fontsize = 20;
+    case 'testmode'
+        window_rect = [0 0 1240 800];
+        fontsize = 26;
 end
 
 % size
@@ -117,6 +120,7 @@ while true % Space
         break
     elseif keyCode(KbName('q')) == 1
         abort_experiment('manual');
+        break
     end
 end
 
@@ -130,32 +134,39 @@ while true % Ready, s
         break
     elseif keyCode(KbName('q')) == 1
         abort_experiment('manual');
+        break
     end
 end
 
 
-% For disdaq ("시작합니다…") : 4 secs
+% For disdaq ("시작합니다…") : 5 secs
 data.dat.t1_starttime = GetSecs;
 Screen(theWindow, 'FillRect', bgcolor, window_rect);
 DrawFormattedText(theWindow, double('시작합니다...'), 'center', 'center', white, [], [], [], 1.2);
 Screen('Flip', theWindow);
-waitsec_fromstarttime(data.dat.t1_starttime, 4);
+waitsec_fromstarttime(data.dat.t1_starttime, 5);
 
-% For disdaq (blank & biopac) : 6 secs
+% For disdaq (blank & biopac) : 10 secs
 Screen(theWindow,'FillRect',bgcolor, window_rect);
 Screen('Flip', theWindow);
-waitsec_fromstarttime(data.dat.t1_starttime, 10); %4+6
+waitsec_fromstarttime(data.dat.t1_starttime, 15); % 5+10
 
 
 % Fixation cross
-t1_start_t = GetSecs;
-DrawFormattedText(theWindow, double('+'), 'center', 'center', white, [], [], [], 2);
-Screen('Flip', theWindow);
-waitsec_fromstarttime(t1_start_t, 15) %duration
 
-[~,~,keyCode] = KbCheck;
-if keyCode(KbName('q')) == 1
-    abort_experiment('manual');
+t1_start_t = GetSecs;
+
+while true
+    DrawFormattedText(theWindow, double('+'), 'center', 'center', white, [], [], [], 2);
+    Screen('Flip', theWindow);
+    waitsec_fromstarttime(t1_start_t, 15) %duration
+    
+    [~,~,keyCode] = KbCheck;
+    if keyCode(KbName('q')) == 1
+        abort_experiment('manual');
+        break
+    end
+    
 end
 
 data.dat.t1_endtime = GetSecs - data.dat.t1_starttime;

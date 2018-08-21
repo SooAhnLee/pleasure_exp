@@ -1,12 +1,11 @@
-function [lb, rb, one_directional] = draw_scale_pls(scale)
+function [lb, rb, start_center] = draw_scale_pls(scale)
 
 global theWindow W H window_ratio  %window property
 global lb rb scale_W scale_H anchor_lms  %rating scale
 global bgcolor white orange red  %color
 
 %% Basic Settings
-one_directional = false;
-
+start_center = true;
 
 %% Drawing scale
 switch scale
@@ -27,7 +26,7 @@ switch scale
         Screen('DrawLine', theWindow, white, rb, H*(5/8)-scale_H/2, rb, H*(5/8)+scale_H/2, 6);
         
     case 'overall_int'  % one-directional
-        one_directional = true;
+        start_center = false;
         Screen('DrawLine', theWindow, white, lb, H*(5/8), rb, H*(5/8), 4); % penWidth: 0.125~7.000
         Screen('DrawLine', theWindow, white, lb, H*(5/8)-scale_H/3, lb, H*(5/8)+scale_H/3, 6);
         DrawFormattedText(theWindow, double('전혀 느껴지지\n 않음'), lb-50, H*(5/8)+10, white);
@@ -131,8 +130,8 @@ switch scale
         DrawFormattedText(theWindow, double('매우 그렇다'), rb+20, H*(5/8)+10, white);
         Screen('DrawLine', theWindow, white, rb, H*(5/8)-scale_H/2, rb, H*(5/8)+scale_H/2, 6);
         
-    case 'overall_resting_bitter_int'
-        one_directional = true;
+    case 'overall_resting_bitter_int'  % one-directional
+        start_center = false;
         Screen('DrawLine', theWindow, white, lb, H*(5/8), rb, H*(5/8), 4); % penWidth: 0.125~7.000
         Screen('DrawLine', theWindow, white, lb, H*(5/8)-scale_H/3, lb, H*(5/8)+scale_H/3, 6);
         DrawFormattedText(theWindow, double('전혀 느껴지지\n 않음'), lb-50, H*(5/8)+10, white);
@@ -147,8 +146,8 @@ switch scale
         DrawFormattedText(theWindow, double('유쾌'), rb+20, H*(5/8)+10, white);
         Screen('DrawLine', theWindow, white, rb, H*(5/8)-scale_H/2, rb, H*(5/8)+scale_H/2, 6);
         
-    case 'overall_resting_capsai_int'
-        one_directional = true;
+    case 'overall_resting_capsai_int'  % one-directional
+        start_center = false;
         Screen('DrawLine', theWindow, white, lb, H*(5/8), rb, H*(5/8), 4); % penWidth: 0.125~7.000
         Screen('DrawLine', theWindow, white, lb, H*(5/8)-scale_H/3, lb, H*(5/8)+scale_H/3, 6);
         DrawFormattedText(theWindow, double('전혀 느껴지지\n 않음'), lb-50, H*(5/8)+10, white);
@@ -163,8 +162,8 @@ switch scale
         DrawFormattedText(theWindow, double('유쾌'), rb+20, H*(5/8)+10, white);
         Screen('DrawLine', theWindow, white, rb, H*(5/8)-scale_H/2, rb, H*(5/8)+scale_H/2, 6);
         
-    case 'overall_resting_sweet_int'
-        one_directional = true;
+    case 'overall_resting_sweet_int'  % one-directional
+        start_center = false;
         Screen('DrawLine', theWindow, white, lb, H*(5/8), rb, H*(5/8), 4); % penWidth: 0.125~7.000
         Screen('DrawLine', theWindow, white, lb, H*(5/8)-scale_H/3, lb, H*(5/8)+scale_H/3, 6);
         DrawFormattedText(theWindow, double('전혀 느껴지지\n 않음'), lb-50, H*(5/8)+10, white);
@@ -179,8 +178,8 @@ switch scale
         DrawFormattedText(theWindow, double('유쾌'), rb+20, H*(5/8)+10, white);
         Screen('DrawLine', theWindow, white, rb, H*(5/8)-scale_H/2, rb, H*(5/8)+scale_H/2, 6);
         
-    case 'overall_resting_touch_int'
-        one_directional = true;
+    case 'overall_resting_touch_int'  % one-directional
+        start_center = false;
         Screen('DrawLine', theWindow, white, lb, H*(5/8), rb, H*(5/8), 4); % penWidth: 0.125~7.000
         Screen('DrawLine', theWindow, white, lb, H*(5/8)-scale_H/3, lb, H*(5/8)+scale_H/3, 6);
         DrawFormattedText(theWindow, double('전혀 느껴지지\n 않음'), lb-50, H*(5/8)+10, white);

@@ -15,6 +15,7 @@ practice = false;
 run = false;
 USE_EYELINK = false;
 USE_BIOPAC = false;
+% savedir = fullfile(pwd, 'data');
 
 %% PARSING VARARGIN
 
@@ -28,8 +29,8 @@ for i = 1:length(varargin)
                 practice = true;
             case {'run'}
                 run = true;
-                %             case {'savedir'}
-                %                 savedir = varargin{i+1};
+%             case {'savedir'}
+%                 savedir = varargin{i+1};
             case {'eyelink', 'eye', 'eyetrack'}
                 USE_EYELINK = true;
             case {'biopac'}

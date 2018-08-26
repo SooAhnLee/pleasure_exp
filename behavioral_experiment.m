@@ -33,19 +33,19 @@ global bgcolor white orange red  %color
 
 
 screens = Screen('Screens');  
-window_num = screens(end); 
+window_num = screens(end);
 Screen('Preference', 'SkipSyncTests', 0);
 screen_mode = 'testmode'; 
 window_ratio = 1.11;  
-window_info = Screen('Resolution', window_num);
+window_info = Screen('Resolution', window_num); 
 switch screen_mode 
-    case 'full' 
+    case 'full'  
         window_rect = [0 0 window_info.width window_info.height]; % full screen
-        fontsize = 32;
+        fontsize = 32; 
     case 'semifull'   
         window_rect = [0 0 window_info.width-100 window_info.height-100]; % a little bit distance
     case 'middle'
-        window_rect = [0 0 window_info.width/2 window_info.height/2];
+        window_re ct = [0 0 window_info.width/2 window_info.height/2];
     case 'small'
         window_rect = [0 0 1200 720]; % in the test mode, use a little smaller screen
         fontsize = 10;
@@ -54,7 +54,7 @@ switch screen_mode
         fontsize = 20; 
     case 'testmode'
         window_rect = [0 0 1240 800];
-        fontsize = 30;
+        fontsize = 26;
 end
  
 % color
@@ -73,8 +73,8 @@ rb = W*(5/6); % rating scale right bounds 3/4
 scale_W = (rb-lb)*0.1;
 scale_H = H*0.1;
 
-anchor_lms = [W/2-0.01*(W/2-lb) W/2-0.06*(W/2-lb) W/2-0.18*(W/2-lb) W/2-0.35*(W/2-lb) W/2-0.5*(W/2-lb);
-    W/2+0.01*(W/2-lb) W/2+0.06*(W/2-lb) W/2+0.18*(W/2-lb) W/2+0.35*(W/2-lb) W/2+0.5*(W/2-lb)];
+anchor_lms = [W/2-0.014*(W/2-lb) W/2-0.061*(W/2-lb) W/2-0.172*(W/2-lb) W/2-0.354*(W/2-lb) W/2-0.533*(W/2-lb);
+    W/2+0.014*(W/2-lb) W/2+0.061*(W/2-lb) W/2+0.172*(W/2-lb) W/2+0.354*(W/2-lb) W/2+0.533*(W/2-lb)];
 %W/2-lb = rb-W/2
  
 % start the screen
@@ -84,7 +84,7 @@ theWindow = Screen('OpenWindow', window_num, bgcolor, window_rect);
 %font = 'Helvetica';
 font = 'NanumBarunGothic';
 Screen('Preference', 'TextEncodingLocale', 'ko_KR.UTF-8');
-  
+     
 %Screen('TextFont', theWindow, font);
 Screen('TextSize', theWindow, fontsize); 
  
@@ -107,20 +107,22 @@ Screen('CloseAll');
 % start the screen
 theWindow = Screen('OpenWindow', window_num, bgcolor, window_rect);
 HideCursor;
-
+ 
 % Continuous rating 
-while true
+while true  
     DrawFormattedText(theWindow, double('지금부터 실험을 시작합니다. 시작하려면 스페이스바를 눌러주세요.'), 'center', 'center', white);
     Screen('Flip', theWindow);
     [~,~,keyCode] = KbCheck;
         if keyCode(KbName('space')) == 1 
             break  
-        end
+        end 
 end 
  
    
 rec_i = 0;
 start_t = GetSecs; 
+
+
 x = W/2; y = H*(5/8);
 SetMouse(x,y)
  
@@ -162,7 +164,7 @@ data.dat.cont_rating(rec_i,1) = (x-W/2)/(rb-lb).*2;
 save(data.datafile, '-append', 'data');
 
   
-ShowCursor;
+ShowCursor; 
 Screen('Clear'); 
 Screen('CloseAll');
  

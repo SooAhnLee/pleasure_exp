@@ -31,9 +31,9 @@ while true
     Screen('DrawLine', theWindow, white, lb, H*(5/8), rb, H*(5/8), 4); %rating scale
     % penWidth: 0.125~7.000
     Screen('DrawLine', theWindow, white, W/2, H*(5/8)-scale_H/3, W/2, H*(5/8)+scale_H/3, 6);
-    DrawFormattedText(theWindow, double('ºÒÄè'), lb-70, H*(5/8)+10, white);
+    DrawFormattedText(theWindow, double('ºÒÄè'), lb-26, H*(5/8)+scale_H/1.2, white);
     Screen('DrawLine', theWindow, white, lb, H*(5/8)-scale_H/2, lb, H*(5/8)+scale_H/2, 6);
-    DrawFormattedText(theWindow, double('À¯Äè'), rb+20, H*(5/8)+10, white);
+    DrawFormattedText(theWindow, double('À¯Äè'), rb-26, H*(5/8)+scale_H/1.2, white);
     Screen('DrawLine', theWindow, white, rb, H*(5/8)-scale_H/2, rb, H*(5/8)+scale_H/2, 6);
     Screen('DrawLine', theWindow, orange, x, H*(5/8)-scale_H/2, x, H*(5/8)+scale_H/2, 6); %rating bar
     Screen('Flip', theWindow);

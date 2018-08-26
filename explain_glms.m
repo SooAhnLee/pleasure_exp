@@ -14,9 +14,9 @@ global bgcolor white orange red  %color
             Screen('DrawLine', theWindow, white, anchor_lms(1,i), H*(5/8)-scale_H/4, anchor_lms(1,i), H*(5/8)+scale_H/4, 2);
             Screen('DrawLine', theWindow, white, anchor_lms(2,i), H*(5/8)-scale_H/4, anchor_lms(2,i), H*(5/8)+scale_H/4, 2);
         end
-        DrawFormattedText(theWindow, double('ºÒÄè'), lb-70, H*(5/8)+10, white);
-        DrawFormattedText(theWindow, double('À¯Äè'), rb+20, H*(5/8)+10, white);
-        DrawFormattedText(theWindow, double('Áß¸³'), W/2-30, H*(5/8)+scale_H/2*1.6);
+        DrawFormattedText(theWindow, double('ºÒÄè'), lb-26, H*(5/8)+scale_H/1.2, white);
+        DrawFormattedText(theWindow, double('À¯Äè'), rb-26, H*(5/8)+scale_H/1.2, white);
+        DrawFormattedText(theWindow, double('Áß¸³'), W/2-26, H*(5/8)+scale_H);
         Screen('DrawLine', theWindow, white, W/2, H*(5/8)-scale_H/3, W/2, H*(5/8)+scale_H/3, 6);
         Screen('DrawLine', theWindow, white, lb, H*(5/8)-scale_H/2, lb, H*(5/8)+scale_H/2, 6);
         Screen('DrawLine', theWindow, white, rb, H*(5/8)-scale_H/2, rb, H*(5/8)+scale_H/2, 6);

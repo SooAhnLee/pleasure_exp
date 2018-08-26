@@ -2,7 +2,7 @@ clc;
 clear;
 close all;
 %% EXPERIMENT %% 
-%% Subject info & load run order
+%% Subject info & load run ordert
 
 [SID, SubjNum, order] = pleasure_fmri_subjinfo_order;
 
@@ -15,7 +15,7 @@ pleasure_fmri_t1(SID, SubjNum);
 %% Run 1
 
 run_i = 1;
-pleasure_fmri_task_main(SID, SubjNum, order(run_i), 'run'); %'explain', 'practice', 'run'); %, 'eyelink', 'biopac')
+pleasure_fmri_task_main(SID, SubjNum, order(run_i), 'run'); %, 'eyelink', 'biopac')
 
 %% RUN 2
 

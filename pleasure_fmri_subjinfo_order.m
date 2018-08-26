@@ -9,16 +9,16 @@ basedir = pwd;
 cd(basedir); addpath(genpath(basedir));
 
 % version 1
-% rundatdir = fullfile(basedir, 'Pleasure_randomized_run_data.mat');
-% load(rundatdir, 'Runs');
-% order = Runs(SubjNum,:)
+rundatdir = fullfile(basedir, 'Pleasure_randomized_run_data.mat');
+load(rundatdir, 'Runs_randomized');
+order = Runs_randomized(SubjNum,:);
 
 % version 2
-Runs = {'REST', 'CAPS', 'QUIN', 'SWEET', 'TOUCH'};
+% Runs = {'REST', 'CAPS', 'QUIN', 'SWEET', 'TOUCH'};
 % for i = 1:80
 %     order{i} = Runs(randperm(5)); % produce a randomized order
 % end
-order = Runs(randperm(5));
+% order = Runs(randperm(5));
 
 SubjInfo_Order.SID = SID;
 SubjInfo_Order.SubjNum = SubjNum;

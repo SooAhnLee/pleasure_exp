@@ -31,16 +31,16 @@ global theWindow W H window_ratio  %window property
 global lb rb scale_W scale_H anchor_lms  %rating scale
 global bgcolor white orange red  %color 
 
-
-screens = Screen('Screens');  
+ 
+screens = Screen('Screens');   
 window_num = screens(end);
 Screen('Preference', 'SkipSyncTests', 0);
 screen_mode = 'testmode'; 
-window_ratio = 1.11;  
+window_ratio = 1.11;   
 window_info = Screen('Resolution', window_num); 
 switch screen_mode 
-    case 'full'  
-        window_rect = [0 0 window_info.width window_info.height]; % full screen
+    case 'full'   
+        window_rect   = [0 0 window_info.width window_info.height]; % full screen
         fontsize = 32; 
     case 'semifull'   
         window_rect = [0 0 window_info.width-100 window_info.height-100]; % a little bit distance
@@ -52,7 +52,7 @@ switch screen_mode
     case 'test'
         window_rect = [0 0 window_info.width window_info.height]/window_ratio;
         fontsize = 20; 
-    case 'testmode'
+    case 'testmode' 
         window_rect = [0 0 1240 800];
         fontsize = 26;
 end
@@ -99,7 +99,7 @@ explain_glms
 % Practice 
 practice_glms 
     
-sca;
+sca; 
 Screen('CloseAll'); 
  
 %% Start behavioral experiment
@@ -107,12 +107,12 @@ Screen('CloseAll');
 % start the screen
 theWindow = Screen('OpenWindow', window_num, bgcolor, window_rect);
 HideCursor;
- 
-% Continuous rating 
-while true  
+  
+% Continuous rating  
+while true   
     DrawFormattedText(theWindow, double('지금부터 실험을 시작합니다. 시작하려면 스페이스바를 눌러주세요.'), 'center', 'center', white);
     Screen('Flip', theWindow);
-    [~,~,keyCode] = KbCheck;
+    [~,~,keyCode] = KbCheck; 
         if keyCode(KbName('space')) == 1 
             break  
         end 
@@ -120,11 +120,11 @@ end
  
    
 rec_i = 0;
-start_t = GetSecs; 
+start_t = GetSecs;  
 
 
 x = W/2; y = H*(5/8);
-SetMouse(x,y)
+SetMouse(x,y) 
  
 while true
     rec_i = rec_i + 1;
@@ -133,7 +133,7 @@ while true
     if x < lb
         x = lb;
     elseif x > rb
-        x = rb;
+        x = rb; 
     end
     
     msgtxt = '마우스를 좌우로 움직여 해당 자극이 얼마나 유쾌/불쾌한지에 대해 평가해주세요.\n 실험을 끝내려면 클릭해주세요.';

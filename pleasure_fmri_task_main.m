@@ -31,7 +31,7 @@ for i = 1:length(varargin)
                 run = true;
 %             case {'savedir'}
 %                 savedir = varargin{i+1};
-            case {'eyelink', 'eye', 'eyetrack'}
+            case {'eyelink'}
                 USE_EYELINK = true;
             case {'biopac'}
                 USE_BIOPAC = true;
@@ -93,23 +93,6 @@ data.dat.duration = S.dur;
 data.dat.changecolor = S.changecolor;
 data.dat.changetime = S.changetime;
 
-%% SETUP: Save eyelink filename according to subject information
-
-% need to be revised when the eyelink is here.
-if USE_EYELINK
-    
-    edf_filename = ['E_' SID '_' SubjNum]; % name should be equal or less than 8
-    edfFile = sprintf('%s.EDF', edf_filename);
-    eyelink_main(edfFile, 'Init');
-    
-    status = Eyelink('Initialize');
-    if status
-        error('Eyelink is not communicating with PC. It is okay though.');
-    end
-    Eyelink('Command', 'set_idle_mode');
-    waitsec_fromstarttime(GetSecs, .5);
-    
-end
 
 %% SETUP : Screen
 
@@ -117,7 +100,7 @@ bgcolor = 100;
 window_ratio = 3;
 
 screens = Screen('Screens');
-window_num = screens(end);
+window_num = screens(1);
 Screen('Preference', 'SkipSyncTests', 1);
 screen_mode = 'testmode';
 window_info = Screen('Resolution', window_num);
@@ -167,7 +150,7 @@ font = 'NanumBarunGothic';
 Screen('Preference', 'TextEncodingLocale', 'ko_KR.UTF-8');
 
 %% Start : Screen
-sca
+
 theWindow = Screen('OpenWindow', window_num, bgcolor, window_rect); % start the screen
 %Screen('TextFont', theWindow, font);
 Screen('TextSize', theWindow, fontsize);
@@ -175,6 +158,24 @@ Screen('TextSize', theWindow, fontsize);
 Screen(theWindow, 'FillRect', bgcolor, window_rect); % Just getting information, and do not show the scale.
 Screen('Flip', theWindow);
 HideCursor;
+
+%% SETUP: Save eyelink filename according to subject information
+
+% need to be revised when the eyelink is here.
+if USE_EYELINK
+    
+    edf_filename = ['E_' SID '_' SubjNum]; % name should be equal or less than 8
+    edfFile = sprintf('%s.EDF', edf_filename);
+    eyelink_main(edfFile, 'Init');
+    
+    status = Eyelink('Initialize');
+    if status
+        error('Eyelink is not communicating with PC. It is okay though.');
+    end
+    Eyelink('Command', 'set_idle_mode');
+    waitsec_fromstarttime(GetSecs, .5);
+    
+end
 
 %% Start
 
@@ -186,7 +187,7 @@ try
         % Explain bi-directional scale with visualization
         while true % Button
             msgtxt = '지금부터 실험이 시작됩니다. 먼저, 실험을 진행하기에 앞서 평가 척도에 대한 설명을 진행하겠습니다.\n\n참가자는 모든 준비가 완료되면 버튼을 눌러주시기 바랍니다.';
-            DrawFormattedText(theWindow, double(msgtxt), 'center', H*(1/4), white, [], [], [], 2);
+            DrawFormattedText(theWindow, double(msgtxt), 'center', 'center', white, [], [], [], 2);
             Screen('Flip', theWindow);
             
             [~,~,button] = GetMouse(theWindow);
@@ -373,7 +374,7 @@ try
         
         while true % Start, Space
             msgtxt = '\n실험자는 모든 것이 잘 준비되었는지 체크해주세요 (Biopac, Eyelink, 등등).\n\n모두 준비되었으면, 스페이스바를 눌러주세요.';
-            DrawFormattedText(theWindow, double(msgtxt), 'center', 100, white, [], [], [], 2);
+            DrawFormattedText(theWindow, double(msgtxt), 'center', 'center', white, [], [], [], 2);
             Screen('Flip', theWindow);
             
             [~,~,keyCode] = KbCheck;
@@ -448,10 +449,12 @@ try
             
             Screen('DrawLine', theWindow, white, lb1, H*(1/2), rb1, H*(1/2), 4); %rating scale
             % penWidth: 0.125~7.000
+            msgtxt = '이 경험이 얼마나 유쾌 혹은 불쾌한지를 지속적으로 보고해주세요.';
+            DrawFormattedText(theWindow, double(msgtxt), 'center', H*(1/4), orange);
             Screen('DrawLine', theWindow, white, W/2, H*(1/2)-scale_H/3, W/2, H*(1/2)+scale_H/3, 6);
-            DrawFormattedText(theWindow, double('불쾌'), lb1-26, H*(1/2)+scale_H, white);
+%             DrawFormattedText(theWindow, double('불쾌'), lb1-26, H*(1/2)+scale_H, white);
             Screen('DrawLine', theWindow, white, lb1, H*(1/2)-scale_H/2, lb1, H*(1/2)+scale_H/2, 6);
-            DrawFormattedText(theWindow, double('유쾌'), rb1-26, H*(1/2)+scale_H, white);
+%             DrawFormattedText(theWindow, double('유쾌'), rb1-26, H*(1/2)+scale_H, white);
             Screen('DrawLine', theWindow, white, rb1, H*(1/2)-scale_H/2, rb1, H*(1/2)+scale_H/2, 6);
             Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/2, x, H*(1/2)+scale_H/2, 6); %rating bar
             

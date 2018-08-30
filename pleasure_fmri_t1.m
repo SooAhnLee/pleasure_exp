@@ -42,7 +42,7 @@ end
 %% SETUP : Create paradigm according to subject information
 
 data.dat.type = 'T1';
-data.dat.duration = 30;  % 15*60 - 10
+data.dat.duration = 30;  % 15*60 (including disdaq)
 
 %% SETUP : Screen
 

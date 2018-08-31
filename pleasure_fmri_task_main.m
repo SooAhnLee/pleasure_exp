@@ -78,8 +78,8 @@ end
 %% SETUP : Create paradigm according to subject information
 
 S.type = type;
-% S.dur = 15*60 + 15; % 15 mins + 15 secs for disdaq
-S.dur = 10;
+% S.dur = 15*60; % except disdaq
+S.dur = 403;  %
 
 S.changecolor = [10:60:S.dur];
 changecolor_jitter = randi(10, 1, numel(S.changecolor));
@@ -93,16 +93,15 @@ data.dat.duration = S.dur;
 data.dat.changecolor = S.changecolor;
 data.dat.changetime = S.changetime;
 
-
 %% SETUP : Screen
 
 bgcolor = 100;
-window_ratio = 3;
+% window_ratio = 3;
 
 screens = Screen('Screens');
 window_num = screens(1);
 Screen('Preference', 'SkipSyncTests', 1);
-screen_mode = 'testmode';
+screen_mode = 'full';
 window_info = Screen('Resolution', window_num);
 switch screen_mode
     case 'full'
@@ -159,6 +158,7 @@ Screen(theWindow, 'FillRect', bgcolor, window_rect); % Just getting information,
 Screen('Flip', theWindow);
 HideCursor;
 
+
 %% SETUP: Save eyelink filename according to subject information
 
 % need to be revised when the eyelink is here.
@@ -176,7 +176,6 @@ if USE_EYELINK
     waitsec_fromstarttime(GetSecs, .5);
     
 end
-
 %% Start
 
 try
@@ -452,9 +451,9 @@ try
             msgtxt = '이 경험이 얼마나 유쾌 혹은 불쾌한지를 지속적으로 보고해주세요.';
             DrawFormattedText(theWindow, double(msgtxt), 'center', H*(1/4), orange);
             Screen('DrawLine', theWindow, white, W/2, H*(1/2)-scale_H/3, W/2, H*(1/2)+scale_H/3, 6);
-%             DrawFormattedText(theWindow, double('불쾌'), lb1-26, H*(1/2)+scale_H, white);
+%             DrawFormattedText(theWindow, double('불쾌'), lb1-scale_H/2.8, H*(1/2)+scale_H, white);
             Screen('DrawLine', theWindow, white, lb1, H*(1/2)-scale_H/2, lb1, H*(1/2)+scale_H/2, 6);
-%             DrawFormattedText(theWindow, double('유쾌'), rb1-26, H*(1/2)+scale_H, white);
+%             DrawFormattedText(theWindow, double('유쾌'), rb1-scale_H/2.8, H*(1/2)+scale_H, white);
             Screen('DrawLine', theWindow, white, rb1, H*(1/2)-scale_H/2, rb1, H*(1/2)+scale_H/2, 6);
             Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/2, x, H*(1/2)+scale_H/2, 6); %rating bar
             

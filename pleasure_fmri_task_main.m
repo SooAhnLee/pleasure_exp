@@ -95,13 +95,13 @@ data.dat.changetime = S.changetime;
 
 %% SETUP : Screen
 
-bgcolor = 100;
+bgcolor = 50;
 % window_ratio = 3;
 
 screens = Screen('Screens');
 window_num = screens(1);
 Screen('Preference', 'SkipSyncTests', 1);
-screen_mode = 'full';
+screen_mode = 'testmode';
 window_info = Screen('Resolution', window_num);
 switch screen_mode
     case 'full'
@@ -139,7 +139,6 @@ anchor_lms = [W/2-0.014*(W/2-lb1) W/2-0.061*(W/2-lb1) W/2-0.172*(W/2-lb1) W/2-0.
 %W/2-lb1 = rb1-W/2
 
 % color
-% bgcolor = 50;
 white = 255;
 red = [158 1 66];
 orange = [255 164 0];
@@ -205,22 +204,22 @@ try
                 Screen('DrawLine', theWindow, white, anchor_lms(1,i), H*(1/2)-scale_H/4, anchor_lms(1,i), H*(1/2)+scale_H/4, 2);
                 Screen('DrawLine', theWindow, white, anchor_lms(2,i), H*(1/2)-scale_H/4, anchor_lms(2,i), H*(1/2)+scale_H/4, 2);
             end
-            DrawFormattedText(theWindow, double('불쾌'), lb1-26, H*(1/2)+scale_H, white);
-            DrawFormattedText(theWindow, double('유쾌'), rb1-26, H*(1/2)+scale_H, white);
-            DrawFormattedText(theWindow, double('중립'), W/2-26, H*(1/2)+scale_H);
+            DrawFormattedText(theWindow, double('불쾌'), lb1-scale_H/2.8, H*(1/2)+scale_H, white);
+            DrawFormattedText(theWindow, double('유쾌'), rb1-scale_H/2.8, H*(1/2)+scale_H, white);
+            DrawFormattedText(theWindow, double('중립'), W/2-scale_H/2.8, H*(1/2)+scale_H);
             Screen('DrawLine', theWindow, white, W/2, H*(1/2)-scale_H/3, W/2, H*(1/2)+scale_H/3, 6);
             Screen('DrawLine', theWindow, white, lb1, H*(1/2)-scale_H/2, lb1, H*(1/2)+scale_H/2, 6);
             Screen('DrawLine', theWindow, white, rb1, H*(1/2)-scale_H/2, rb1, H*(1/2)+scale_H/2, 6);
             
-            DrawFormattedText(theWindow, double('약함'), anchor_lms(1,2)-26, H*(1/2)+scale_H/2, white);
-            DrawFormattedText(theWindow, double('중간'), anchor_lms(1,3)-26, H*(1/2)+scale_H/2, white);
-            DrawFormattedText(theWindow, double('강함'), anchor_lms(1,4)-26, H*(1/2)+scale_H/2, white);
-            DrawFormattedText(theWindow, double('매우 강함'), anchor_lms(1,5)-26, H*(1/2)+scale_H/2, white, 2,[],[],1);
+            DrawFormattedText(theWindow, double('약함'), anchor_lms(1,2)-scale_H/2.8, H*(1/2)+scale_H/2, white);
+            DrawFormattedText(theWindow, double('중간'), anchor_lms(1,3)-scale_H/2.8, H*(1/2)+scale_H/2, white);
+            DrawFormattedText(theWindow, double('강함'), anchor_lms(1,4)-scale_H/2.8, H*(1/2)+scale_H/2, white);
+            DrawFormattedText(theWindow, double('매우 강함'), anchor_lms(1,5)-scale_H/2.8, H*(1/2)+scale_H/2, white, 2,[],[],1);
             
-            DrawFormattedText(theWindow, double('약함'), anchor_lms(2,2)-26, H*(1/2)+scale_H/2, white);
-            DrawFormattedText(theWindow, double('중간'), anchor_lms(2,3)-26, H*(1/2)+scale_H/2, white);
-            DrawFormattedText(theWindow, double('강함'), anchor_lms(2,4)-26, H*(1/2)+scale_H/2, white);
-            DrawFormattedText(theWindow, double('매우 강함'), anchor_lms(2,5)-26, H*(1/2)+scale_H/2, white, 2,[],[],1);
+            DrawFormattedText(theWindow, double('약함'), anchor_lms(2,2)-scale_H/2.8, H*(1/2)+scale_H/2, white);
+            DrawFormattedText(theWindow, double('중간'), anchor_lms(2,3)-scale_H/2.8, H*(1/2)+scale_H/2, white);
+            DrawFormattedText(theWindow, double('강함'), anchor_lms(2,4)-scale_H/2.8, H*(1/2)+scale_H/2, white);
+            DrawFormattedText(theWindow, double('매우 강함'), anchor_lms(2,5)-scale_H/2.8, H*(1/2)+scale_H/2, white, 2,[],[],1);
             
             Screen('Flip', theWindow);
             
@@ -253,8 +252,8 @@ try
             DrawFormattedText(theWindow, double(msgtxt), 'center', H*(1/4), white, [], [], [], 2);
             Screen('DrawLine', theWindow, white, lb2, H*(1/2), rb2, H*(1/2), 4); %rating scale
 
-            DrawFormattedText(theWindow, double('전혀'), lb2-26, H*(1/2)+scale_H/1.2, white);
-            DrawFormattedText(theWindow, double('최대'), rb2-26, H*(1/2)+scale_H/1.2, white);
+            DrawFormattedText(theWindow, double('전혀'), lb2-scale_H/2.8, H*(1/2)+scale_H/1.2, white);
+            DrawFormattedText(theWindow, double('최대'), rb2-scale_H/2.8, H*(1/2)+scale_H/1.2, white);
             Screen('DrawLine', theWindow, white, lb2, H*(1/2)-scale_H/3, lb2, H*(1/2)+scale_H/3, 6);
             Screen('DrawLine', theWindow, white, rb2, H*(1/2)-scale_H/2, rb2, H*(1/2)+scale_H/2, 6);
             
@@ -263,10 +262,10 @@ try
             Screen('DrawLine', theWindow, white, lb2+(rb2-lb2)*0.354, H*(1/2)-scale_H/4, lb2+(rb2-lb2)*0.354, H*(1/2)+scale_H/4, 6);
             Screen('DrawLine', theWindow, white, lb2+(rb2-lb2)*0.533, H*(1/2)-scale_H/4, lb2+(rb2-lb2)*0.533, H*(1/2)+scale_H/4, 6);
             
-            DrawFormattedText(theWindow, double('약함'), lb2+(rb2-lb2)*0.061-26, H*(1/2)+scale_H/2, white);
-            DrawFormattedText(theWindow, double('중간'), lb2+(rb2-lb2)*0.172-26, H*(1/2)+scale_H/2, white);
-            DrawFormattedText(theWindow, double('강함'), lb2+(rb2-lb2)*0.354-26, H*(1/2)+scale_H/2, white);
-            DrawFormattedText(theWindow, double('매우 강함'), lb2+(rb2-lb2)*0.533-26, H*(1/2)+scale_H/2, white, 2,[],[],1);
+            DrawFormattedText(theWindow, double('약함'), lb2+(rb2-lb2)*0.061-scale_H/2.8, H*(1/2)+scale_H/2, white);
+            DrawFormattedText(theWindow, double('중간'), lb2+(rb2-lb2)*0.172-scale_H/2.8, H*(1/2)+scale_H/2, white);
+            DrawFormattedText(theWindow, double('강함'), lb2+(rb2-lb2)*0.354-scale_H/2.8, H*(1/2)+scale_H/2, white);
+            DrawFormattedText(theWindow, double('매우 강함'), lb2+(rb2-lb2)*0.533-scale_H/2.8, H*(1/2)+scale_H/2, white, 2,[],[],1);
             
             Screen('Flip', theWindow);
             

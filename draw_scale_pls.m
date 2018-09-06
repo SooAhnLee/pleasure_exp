@@ -34,7 +34,15 @@ switch scale
         DrawFormattedText(theWindow, double('전혀 느껴지지\n      않음'), lb-scale_H/0.8, H*(1/2)+scale_H/1.2, white);
         Screen('DrawLine', theWindow, white, rb, H*(1/2)-scale_H/2, rb, H*(1/2)+scale_H/2, 6);
         DrawFormattedText(theWindow, double('상상할 수 있는\n   가장 심한'), rb-scale_H/0.7, H*(1/2)+scale_H/1.2, white);
-
+        
+    case 'general_sensitivity'  % one-directional
+        start_center = false;
+        Screen('DrawLine', theWindow, white, lb, H*(1/2), rb, H*(1/2), 4); % penWidth: 0.125~7.000
+        Screen('DrawLine', theWindow, white, lb, H*(1/2)-scale_H/3, lb, H*(1/2)+scale_H/3, 6);
+        DrawFormattedText(theWindow, double('느낄 수\n      없음'), lb-scale_H/0.8, H*(1/2)+scale_H/1.2, white);
+        Screen('DrawLine', theWindow, white, rb, H*(1/2)-scale_H/2, rb, H*(1/2)+scale_H/2, 6);
+        DrawFormattedText(theWindow, double('상상할 수 있는\n   가장 강한 정도의 자극'), rb-scale_H/0.7, H*(1/2)+scale_H/1.2, white);
+        
     case 'overall_boredness'
         Screen('DrawLine', theWindow, white, lb, H*(1/2), rb, H*(1/2), 4); % penWidth: 0.125~7.000
         Screen('DrawLine', theWindow, white, W/2, H*(1/2)-scale_H/3, W/2, H*(1/2)+scale_H/3, 6);
@@ -50,7 +58,7 @@ switch scale
         Screen('DrawLine', theWindow, white, lb, H*(1/2)-scale_H/2, lb, H*(1/2)+scale_H/2, 6);
         DrawFormattedText(theWindow, double('매우 또렷'), rb-scale_H/1.4, H*(1/2)+scale_H/1.2, white);
         Screen('DrawLine', theWindow, white, rb, H*(1/2)-scale_H/2, rb, H*(1/2)+scale_H/2, 6);
- 
+        
     case 'overall_relaxed'
         Screen('DrawLine', theWindow, white, lb, H*(1/2), rb, H*(1/2), 4); % penWidth: 0.125~7.000
         Screen('DrawLine', theWindow, white, W/2, H*(1/2)-scale_H/3, W/2, H*(1/2)+scale_H/3, 6);
@@ -74,7 +82,7 @@ switch scale
         Screen('DrawLine', theWindow, white, lb, H*(1/2)-scale_H/2, lb, H*(1/2)+scale_H/2, 6);
         DrawFormattedText(theWindow, double('매우 그렇다'), rb-scale_H/1.5, H*(1/2)+scale_H/1.2, white);
         Screen('DrawLine', theWindow, white, rb, H*(1/2)-scale_H/2, rb, H*(1/2)+scale_H/2, 6);
-
+        
         
     case 'overall_resting_negative'
         Screen('DrawLine', theWindow, white, lb, H*(1/2), rb, H*(1/2), 4); % penWidth: 0.125~7.000
@@ -202,8 +210,8 @@ switch scale
         DrawFormattedText(theWindow, double('불쾌'), lb-scale_H/2.8, H*(1/2)+scale_H, white);
         Screen('DrawLine', theWindow, white, lb, H*(1/2)-scale_H/2, lb, H*(1/2)+scale_H/2, 6);
         DrawFormattedText(theWindow, double('유쾌'), rb-scale_H/2.8, H*(1/2)+scale_H, white);
-        Screen('DrawLine', theWindow, white, rb, H*(1/2)-scale_H/2, rb, H*(1/2)+scale_H/2, 6);       
-           
+        Screen('DrawLine', theWindow, white, rb, H*(1/2)-scale_H/2, rb, H*(1/2)+scale_H/2, 6);
+        
 end
 
 end

@@ -63,7 +63,7 @@ data.starttime_getsecs = GetSecs;
 % if the same file exists, break and retype subject info
 if exist(data.datafile, 'file')
     fprintf('\n ** EXSITING FILE: %s %s **', data.subject, SubjDate);
-    cont_or_not = input(['\nYou type the run number that is inconsistent with the data previously saved.', ...
+    cont_or_not = input(['\nYou typed the run number that is inconsistent with the data previously saved.', ...
         '\nWill you go on with your run number that typed just before?', ...
         '\n1: Yes, continue with typed run number.  ,   2: No, it`s a mistake. I`ll break.\n:  ']);
     if cont_or_not == 2
@@ -150,13 +150,12 @@ Screen('Preference', 'TextEncodingLocale', 'ko_KR.UTF-8');
 %% Start : Screen
 
 theWindow = Screen('OpenWindow', window_num, bgcolor, window_rect); % start the screen
-%Screen('TextFont', theWindow, font);
+Screen('TextFont', theWindow, font);
 Screen('TextSize', theWindow, fontsize);
 
 Screen(theWindow, 'FillRect', bgcolor, window_rect); % Just getting information, and do not show the scale.
 Screen('Flip', theWindow);
 HideCursor;
-
 
 %% SETUP: Save eyelink filename according to subject information
 

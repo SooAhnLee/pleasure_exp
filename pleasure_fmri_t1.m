@@ -46,7 +46,7 @@ data.dat.duration = 30;  % 15*60 (including disdaq)
 
 %% SETUP : Screen
 
-bgcolor = 100;
+bgcolor = 50;
 window_ratio = 3;
 
 screens = Screen('Screens');
@@ -88,7 +88,6 @@ anchor_lms = [W/2-0.01*(W/2-lb) W/2-0.06*(W/2-lb) W/2-0.18*(W/2-lb) W/2-0.35*(W/
 %W/2-lb = rb-W/2
 
 % color
-% bgcolor = 50;
 white = 255;
 red = [158 1 66];
 orange = [255 164 0];

@@ -450,9 +450,9 @@ try
             msgtxt = '이 경험이 얼마나 유쾌 혹은 불쾌한지를 지속적으로 보고해주세요.';
             DrawFormattedText(theWindow, double(msgtxt), 'center', H*(1/4), orange);
             Screen('DrawLine', theWindow, white, W/2, H*(1/2)-scale_H/3, W/2, H*(1/2)+scale_H/3, 6);
-%             DrawFormattedText(theWindow, double('불쾌'), lb1-scale_H/2.8, H*(1/2)+scale_H, white);
+            DrawFormattedText(theWindow, double('불쾌'), lb1-scale_H/2.8, H*(1/2)+scale_H, white);
             Screen('DrawLine', theWindow, white, lb1, H*(1/2)-scale_H/2, lb1, H*(1/2)+scale_H/2, 6);
-%             DrawFormattedText(theWindow, double('유쾌'), rb1-scale_H/2.8, H*(1/2)+scale_H, white);
+            DrawFormattedText(theWindow, double('유쾌'), rb1-scale_H/2.8, H*(1/2)+scale_H, white);
             Screen('DrawLine', theWindow, white, rb1, H*(1/2)-scale_H/2, rb1, H*(1/2)+scale_H/2, 6);
             Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/2, x, H*(1/2)+scale_H/2, 6); %rating bar
             

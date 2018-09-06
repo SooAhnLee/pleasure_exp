@@ -3,7 +3,7 @@ function pleasure_fmri_t1(SID, SubjNum)
 %% SETUP : Basic parameters
 
 global theWindow W H window_ratio  %window property
-global lb rb scale_W scale_H anchor_lms  %rating scale
+global scale_W scale_H  %rating scale
 global bgcolor white orange red  %color
 
 basedir = pwd;
@@ -70,22 +70,14 @@ switch screen_mode
         fontsize = 20;
     case 'testmode'
         window_rect = [0 0 1240 800];
-        fontsize = 26;
+        fontsize = 32;
 end
 
 % size
 W = window_rect(3); % width
 H = window_rect(4); % height
-
-lb = W*(1/8); % rating scale left bounds 1/8
-rb = W*(7/8); % rating scale right bounds 7/8
-
 scale_W = W*0.1;
 scale_H = H*0.1;
-
-anchor_lms = [W/2-0.01*(W/2-lb) W/2-0.06*(W/2-lb) W/2-0.18*(W/2-lb) W/2-0.35*(W/2-lb) W/2-0.5*(W/2-lb);
-    W/2+0.01*(W/2-lb) W/2+0.06*(W/2-lb) W/2+0.18*(W/2-lb) W/2+0.35*(W/2-lb) W/2+0.5*(W/2-lb)];
-%W/2-lb = rb-W/2
 
 % color
 white = 255;
@@ -97,7 +89,7 @@ font = 'NanumBarunGothic';
 Screen('Preference', 'TextEncodingLocale', 'ko_KR.UTF-8');
 
 %% Start : Screen
-sca
+
 theWindow = Screen('OpenWindow', window_num, bgcolor, window_rect); % start the screen
 %Screen('TextFont', theWindow, font);
 Screen('TextSize', theWindow, fontsize);
@@ -109,7 +101,7 @@ HideCursor;
 %% Start
 
 while true % Space
-    msgtxt = '잠시 후 구조촬영이 시작될 예정입니다. 곧 나타날 화면 중앙의 + 표시를 응시하면서 편안히 계시기 바랍니다.\n준비가 완료되면 실험자는 스페이스바를 눌러주시기 바랍니다.';
+    msgtxt = '잠시 후 구조촬영이 시작될 예정입니다.\n곧 나타날 화면 중앙의 + 표시를 응시하면서 편안히 계시기 바랍니다.\n준비가 완료되면 실험자는 스페이스바를 눌러주시기 바랍니다.';
     msgtxt = double(msgtxt);
     DrawFormattedText(theWindow, msgtxt, 'center', 'center', white, [], [], [], 2);
     Screen('Flip', theWindow);
@@ -156,9 +148,8 @@ waitsec_fromstarttime(data.dat.t1_starttime, 15); % 5+10
 t1_start_t = GetSecs;
 
 while true
-    DrawFormattedText(theWindow, double('+'), 'center', 'center', white, [], [], [], 2);
+    DrawFormattedText(theWindow, double('+'), 'center', 'center', white);
     Screen('Flip', theWindow);
-    waitsec_fromstarttime(t1_start_t, 15) %duration
     
     [~,~,keyCode] = KbCheck;
     if keyCode(KbName('q')) == 1
@@ -166,6 +157,9 @@ while true
         break
     end
     
+    if GetSecs - t1_start_t > 15  % duration
+        break
+    end
 end
 
 data.dat.t1_endtime = GetSecs - data.dat.t1_starttime;

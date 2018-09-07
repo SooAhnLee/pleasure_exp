@@ -128,8 +128,8 @@ H = window_rect(4); % height
 
 lb1 = W*(1/6); % rating scale left bounds 1/6
 rb1 = W*(5/6); % rating scale right bounds 5/6
-lb2 = W*(1/4); % rating scale left bounds 1/6
-rb2 = W*(3/4); % rating scale right bounds 5/6
+lb2 = W*(1/4); % rating scale left bounds 1/4
+rb2 = W*(3/4); % rating scale right bounds 3/4
 
 scale_W = W*0.1;
 scale_H = H*0.1;
@@ -254,7 +254,7 @@ try
             DrawFormattedText(theWindow, double('전혀'), lb2-scale_H/2.8, H*(1/2)+scale_H/1.2, white);
             DrawFormattedText(theWindow, double('최대'), rb2-scale_H/2.8, H*(1/2)+scale_H/1.2, white);
             Screen('DrawLine', theWindow, white, lb2, H*(1/2)-scale_H/3, lb2, H*(1/2)+scale_H/3, 6);
-            Screen('DrawLine', theWindow, white, rb2, H*(1/2)-scale_H/2, rb2, H*(1/2)+scale_H/2, 6);
+            Screen('DrawLine', theWindow, white, rb2, H*(1/2)-scale_H/3, rb2, H*(1/2)+scale_H/3, 6);
             
             Screen('DrawLine', theWindow, white, lb2+(rb2-lb2)*0.061, H*(1/2)-scale_H/4, lb2+(rb2-lb2)*0.061, H*(1/2)+scale_H/4, 6);
             Screen('DrawLine', theWindow, white, lb2+(rb2-lb2)*0.172, H*(1/2)-scale_H/4, lb2+(rb2-lb2)*0.172, H*(1/2)+scale_H/4, 6);

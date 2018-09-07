@@ -32,16 +32,16 @@ switch scale
         Screen('DrawLine', theWindow, white, lb, H*(1/2), rb, H*(1/2), 4); % penWidth: 0.125~7.000
         Screen('DrawLine', theWindow, white, lb, H*(1/2)-scale_H/3, lb, H*(1/2)+scale_H/3, 6);
         DrawFormattedText(theWindow, double('전혀 느껴지지\n      않음'), lb-scale_H/0.8, H*(1/2)+scale_H/1.2, white);
-        Screen('DrawLine', theWindow, white, rb, H*(1/2)-scale_H/2, rb, H*(1/2)+scale_H/2, 6);
+        Screen('DrawLine', theWindow, white, rb, H*(1/2)-scale_H/3, rb, H*(1/2)+scale_H/3, 6);
         DrawFormattedText(theWindow, double('상상할 수 있는\n   가장 심한'), rb-scale_H/0.7, H*(1/2)+scale_H/1.2, white);
         
     case 'general_sensitivity'  % one-directional
         start_center = false;
         Screen('DrawLine', theWindow, white, lb, H*(1/2), rb, H*(1/2), 4); % penWidth: 0.125~7.000
         Screen('DrawLine', theWindow, white, lb, H*(1/2)-scale_H/3, lb, H*(1/2)+scale_H/3, 6);
-        DrawFormattedText(theWindow, double('느낄 수\n      없음'), lb-scale_H/0.8, H*(1/2)+scale_H/1.2, white);
-        Screen('DrawLine', theWindow, white, rb, H*(1/2)-scale_H/2, rb, H*(1/2)+scale_H/2, 6);
-        DrawFormattedText(theWindow, double('상상할 수 있는\n   가장 강한 정도의 자극'), rb-scale_H/0.7, H*(1/2)+scale_H/1.2, white);
+        DrawFormattedText(theWindow, double('느낄 수\n   없음'), lb-scale_H/0.8, H*(1/2)+scale_H/1.2, white);
+        Screen('DrawLine', theWindow, white, rb, H*(1/2)-scale_H/3, rb, H*(1/2)+scale_H/3, 6);
+        DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 정도의 자극'), rb-scale_H/0.7, H*(1/2)+scale_H/1.2, white);
         
     case 'overall_boredness'
         Screen('DrawLine', theWindow, white, lb, H*(1/2), rb, H*(1/2), 4); % penWidth: 0.125~7.000
@@ -145,7 +145,7 @@ switch scale
         Screen('DrawLine', theWindow, white, lb, H*(1/2), rb, H*(1/2), 4); % penWidth: 0.125~7.000
         Screen('DrawLine', theWindow, white, lb, H*(1/2)-scale_H/3, lb, H*(1/2)+scale_H/3, 6);
         DrawFormattedText(theWindow, double('전혀 느껴지지\n      않음'), lb-scale_H/1.1, H*(1/2)+scale_H/1.2, white);
-        Screen('DrawLine', theWindow, white, rb, H*(1/2)-scale_H/2, rb, H*(1/2)+scale_H/2, 6);
+        Screen('DrawLine', theWindow, white, rb, H*(1/2)-scale_H/3, rb, H*(1/2)+scale_H/3, 6);
         DrawFormattedText(theWindow, double('상상할 수 있는\n   가장 강한'), rb-scale_H/0.9, H*(1/2)+scale_H/1.2, white);
         
     case 'overall_resting_bitter_glms'
@@ -163,7 +163,7 @@ switch scale
         Screen('DrawLine', theWindow, white, lb, H*(1/2), rb, H*(1/2), 4); % penWidth: 0.125~7.000
         Screen('DrawLine', theWindow, white, lb, H*(1/2)-scale_H/3, lb, H*(1/2)+scale_H/3, 6);
         DrawFormattedText(theWindow, double('전혀 느껴지지\n      않음'), lb-scale_H/1.1, H*(1/2)+scale_H/1.2, white);
-        Screen('DrawLine', theWindow, white, rb, H*(1/2)-scale_H/2, rb, H*(1/2)+scale_H/2, 6);
+        Screen('DrawLine', theWindow, white, rb, H*(1/2)-scale_H/3, rb, H*(1/2)+scale_H/3, 6);
         DrawFormattedText(theWindow, double('상상할 수 있는\n   가장 강한'), rb-scale_H/0.9, H*(1/2)+scale_H/1.2, white);
         
     case 'overall_resting_capsai_glms'
@@ -181,7 +181,7 @@ switch scale
         Screen('DrawLine', theWindow, white, lb, H*(1/2), rb, H*(1/2), 4); % penWidth: 0.125~7.000
         Screen('DrawLine', theWindow, white, lb, H*(1/2)-scale_H/3, lb, H*(1/2)+scale_H/3, 6);
         DrawFormattedText(theWindow, double('전혀 느껴지지\n      않음'), lb-scale_H/1.1, H*(1/2)+scale_H/1.2, white);
-        Screen('DrawLine', theWindow, white, rb, H*(1/2)-scale_H/2, rb, H*(1/2)+scale_H/2, 6);
+        Screen('DrawLine', theWindow, white, rb, H*(1/2)-scale_H/3, rb, H*(1/2)+scale_H/3, 6);
         DrawFormattedText(theWindow, double('상상할 수 있는\n   가장 강한'), rb-scale_H/0.9, H*(1/2)+scale_H/1.2, white);
         
     case 'overall_resting_sweet_glms'
@@ -199,7 +199,7 @@ switch scale
         Screen('DrawLine', theWindow, white, lb, H*(1/2), rb, H*(1/2), 4); % penWidth: 0.125~7.000
         Screen('DrawLine', theWindow, white, lb, H*(1/2)-scale_H/3, lb, H*(1/2)+scale_H/3, 6);
         DrawFormattedText(theWindow, double('전혀 느껴지지\n      않음'), lb-scale_H/1.1, H*(1/2)+scale_H/1.2, white);
-        Screen('DrawLine', theWindow, white, rb, H*(1/2)-scale_H/2, rb, H*(1/2)+scale_H/2, 6);
+        Screen('DrawLine', theWindow, white, rb, H*(1/2)-scale_H/3, rb, H*(1/2)+scale_H/3, 6);
         DrawFormattedText(theWindow, double('상상할 수 있는\n   가장 강한'), rb-scale_H/0.9, H*(1/2)+scale_H/1.2, white);
         
     case 'overall_resting_touch_glms'

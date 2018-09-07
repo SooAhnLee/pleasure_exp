@@ -14,7 +14,7 @@ cd(basedir); addpath(genpath(basedir));
 
 %% Save the behavioral data
 
-savedir = fullfile(basedir, 'Behav_Data');
+savedir = fullfile(basedir, 'Behav_exp_data');
 nowtime = clock;
 subjtime = sprintf('%.2d%.2d%.2d', nowtime(1), nowtime(2), nowtime(3));
 

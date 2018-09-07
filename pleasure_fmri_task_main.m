@@ -631,7 +631,7 @@ try
                 break
             end
             
-            msgtxt = [num2str(SubjRun) '번째 세션이 끝났습니다.\n세션을 마치려면, 실험자는 스페이스바를 눌러주시기 바랍니다.'];
+            msgtxt = [num2str(SubjRun) '번째 세션이 끝났습니다.\n\n세션을 마치려면, 실험자는 스페이스바를 눌러주시기 바랍니다.'];
             msgtxt = double(msgtxt); % korean to double
             DrawFormattedText(theWindow, msgtxt, 'center', 'center', white, [], [], [], 2);
             Screen('Flip', theWindow);

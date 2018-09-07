@@ -39,9 +39,9 @@ switch scale
         start_center = false;
         Screen('DrawLine', theWindow, white, lb, H*(1/2), rb, H*(1/2), 4); % penWidth: 0.125~7.000
         Screen('DrawLine', theWindow, white, lb, H*(1/2)-scale_H/3, lb, H*(1/2)+scale_H/3, 6);
-        DrawFormattedText(theWindow, double('느낄 수\n   없음'), lb-scale_H/0.8, H*(1/2)+scale_H/1.2, white);
+        DrawFormattedText(theWindow, double('느낄 수\n  없음'), lb-scale_H/2, H*(1/2)+scale_H/1.2, white);
         Screen('DrawLine', theWindow, white, rb, H*(1/2)-scale_H/3, rb, H*(1/2)+scale_H/3, 6);
-        DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 정도의 자극'), rb-scale_H/0.7, H*(1/2)+scale_H/1.2, white);
+        DrawFormattedText(theWindow, double('      상상할 수 있는\n가장 강한 정도의 자극'), rb-scale_H/0.7, H*(1/2)+scale_H/1.2, white);
         
     case 'overall_boredness'
         Screen('DrawLine', theWindow, white, lb, H*(1/2), rb, H*(1/2), 4); % penWidth: 0.125~7.000

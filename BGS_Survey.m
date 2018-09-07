@@ -60,7 +60,7 @@ switch screen_mode
         window_rect = [0 0 window_info.width window_info.height]/window_ratio;
         fontsize = 20;
     case 'testmode'
-        window_rect = [0 0 1200 800];
+        window_rect = [0 0 1440 900];
         fontsize = 32;
 end
 
@@ -112,8 +112,8 @@ while true % Space
     DrawFormattedText(theWindow, double(msgtxt), 'center', H*(1/4), white, [], [], [], 2);
     Screen('DrawLine', theWindow, white, lb2, H*(1/2), rb2, H*(1/2), 4); %rating scale
     
-    DrawFormattedText(theWindow, double('거의\n느낄 수 없음'), lb2-scale_H/2.8, H*(1/2)+scale_H/1.2, white);
-    DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 정도의 자극'), rb2-scale_H/2.8, H*(1/2)+scale_H/1.2, white);
+    DrawFormattedText(theWindow, double('느낄 수\n  없음'), lb2-scale_H/2, H*(1/2)+scale_H/1.2, white);
+    DrawFormattedText(theWindow, double('      상상할 수 있는\n가장 강한 정도의 자극'), rb2-scale_H/0.7, H*(1/2)+scale_H/1.2, white);
     Screen('DrawLine', theWindow, white, lb2, H*(1/2)-scale_H/3, lb2, H*(1/2)+scale_H/3, 6);
     Screen('DrawLine', theWindow, white, rb2, H*(1/2)-scale_H/3, rb2, H*(1/2)+scale_H/3, 6);
     

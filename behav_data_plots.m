@@ -110,7 +110,7 @@ subplot(3,1,2);
 plot(x,y) 
 axis([0 500 -0.1 0.7]);
 % title('JWP 180905')
-load('201809_HJK_subj001_behav_dat_touch.mat')
+load('20180907_HJK_subj002_behav_dat_touch.mat')
 x = data.dat.time_fromstart;
 y = data.dat.cont_rating;
 subplot(3,1,3);
@@ -222,19 +222,19 @@ ylabel('rating (-1 ~ 1)', 'FontSize', 10);
 close
 figure
 suptitle('Sweet result 4')
-load('20180907_YWH_subj001_behav_dat_sweet.mat')
-x = data.dat.time_fromstart;
-y = data.dat.cont_rating;
-subplot(3,1,1);
-plot(x,y) 
-axis([0 500 0 0.5]);
-xlabel('time (secs)', 'FontSize', 10);
-ylabel('rating (-1 ~ 1)', 'FontSize', 10);
+% load('20180907_YWH_subj001_behav_dat_sweet.mat')
+% x = data.dat.time_fromstart;
+% y = data.dat.cont_rating;
+% subplot(3,1,1);
+% plot(x,y) 
+% axis([0 500 0 0.5]);
+% xlabel('time (secs)', 'FontSize', 10);
+% ylabel('rating (-1 ~ 1)', 'FontSize', 10);
 % title('YWH 180907')
 load('20180907_HJK_subj001_behav_dat_sweet.mat')
 x = data.dat.time_fromstart;
 y = data.dat.cont_rating;
-subplot(3,1,2);
+subplot(2,1,1);
 plot(x,y) 
 axis([0 500 0 0.5]);
 xlabel('time (secs)', 'FontSize', 10);
@@ -243,7 +243,7 @@ ylabel('rating (-1 ~ 1)', 'FontSize', 10);
 load('20180905_JWP_subj001_behav_dat_sweet.mat')
 x = data.dat.time_fromstart;
 y = data.dat.cont_rating;
-subplot(3,1,3);
+subplot(2,1,2);
 plot(x,y) 
 axis([0 500 -0.5 0.1]);
 xlabel('time (secs)', 'FontSize', 10);

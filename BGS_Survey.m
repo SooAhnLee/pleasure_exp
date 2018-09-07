@@ -122,7 +122,7 @@ while true % Space
     Screen('DrawLine', theWindow, white, lb2+(rb2-lb2)*0.354, H*(1/2)-scale_H/4, lb2+(rb2-lb2)*0.354, H*(1/2)+scale_H/4, 6);
     Screen('DrawLine', theWindow, white, lb2+(rb2-lb2)*0.533, H*(1/2)-scale_H/4, lb2+(rb2-lb2)*0.533, H*(1/2)+scale_H/4, 6);
     
-    DrawFormattedText(theWindow, double('약함'), lb2+(rb2-lb2)*0.061-scale_H/2.8, H*(1/2)+scale_H/2, white);
+    DrawFormattedText(theWindow, double('거의 느낄 수\n없을 정도로\n    약함'), lb2+(rb2-lb2)*0.061-scale_H, H*(1/2)+scale_H/2, white);
     DrawFormattedText(theWindow, double('보통'), lb2+(rb2-lb2)*0.172-scale_H/2.8, H*(1/2)+scale_H/2, white);
     DrawFormattedText(theWindow, double('강함'), lb2+(rb2-lb2)*0.354-scale_H/2.8, H*(1/2)+scale_H/2, white);
     DrawFormattedText(theWindow, double('매우 강함'), lb2+(rb2-lb2)*0.533-scale_H/2.8, H*(1/2)+scale_H/2, white, 2,[],[],1);

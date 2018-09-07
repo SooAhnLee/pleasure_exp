@@ -69,7 +69,7 @@ switch screen_mode
         window_rect = [0 0 window_info.width window_info.height]/window_ratio;
         fontsize = 20;
     case 'testmode'
-        window_rect = [0 0 1240 800];
+        window_rect = [0 0 1440 900];
         fontsize = 32;
 end
 

@@ -79,7 +79,7 @@ end
 
 S.type = type;
 % S.dur = 15*60; % except disdaq
-S.dur = 403;  %
+S.dur = 5;  %
 
 S.changecolor = [10:60:S.dur];
 changecolor_jitter = randi(10, 1, numel(S.changecolor));
@@ -504,7 +504,7 @@ try
             
             if scale_i == 1
                 
-                msgtxt = [num2str(SubjRun) '번째 세션이 끝났습니다.\n잠시 후 질문들이 제시될 것입니다. 참가자분께서는 기다려주시기 바랍니다.'];
+                msgtxt = [num2str(SubjRun) '번째 세션이 끝났습니다.\n\n잠시 후 질문들이 제시될 것입니다. 참가자분께서는 기다려주시기 바랍니다.'];
                 msgtxt = double(msgtxt);
                 DrawFormattedText(theWindow, msgtxt, 'center', 'center', white, [], [], [], 2);
                 Screen('Flip', theWindow);

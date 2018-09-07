@@ -40,7 +40,7 @@ window_ratio = 1.11;
 window_info = Screen('Resolution', window_num); 
 switch screen_mode 
     case 'full'   
-        window_rect   = [0 0 window_info.width window_info.height]; % full screen
+        window_rect   = [0 0 win dow_info.width window_info.height]; % full screen
         fontsize = 32; 
     case 'semifull'   
         window_rect = [0 0 window_info.width-100 window_info.height-100]; % a little bit distance
@@ -49,13 +49,13 @@ switch screen_mode
     case 'small'
         window_rect = [0 0 1200 720]; % in the test mode, use a little smaller screen
         fontsize = 10;
-    case 'test'
+    case 'test' 
         window_rect = [0 0 window_info.width window_info.height]/window_ratio;
         fontsize = 20; 
     case 'testmode' 
         window_rect = [0 0 1240 800];
         fontsize = 26;
-end
+end 
  
 % color
 bgcolor = 50;   
@@ -105,7 +105,7 @@ Screen('CloseAll');
 %% Start behavioral experiment
  
 % start the screen
-theWindow = Screen('OpenWindow', window_num, bgcolor, window_rect);
+theWindow = Screen('OpenWindow', window_ num, bgcolor, window_rect);
 HideCursor;
   
 % Continuous rating  
@@ -121,7 +121,7 @@ end
    
 rec_i = 0;
 start_t = GetSecs;  
-
+ 
 
 x = W/2; y = H*(5/8);
 SetMouse(x,y) 
@@ -133,7 +133,7 @@ while true
     if x < lb
         x = lb;
     elseif x > rb
-        x = rb; 
+        x = rb;  
     end
     
     msgtxt = '마우스를 좌우로 움직여 해당 자극이 얼마나 유쾌/불쾌한지에 대해 평가해주세요.\n 실험을 끝내려면 클릭해주세요.';

@@ -264,7 +264,7 @@ ylabel('rating (-1 ~ 1)', 'FontSize', 10);
 % ylabel('rating (-1 ~ 1)', 'FontSize', 10);
 % title('YWH 180907')
 
-%% All 'Touch' data
+%% All 'Touch' behav data
 figure
 load('20180905_JHH_subj001_behav_dat_touch.mat')
 x10 = data.dat.time_fromstart;
@@ -351,18 +351,20 @@ hold on
 
 x = [x1';x2';x3';x4';x5';x6';x7';x8';x9';x10';x11';x12'];  % concatenate in a row
 y = [y1';y2';y3';y4';y5';y6';y7';y8';y9';y10';y11';y12'];  % concatenate in a row
-mx = (x1+x2+x3+x4+x5+x6+x7+x8+x9+x10+x11+x12)/12;
-my = (y1+y2+y3+y4+y5+y6+y7+y8+y9+y10+y11+y12)/12;
-error = std(x);
 
-hold on
-h_patch = patch(x,y,'y','linestyle', 'none', 'FaceColor', 'b', 'faceAlpha', 0.1);
-hold on;
-h_line = plot(x10, my, '-', 'linewidth', 2, 'color', 'r');
+% figure
+% plot(y')
+y(isnan(y)) = 0;
 
-[h_line, h_patch] = wani_plot_shading(x10, my, error);
+mean_y = mean(y);
+std_y = std(y);
+wani_plot_shading(1:size(y,2), mean_y, std_y, 'color', [207 83 0]/255, 'alpha', .3);
+axis([0 800 -0.4 0.8]);
+title('All Touch behav data')
+xlabel('time (total: about 753 secs)')  % 1 sec = about 60.3341
+ylabel('pleasure rating (-1 ~ 1)')
 
-%% All 'Sweet' data
+%% All 'Sweet' behav data
 figure
 load('20180901_DEL_subj001_behav_dat_sweet.mat')
 x10 = data.dat.time_fromstart;
@@ -437,18 +439,19 @@ x11(numel(x11)+1:numel(x10)) = NaN;
 y11 = data.dat.cont_rating;
 y11(numel(y11)+1:numel(y10)) = NaN;
 plot(x11,y11,'color',[0.5 0.5 0.5]) 
-axis([0 500 -0.1 0.7]);
 hold on
 
-x = [x1';x2';x3';x4';x5';x6';x7';x8';x9';x10';x11';];  % concatenate in a row
-y = [y1';y2';y3';y4';y5';y6';y7';y8';y9';y10';y11';];  % concatenate in a row 
-mx = (x1+x2+x3+x4+x5+x6+x7+x8+x9+x10+x11)/11;
-my = (y1+y2+y3+y4+y5+y6+y7+y8+y9+y10+y11)/11;
-error = std(x);
+x = [x1';x2';x3';x4';x5';x6';x7';x8';x9';x10';x11'];  % concatenate in a row
+y = [y1';y2';y3';y4';y5';y6';y7';y8';y9';y10';y11'];  % concatenate in a row
 
-hold on
-h_patch = patch(x,y,'y','linestyle', 'none', 'FaceColor', 'b', 'faceAlpha', 0.1);
-hold on;
-h_line = plot(x10, my, '-', 'linewidth', 2, 'color', 'r');
+% figure
+% plot(y')
+y(isnan(y)) = 0;
 
-[h_line, h_patch] = wani_plot_shading(x10, my, error);
+mean_y = mean(y);
+std_y = std(y);
+wani_plot_shading(1:size(y,2), mean_y, std_y, 'color', [207 83 0]/255, 'alpha', .3);
+axis([0 950 -0.4 0.8]);
+title('All Sweet behav data')
+xlabel('time (total: about 949 secs)')  % 1 sec = about 63.8203
+ylabel('pleasure rating (-1 ~ 1)')

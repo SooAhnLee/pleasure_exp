@@ -1,7 +1,7 @@
 %% Set basic parameters and save data
 
 global theWindow W H window_ratio  %window property
-global lb2 rb2 scale_W scale_H anchor_lms  %rating scale
+global lb1 rb1 lb2 rb2 scale_W scale_H anchor_lms  %rating scale
 global bgcolor white red orange  %color
 
 basedir = pwd;
@@ -67,6 +67,8 @@ end
 % size
 W = window_rect(3); % width
 H = window_rect(4); % height
+lb1 = W*(1/6); % rating scale left bounds 1/6
+rb1 = W*(5/6); % rating scale right bounds 5/6
 lb2 = W*(1/4); % rating scale left bounds 1/4
 rb2 = W*(3/4); % rating scale right bounds 3/4
 
@@ -103,50 +105,49 @@ start_t = GetSecs;
 data.dat.BGS_Survey_starttime = start_t;
 labels = BGS_questionnaires.stimulus_types_label;
 stimuli = BGS_questionnaires.stimulus_types_content;
-scale = 'general_sensitivity';
 
-% Explain one-directional scale with visualization
-while true % Space
-    
-    msgtxt = '실험자는 평가 방법에 대해 충분히 설명한 후, 스페이스바를 눌러주시기 바랍니다.';
-    DrawFormattedText(theWindow, double(msgtxt), 'center', H*(1/4), white, [], [], [], 2);
-    Screen('DrawLine', theWindow, white, lb2, H*(1/2), rb2, H*(1/2), 4); %rating scale
-    
-    DrawFormattedText(theWindow, double('느낄 수\n  없음'), lb2-scale_H/2, H*(1/2)+scale_H/1.2, white);
-    DrawFormattedText(theWindow, double('      상상할 수 있는\n가장 강한 정도의 자극'), rb2-scale_H/0.7, H*(1/2)+scale_H/1.2, white);
-    Screen('DrawLine', theWindow, white, lb2, H*(1/2)-scale_H/3, lb2, H*(1/2)+scale_H/3, 6);
-    Screen('DrawLine', theWindow, white, rb2, H*(1/2)-scale_H/3, rb2, H*(1/2)+scale_H/3, 6);
-    
-    Screen('DrawLine', theWindow, white, lb2+(rb2-lb2)*0.061, H*(1/2)-scale_H/4, lb2+(rb2-lb2)*0.061, H*(1/2)+scale_H/4, 6);
-    Screen('DrawLine', theWindow, white, lb2+(rb2-lb2)*0.172, H*(1/2)-scale_H/4, lb2+(rb2-lb2)*0.172, H*(1/2)+scale_H/4, 6);
-    Screen('DrawLine', theWindow, white, lb2+(rb2-lb2)*0.354, H*(1/2)-scale_H/4, lb2+(rb2-lb2)*0.354, H*(1/2)+scale_H/4, 6);
-    Screen('DrawLine', theWindow, white, lb2+(rb2-lb2)*0.533, H*(1/2)-scale_H/4, lb2+(rb2-lb2)*0.533, H*(1/2)+scale_H/4, 6);
-    
-    DrawFormattedText(theWindow, double('거의 느낄 수\n없을 정도로\n    약함'), lb2+(rb2-lb2)*0.061-scale_H, H*(1/2)+scale_H/2, white);
-    DrawFormattedText(theWindow, double('보통'), lb2+(rb2-lb2)*0.172-scale_H/2.8, H*(1/2)+scale_H/2, white);
-    DrawFormattedText(theWindow, double('강함'), lb2+(rb2-lb2)*0.354-scale_H/2.8, H*(1/2)+scale_H/2, white);
-    DrawFormattedText(theWindow, double('매우 강함'), lb2+(rb2-lb2)*0.533-scale_H/2.8, H*(1/2)+scale_H/2, white, 2,[],[],1);
-    
-    Screen('Flip', theWindow);
-    
-    [~,~,keyCode] = KbCheck;
-    if keyCode(KbName('space')) == 1
-        break
-    elseif keyCode(KbName('q')) == 1
-        abort_experiment('manual');
-        break
-    end
-end
-
-% go to the next after space is unpressed
-while keyCode(KbName('space')) == 1
-    if keyCode(KbName('space')) == 1
-        while keyCode(KbName('space')) == 1
-            [~,~,keyCode] = KbCheck;
-        end
-        break
-    end
-end
+% % Explain one-directional scale with visualization
+% while true % Space
+%
+%     msgtxt = '실험자는 평가 방법에 대해 충분히 설명한 후, 스페이스바를 눌러주시기 바랍니다.';
+%     DrawFormattedText(theWindow, double(msgtxt), 'center', H*(1/4), white, [], [], [], 2);
+%     Screen('DrawLine', theWindow, white, lb2, H*(1/2), rb2, H*(1/2), 4); %rating scale
+%
+%     DrawFormattedText(theWindow, double('느낄 수\n  없음'), lb2-scale_H/2, H*(1/2)+scale_H/1.2, white);
+%     DrawFormattedText(theWindow, double('      상상할 수 있는\n가장 강한 정도의 자극'), rb2-scale_H/0.7, H*(1/2)+scale_H/1.2, white);
+%     Screen('DrawLine', theWindow, white, lb2, H*(1/2)-scale_H/3, lb2, H*(1/2)+scale_H/3, 6);
+%     Screen('DrawLine', theWindow, white, rb2, H*(1/2)-scale_H/3, rb2, H*(1/2)+scale_H/3, 6);
+%
+%     Screen('DrawLine', theWindow, white, lb2+(rb2-lb2)*0.061, H*(1/2)-scale_H/4, lb2+(rb2-lb2)*0.061, H*(1/2)+scale_H/4, 6);
+%     Screen('DrawLine', theWindow, white, lb2+(rb2-lb2)*0.172, H*(1/2)-scale_H/4, lb2+(rb2-lb2)*0.172, H*(1/2)+scale_H/4, 6);
+%     Screen('DrawLine', theWindow, white, lb2+(rb2-lb2)*0.354, H*(1/2)-scale_H/4, lb2+(rb2-lb2)*0.354, H*(1/2)+scale_H/4, 6);
+%     Screen('DrawLine', theWindow, white, lb2+(rb2-lb2)*0.533, H*(1/2)-scale_H/4, lb2+(rb2-lb2)*0.533, H*(1/2)+scale_H/4, 6);
+%
+%     DrawFormattedText(theWindow, double('거의 느낄 수\n없을 정도로\n    약함'), lb2+(rb2-lb2)*0.061-scale_H, H*(1/2)+scale_H/2, white);
+%     DrawFormattedText(theWindow, double('보통'), lb2+(rb2-lb2)*0.172-scale_H/2.8, H*(1/2)+scale_H/2, white);
+%     DrawFormattedText(theWindow, double('강함'), lb2+(rb2-lb2)*0.354-scale_H/2.8, H*(1/2)+scale_H/2, white);
+%     DrawFormattedText(theWindow, double('매우 강함'), lb2+(rb2-lb2)*0.533-scale_H/2.8, H*(1/2)+scale_H/2, white, 2,[],[],1);
+%
+%     Screen('Flip', theWindow);
+%
+%     [~,~,keyCode] = KbCheck;
+%     if keyCode(KbName('space')) == 1
+%         break
+%     elseif keyCode(KbName('q')) == 1
+%         abort_experiment('manual');
+%         break
+%     end
+% end
+%
+% % go to the next after space is unpressed
+% while keyCode(KbName('space')) == 1
+%     if keyCode(KbName('space')) == 1
+%         while keyCode(KbName('space')) == 1
+%             [~,~,keyCode] = KbCheck;
+%         end
+%         break
+%     end
+% end
 
 while true
     msgtxt = '지금부터 설문을 시작합니다. (space)';
@@ -162,58 +163,178 @@ end
 
 % Start the survey
 for stimuli_i = 1:numel(stimuli)
-    rec_i = 0;
-    % Initial position
-    x = lb2;
-    y = H*(1/2);
-    SetMouse(lb2,H/2); % set mouse at the left
     
     start_t = GetSecs;
     label = labels{stimuli_i};
     eval(['data.dat.' label '_timestamp = start_t;']);
     
+    % randomize the order of ratings
+    scale_random = randperm(2);
+    
     % Get ratings
-    while true
-        
-        rec_i = rec_i + 1;
-        [x,~,button] = GetMouse(theWindow);
-        [lb2, rb2, start_center] = draw_scale_pls(scale);
-        if x < lb2; x = lb2; elseif x > rb2; x = rb2; end
-        
-        DrawFormattedText(theWindow, double(stimuli{stimuli_i}), 'center', H*(1/3), white, [], [], [], 2);
-        Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/2, x, H*(1/2)+scale_H/2, 6); %rating bar
-        Screen('Flip', theWindow);
-        
-        if button(1)
-            while button(1)
-                [~,~,button] = GetMouse(theWindow);
+    if scale_random(1) == 1
+        rec_i = 0;
+        x = lb2;
+        y = H*(1/2);
+        SetMouse(x,y); % set mouse at the left
+        first_start_t = GetSecs;
+        while true
+            rec_i = rec_i + 1;
+            [x,~,button] = GetMouse(theWindow);
+            scale = 'general_sensitivity';
+            [lb, rb, start_center] = draw_scale_pls(scale);
+            DrawFormattedText(theWindow, double(stimuli{stimuli_i}), 'center', H*(1/3), white, [], [], [], 2);
+            Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/2, x, H*(1/2)+scale_H/2, 6); %rating bar
+            Screen('Flip', theWindow);
+            
+            if button(1)
+                while button(1)
+                    [~,~,button] = GetMouse(theWindow);
+                end
+                break
             end
-            break
         end
         
         cur_t = GetSecs;
-        eval(['data.dat.' label '_time_fromstart(rec_i,1) = cur_t-start_t;']);
-        eval(['data.dat.' label '_cont_rating(rec_i,1) = (x-lb2)/(rb2-lb2);']);
+        eval(['data.dat.' label '_gs_time_fromstart(rec_i,1) = cur_t-first_start_t;']);
+        eval(['data.dat.' label '_gs_cont_rating(rec_i,1) = (x-lb2)/(rb2-lb2);']);
         
-    end
-    
-    end_t = GetSecs;
-    eval(['data.dat.' label '_rating = (x-lb2)/(rb2-lb2);']);
-    eval(['data.dat.' label '_RT = end_t - start_t;']);
-    
-    % Freeze the screen 0.5 second with red line if overall type
-    freeze_t = GetSecs;
-    while true
-        [lb2, rb2, start_center] = draw_scale_pls(scale);
-        DrawFormattedText(theWindow, double(stimuli{stimuli_i}), 'center', H*(1/3), white, [], [], [], 2);
-        Screen('DrawLine', theWindow, red, x, H*(1/2)-scale_H/2, x, H*(1/2)+scale_H/2, 6);
-        Screen('Flip', theWindow);
-        freeze_cur_t = GetSecs;
-        if freeze_cur_t - freeze_t > 0.5
-            break
+        % Freeze the screen 0.5 second with red line if overall type
+        freeze_t = GetSecs;
+        while true
+            [lb2, rb2, start_center] = draw_scale_pls(scale);
+            DrawFormattedText(theWindow, double(stimuli{stimuli_i}), 'center', H*(1/3), white, [], [], [], 2);
+            Screen('DrawLine', theWindow, red, x, H*(1/2)-scale_H/2, x, H*(1/2)+scale_H/2, 6);
+            Screen('Flip', theWindow);
+            freeze_cur_t = GetSecs;
+            if freeze_cur_t - freeze_t > 0.5
+                break
+            end
+        end
+        
+        % do the other
+        rec_i = 0;
+        x = W/2;
+        y = H*(1/2);
+        SetMouse(x,y); % set mouse at the center
+        second_start_t = GetSecs;
+        while true
+            rec_i = rec_i + 1;
+            [x,~,button] = GetMouse(theWindow);
+            scale = 'overall_glms';
+            [lb, rb, start_center] = draw_scale_pls(scale);
+            DrawFormattedText(theWindow, double(stimuli{stimuli_i}), 'center', H*(1/3), white, [], [], [], 2);
+            Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/2, x, H*(1/2)+scale_H/2, 6); %rating bar
+            Screen('Flip', theWindow);
+            
+            if button(1)
+                while button(1)
+                    [~,~,button] = GetMouse(theWindow);
+                end
+                break
+            end
+        end
+        
+        cur_t = GetSecs;
+        eval(['data.dat.' label '_og_time_fromstart(rec_i,1) = cur_t-second_start_t;']);
+        eval(['data.dat.' label '_og_cont_rating(rec_i,1) = (x-lb1)/(rb1-lb1);']);
+        
+        % Freeze the screen 0.5 second with red line if overall type
+        freeze_t = GetSecs;
+        while true
+            [lb, rb, start_center] = draw_scale_pls(scale);
+            DrawFormattedText(theWindow, double(stimuli{stimuli_i}), 'center', H*(1/3), white, [], [], [], 2);
+            Screen('DrawLine', theWindow, red, x, H*(1/2)-scale_H/2, x, H*(1/2)+scale_H/2, 6);
+            Screen('Flip', theWindow);
+            freeze_cur_t = GetSecs;
+            if freeze_cur_t - freeze_t > 0.5
+                break
+            end
+        end
+        
+        
+    else
+        rec_i = 0;
+        x = W/2;
+        y = H*(1/2);
+        SetMouse(x,y); % set mouse at the center
+        first_start_t = GetSecs;
+        while true
+            rec_i = rec_i + 1;
+            [x,~,button] = GetMouse(theWindow);
+            scale = 'overall_glms';
+            [lb, rb, start_center] = draw_scale_pls(scale);
+            DrawFormattedText(theWindow, double(stimuli{stimuli_i}), 'center', H*(1/3), white, [], [], [], 2);
+            Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/2, x, H*(1/2)+scale_H/2, 6); %rating bar
+            Screen('Flip', theWindow);
+            
+            if button(1)
+                while button(1)
+                    [~,~,button] = GetMouse(theWindow);
+                end
+                break
+            end
+        end
+        
+        cur_t = GetSecs;
+        eval(['data.dat.' label '_og_time_fromstart(rec_i,1) = cur_t-first_start_t;']);
+        eval(['data.dat.' label '_og_cont_rating(rec_i,1) = (x-lb1)/(rb1-lb1);']);
+        
+        % Freeze the screen 0.5 second with red line if overall type
+        freeze_t = GetSecs;
+        while true
+            [lb, rb, start_center] = draw_scale_pls(scale);
+            DrawFormattedText(theWindow, double(stimuli{stimuli_i}), 'center', H*(1/3), white, [], [], [], 2);
+            Screen('DrawLine', theWindow, red, x, H*(1/2)-scale_H/2, x, H*(1/2)+scale_H/2, 6);
+            Screen('Flip', theWindow);
+            freeze_cur_t = GetSecs;
+            if freeze_cur_t - freeze_t > 0.5
+                break
+            end
+        end
+        
+        % do the other
+        rec_i = 0;
+        x = lb2;
+        y = H*(1/2);
+        SetMouse(x,y); % set mouse at the left
+        second_start_t = GetSecs;
+        while true
+            rec_i = rec_i + 1;
+            [x,~,button] = GetMouse(theWindow);
+            scale = 'general_sensitivity';
+            [lb2, rb2, start_center] = draw_scale_pls(scale);
+            DrawFormattedText(theWindow, double(stimuli{stimuli_i}), 'center', H*(1/3), white, [], [], [], 2);
+            Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/2, x, H*(1/2)+scale_H/2, 6); %rating bar
+            Screen('Flip', theWindow);
+            
+            if button(1)
+                while button(1)
+                    [~,~,button] = GetMouse(theWindow);
+                end
+                break
+            end
+        end
+        
+        cur_t = GetSecs;
+        eval(['data.dat.' label '_gs_time_fromstart(rec_i,1) = cur_t-second_start_t;']);
+        eval(['data.dat.' label '_gs_cont_rating(rec_i,1) = (x-lb2)/(rb2-lb2);']);
+        
+        % Freeze the screen 0.5 second with red line if overall type
+        freeze_t = GetSecs;
+        while true
+            [lb, rb, start_center] = draw_scale_pls(scale);
+            DrawFormattedText(theWindow, double(stimuli{stimuli_i}), 'center', H*(1/3), white, [], [], [], 2);
+            Screen('DrawLine', theWindow, red, x, H*(1/2)-scale_H/2, x, H*(1/2)+scale_H/2, 6);
+            Screen('Flip', theWindow);
+            freeze_cur_t = GetSecs;
+            if freeze_cur_t - freeze_t > 0.5
+                break
+            end
         end
     end
 end
+
 
 if stimuli_i == numel(BGS_questionnaires.stimulus_types_content)
     while true

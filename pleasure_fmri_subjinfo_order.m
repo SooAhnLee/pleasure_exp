@@ -26,7 +26,7 @@ SubjInfo_Order.order = order;
 
 nowtime = clock;
 SubjDate = sprintf('%.2d%.2d%.2d', nowtime(1), nowtime(2), nowtime(3));
-save_subjinfo_order = fullfile(basedir, [SubjDate, '_', SID, '_subj', sprintf('%.3d', SubjNum), '_SubjInfo_Order.mat']);
+save_subjinfo_order = fullfile(basedir, [SubjDate, '_', SID, '_PLS', sprintf('%.3d', SubjNum), '_SubjInfo_Order.mat']);
 save(save_subjinfo_order, 'SubjInfo_Order');
 
 end

@@ -78,7 +78,7 @@ end
 %% SETUP : Create paradigm according to subject information
 
 S.type = type;
-% S.dur = 15*60; % except disdaq
+% S.dur = 18*60 - 15; % except disdaq
 S.dur = 5;  %
 
 S.changecolor = [10:60:S.dur];
@@ -484,7 +484,10 @@ try
             
         end
         
-        data.dat.run_dur = GetSecs - run_start_t;
+        % end anyway after run duration + 15 secs(disdaq) (total 18 mins)
+        waitsec_fromstarttime(data.runscan_starttime, S.dur+15)  %run duration + disdaq
+        
+        data.dat.run_dur = GetSecs - run_start_t;  % should be equal to S.dur
         
         if USE_EYELINK
             Eyelink('Message','Run End');
@@ -583,14 +586,10 @@ try
                 msgtxt = double(msgtxt); % korean to double
                 DrawFormattedText(theWindow, msgtxt, 'center', 'center', white, [], [], [], 2);
                 Screen('Flip', theWindow);
-                
-                start_t = GetSecs;
-                while true
-                    cur_t = GetSecs;
-                    if cur_t - start_t >= 2  % postrun_end_t
-                        break
-                    end
-                end
+
+                % wait for 2 secs to end
+                postrun_end = GetSecs;
+                waitsec_fromstarttime(postrun_end, 2);
                 
             end
             

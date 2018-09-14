@@ -182,6 +182,7 @@ for stimuli_i = 1:numel(stimuli)
             rec_i = rec_i + 1;
             [x,~,button] = GetMouse(theWindow);
             scale = 'general_sensitivity';
+            if x < lb2; x = lb2; elseif x > rb2; x = rb2; end
             [lb, rb, start_center] = draw_scale_pls(scale);
             DrawFormattedText(theWindow, double(stimuli{stimuli_i}), 'center', H*(1/3), white, [], [], [], 2);
             Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/2, x, H*(1/2)+scale_H/2, 6); %rating bar
@@ -222,6 +223,7 @@ for stimuli_i = 1:numel(stimuli)
             rec_i = rec_i + 1;
             [x,~,button] = GetMouse(theWindow);
             scale = 'overall_glms';
+            if x < lb1; x = lb1; elseif x > rb1; x = rb1; end
             [lb, rb, start_center] = draw_scale_pls(scale);
             DrawFormattedText(theWindow, double(stimuli{stimuli_i}), 'center', H*(1/3), white, [], [], [], 2);
             Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/2, x, H*(1/2)+scale_H/2, 6); %rating bar
@@ -263,6 +265,7 @@ for stimuli_i = 1:numel(stimuli)
             rec_i = rec_i + 1;
             [x,~,button] = GetMouse(theWindow);
             scale = 'overall_glms';
+            if x < lb1; x = lb1; elseif x > rb1; x = rb1; end
             [lb, rb, start_center] = draw_scale_pls(scale);
             DrawFormattedText(theWindow, double(stimuli{stimuli_i}), 'center', H*(1/3), white, [], [], [], 2);
             Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/2, x, H*(1/2)+scale_H/2, 6); %rating bar
@@ -303,6 +306,7 @@ for stimuli_i = 1:numel(stimuli)
             rec_i = rec_i + 1;
             [x,~,button] = GetMouse(theWindow);
             scale = 'general_sensitivity';
+            if x < lb2; x = lb2; elseif x > rb2; x = rb2; end
             [lb2, rb2, start_center] = draw_scale_pls(scale);
             DrawFormattedText(theWindow, double(stimuli{stimuli_i}), 'center', H*(1/3), white, [], [], [], 2);
             Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/2, x, H*(1/2)+scale_H/2, 6); %rating bar

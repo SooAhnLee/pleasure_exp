@@ -485,7 +485,7 @@ try
         end
         
         % end anyway after run duration + 15 secs(disdaq) (total 18 mins)
-        waitsec_fromstarttime(data.runscan_starttime, S.dur+15)  %run duration + disdaq
+        waitsec_fromstarttime(data.runscan_starttime, S.dur+15+ )  %run duration + disdaq + buffer (modify!)
         
         data.dat.run_dur = GetSecs - run_start_t;  % should be equal to S.dur
         

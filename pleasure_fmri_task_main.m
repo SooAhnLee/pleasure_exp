@@ -54,7 +54,7 @@ nowtime = clock;
 SubjDate = sprintf('%.2d%.2d%.2d', nowtime(1), nowtime(2), nowtime(3));
 
 data.subject = SID;
-data.datafile = fullfile(savedir, [SubjDate, '_', SID, '_subj', sprintf('%.3d', SubjNum), ...
+data.datafile = fullfile(savedir, [SubjDate, '_', SID, '_PLS', sprintf('%.3d', SubjNum), ...
     '_run', sprintf('%.2d', SubjRun), '.mat']);
 data.version = 'Pleasure_v1_08-27-2018_Cocoanlab';
 data.starttime = datestr(clock, 0);
@@ -203,8 +203,8 @@ try
                 Screen('DrawLine', theWindow, white, anchor_lms(1,i), H*(1/2)-scale_H/4, anchor_lms(1,i), H*(1/2)+scale_H/4, 2);
                 Screen('DrawLine', theWindow, white, anchor_lms(2,i), H*(1/2)-scale_H/4, anchor_lms(2,i), H*(1/2)+scale_H/4, 2);
             end
-            DrawFormattedText(theWindow, double('불쾌'), lb1-scale_H/2.8, H*(1/2)+scale_H, white);
-            DrawFormattedText(theWindow, double('유쾌'), rb1-scale_H/2.8, H*(1/2)+scale_H, white);
+            DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 불쾌'), lb1-scale_H, H*(1/2)+scale_H, white);
+            DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 유쾌'), rb1-scale_H, H*(1/2)+scale_H, white);
             DrawFormattedText(theWindow, double('중립'), W/2-scale_H/2.8, H*(1/2)+scale_H);
             Screen('DrawLine', theWindow, white, W/2, H*(1/2)-scale_H/3, W/2, H*(1/2)+scale_H/3, 6);
             Screen('DrawLine', theWindow, white, lb1, H*(1/2)-scale_H/2, lb1, H*(1/2)+scale_H/2, 6);
@@ -449,9 +449,9 @@ try
             msgtxt = '이 경험이 얼마나 유쾌 혹은 불쾌한지를 지속적으로 보고해주세요.';
             DrawFormattedText(theWindow, double(msgtxt), 'center', H*(1/4), orange);
             Screen('DrawLine', theWindow, white, W/2, H*(1/2)-scale_H/3, W/2, H*(1/2)+scale_H/3, 6);
-            DrawFormattedText(theWindow, double('불쾌'), lb1-scale_H/2.8, H*(1/2)+scale_H, white);
+            DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 불쾌'), lb1-scale_H, H*(1/2)+scale_H, white);
             Screen('DrawLine', theWindow, white, lb1, H*(1/2)-scale_H/2, lb1, H*(1/2)+scale_H/2, 6);
-            DrawFormattedText(theWindow, double('유쾌'), rb1-scale_H/2.8, H*(1/2)+scale_H, white);
+            DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 유쾌'), rb1-scale_H, H*(1/2)+scale_H, white);
             Screen('DrawLine', theWindow, white, rb1, H*(1/2)-scale_H/2, rb1, H*(1/2)+scale_H/2, 6);
             Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/2, x, H*(1/2)+scale_H/2, 6); %rating bar
             

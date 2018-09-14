@@ -147,20 +147,18 @@ waitsec_fromstarttime(data.dat.t1_starttime, 15); % 5+10
 
 t1_start_t = GetSecs;
 
-while true
-    DrawFormattedText(theWindow, double('+'), 'center', 'center', white);
-    Screen('Flip', theWindow);
-    
-    [~,~,keyCode] = KbCheck;
-    if keyCode(KbName('q')) == 1
-        abort_experiment('manual');
-        break
-    end
-    
-    if GetSecs - t1_start_t > 15  % duration
-        break
-    end
+
+DrawFormattedText(theWindow, double('+'), 'center', 'center', white);
+Screen('Flip', theWindow);
+
+[~,~,keyCode] = KbCheck;
+if keyCode(KbName('q')) == 1
+    abort_experiment('manual');
 end
+
+waitsec_fromstarttime(t1_start_t, 15)  % duration except disdaq
+
+
 
 data.dat.t1_endtime = GetSecs - data.dat.t1_starttime;
 

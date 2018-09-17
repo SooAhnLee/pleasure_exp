@@ -596,6 +596,12 @@ try
         end
         
         
+        all_end_t = GetSecs;
+        data.dat.postrun_dur = all_end_t - all_start_t;
+        
+        save(data.datafile, '-append', 'data');
+        
+        
         if USE_EYELINK
             Eyelink('Message','Postrun End');
             eyelink_main(edfFile, 'Shutdown');
@@ -607,11 +613,6 @@ try
             BIOPAC_trigger(ljHandle, biopac_channel, 'off');
         end
         
-        
-        all_end_t = GetSecs;
-        data.dat.postrun_dur = all_end_t - all_start_t;
-        
-        save(data.datafile, '-append', 'data');
         
         %% Closing screen
         

@@ -473,7 +473,7 @@ try
             
             % save data every 1 min
             if mod(S.dur, 60) == 0
-                save(data.datafile, '-append', 'data')
+                save(data.datafile, 'data', '-append')
             end
             
             [~,~,keyCode] = KbCheck;
@@ -599,7 +599,7 @@ try
         all_end_t = GetSecs;
         data.dat.postrun_dur = all_end_t - all_start_t;
         
-        save(data.datafile, '-append', 'data');
+        save(data.datafile, 'data', '-append');
         
         
         if USE_EYELINK

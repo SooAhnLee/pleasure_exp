@@ -155,9 +155,9 @@ switch scale
         rb = rb1;
         Screen('DrawLine', theWindow, white, lb, H*(1/2), rb, H*(1/2), 4); % penWidth: 0.125~7.000
         Screen('DrawLine', theWindow, white, W/2, H*(1/2)-scale_H/3, W/2, H*(1/2)+scale_H/3, 6);
-        DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 불쾌'), lb-scale_H/2.8, H*(1/2)+scale_H, white,[],[],[],1.5);
+        DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 불쾌'), lb-scale_H, H*(1/2)+scale_H, white,[],[],[],1.5);
         Screen('DrawLine', theWindow, white, lb, H*(1/2)-scale_H/2, lb, H*(1/2)+scale_H/2, 6);
-        DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 유쾌'), rb-scale_H/2.8, H*(1/2)+scale_H, white,[],[],[],1.5);
+        DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 유쾌'), rb-scale_H, H*(1/2)+scale_H, white,[],[],[],1.5);
         Screen('DrawLine', theWindow, white, rb, H*(1/2)-scale_H/2, rb, H*(1/2)+scale_H/2, 6);
         
     case 'overall_resting_capsai_int'  % one-directional
@@ -173,9 +173,9 @@ switch scale
         rb = rb1;
         Screen('DrawLine', theWindow, white, lb, H*(1/2), rb, H*(1/2), 4); % penWidth: 0.125~7.000
         Screen('DrawLine', theWindow, white, W/2, H*(1/2)-scale_H/3, W/2, H*(1/2)+scale_H/3, 6);
-        DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 불쾌'), lb-scale_H/2.8, H*(1/2)+scale_H, white,[],[],[],1.5);
+        DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 불쾌'), lb-scale_H, H*(1/2)+scale_H, white,[],[],[],1.5);
         Screen('DrawLine', theWindow, white, lb, H*(1/2)-scale_H/2, lb, H*(1/2)+scale_H/2, 6);
-        DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 유쾌'), rb-scale_H/2.8, H*(1/2)+scale_H, white,[],[],[],1.5);
+        DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 유쾌'), rb-scale_H, H*(1/2)+scale_H, white,[],[],[],1.5);
         Screen('DrawLine', theWindow, white, rb, H*(1/2)-scale_H/2, rb, H*(1/2)+scale_H/2, 6);
         
     case 'overall_resting_sweet_int'  % one-directional
@@ -191,9 +191,9 @@ switch scale
         rb = rb1;
         Screen('DrawLine', theWindow, white, lb, H*(1/2), rb, H*(1/2), 4); % penWidth: 0.125~7.000
         Screen('DrawLine', theWindow, white, W/2, H*(1/2)-scale_H/3, W/2, H*(1/2)+scale_H/3, 6);
-        DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 불쾌'), lb-scale_H/1.1, H*(1/2)+scale_H, white,[],[],[],1.5);
+        DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 불쾌'), lb-scale_H, H*(1/2)+scale_H, white,[],[],[],1.5);
         Screen('DrawLine', theWindow, white, lb, H*(1/2)-scale_H/2, lb, H*(1/2)+scale_H/2, 6);
-        DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 유쾌'), rb-scale_H/1.1, H*(1/2)+scale_H, white,[],[],[],1.5);
+        DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 유쾌'), rb-scale_H, H*(1/2)+scale_H, white,[],[],[],1.5);
         Screen('DrawLine', theWindow, white, rb, H*(1/2)-scale_H/2, rb, H*(1/2)+scale_H/2, 6);
         
     case 'overall_resting_touch_int'  % one-directional
@@ -209,9 +209,9 @@ switch scale
         rb = rb1;
         Screen('DrawLine', theWindow, white, lb, H*(1/2), rb, H*(1/2), 4); % penWidth: 0.125~7.000
         Screen('DrawLine', theWindow, white, W/2, H*(1/2)-scale_H/3, W/2, H*(1/2)+scale_H/3, 6);
-        DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 불쾌'), lb-scale_H/2.8, H*(1/2)+scale_H, white,[],[],[],1.5);
+        DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 불쾌'), lb-scale_H, H*(1/2)+scale_H, white,[],[],[],1.5);
         Screen('DrawLine', theWindow, white, lb, H*(1/2)-scale_H/2, lb, H*(1/2)+scale_H/2, 6);
-        DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 유쾌'), rb-scale_H/2.8, H*(1/2)+scale_H, white,[],[],[],1.5);
+        DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 유쾌'), rb-scale_H, H*(1/2)+scale_H, white,[],[],[],1.5);
         Screen('DrawLine', theWindow, white, rb, H*(1/2)-scale_H/2, rb, H*(1/2)+scale_H/2, 6);
         
 end

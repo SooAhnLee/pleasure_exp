@@ -162,7 +162,7 @@ waitsec_fromstarttime(t1_start_t, 15)  % duration except disdaq
 
 data.dat.t1_endtime = GetSecs - data.dat.t1_starttime;
 
-save(data.datafile, '-append', 'data')
+save(data.datafile, 'data', '-append')
 
 
 ShowCursor;

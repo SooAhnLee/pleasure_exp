@@ -106,7 +106,7 @@ window_info = Screen('Resolution', window_num);
 switch screen_mode
     case 'full'
         window_rect = [0 0 window_info.width window_info.height]; % full screen
-        fontsize = 32;
+        fontsize = 26;
     case 'semifull'
         window_rect = [0 0 window_info.width-100 window_info.height-100]; % a little bit distance
     case 'middle'
@@ -144,7 +144,7 @@ red = [158 1 66];
 orange = [255 164 0];
 
 % font
-font = 'NanumBarunGothic';
+% font = 'NanumBarunGothic';
 Screen('Preference', 'TextEncodingLocale', 'ko_KR.UTF-8');
 
 %% Start : Screen

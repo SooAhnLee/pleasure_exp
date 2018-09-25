@@ -119,7 +119,7 @@ switch screen_mode
         fontsize = 20;
     case 'testmode'
         window_rect = [0 0 1440 900];  % 1200 800];
-        fontsize = 28;
+        fontsize = 26;
 end
 
 % size
@@ -150,7 +150,7 @@ Screen('Preference', 'TextEncodingLocale', 'ko_KR.UTF-8');
 %% Start : Screen
 
 theWindow = Screen('OpenWindow', window_num, bgcolor, window_rect); % start the screen
-Screen('TextFont', theWindow, font);
+% Screen('TextFont', theWindow, font);
 Screen('TextSize', theWindow, fontsize);
 
 Screen(theWindow, 'FillRect', bgcolor, window_rect); % Just getting information, and do not show the scale.
@@ -207,8 +207,8 @@ try
             DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 유쾌'), rb1-scale_H, H*(1/2)+scale_H, white,[],[],[],1.5);
             DrawFormattedText(theWindow, double('중립'), W/2-scale_H/2.8, H*(1/2)+scale_H);
             Screen('DrawLine', theWindow, white, W/2, H*(1/2)-scale_H/3, W/2, H*(1/2)+scale_H/3, 6);
-            Screen('DrawLine', theWindow, white, lb1, H*(1/2)-scale_H/2, lb1, H*(1/2)+scale_H/2, 6);
-            Screen('DrawLine', theWindow, white, rb1, H*(1/2)-scale_H/2, rb1, H*(1/2)+scale_H/2, 6);
+            Screen('DrawLine', theWindow, white, lb1, H*(1/2)-scale_H/3, lb1, H*(1/2)+scale_H/3, 6);
+            Screen('DrawLine', theWindow, white, rb1, H*(1/2)-scale_H/3, rb1, H*(1/2)+scale_H/3, 6);
             
             DrawFormattedText(theWindow, double('약함'), anchor_lms(1,2)-scale_H/2.8, H*(1/2)+scale_H/2, white);
             DrawFormattedText(theWindow, double('중간'), anchor_lms(1,3)-scale_H/2.8, H*(1/2)+scale_H/2, white);
@@ -305,8 +305,8 @@ try
             Screen('DrawLine', theWindow, white, lb1, H*(1/2), rb1, H*(1/2), 4); %rating scale
             % penWidth: 0.125~7.000
             Screen('DrawLine', theWindow, white, W/2, H*(1/2)-scale_H/3, W/2, H*(1/2)+scale_H/3, 6);
-            Screen('DrawLine', theWindow, white, lb1, H*(1/2)-scale_H/2, lb1, H*(1/2)+scale_H/2, 6);
-            Screen('DrawLine', theWindow, white, rb1, H*(1/2)-scale_H/2, rb1, H*(1/2)+scale_H/2, 6);
+            Screen('DrawLine', theWindow, white, lb1, H*(1/2)-scale_H/3, lb1, H*(1/2)+scale_H/3, 6);
+            Screen('DrawLine', theWindow, white, rb1, H*(1/2)-scale_H/3, rb1, H*(1/2)+scale_H/3, 6);
             Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/2, x, H*(1/2)+scale_H/2, 6); %rating bar
             Screen('Flip', theWindow);
             
@@ -350,7 +350,7 @@ try
             Screen('DrawLine', theWindow, white, lb2, H*(1/2), rb2, H*(1/2), 4); %rating scale
             % penWidth: 0.125~7.000
             Screen('DrawLine', theWindow, white, lb2, H*(1/2)-scale_H/3, lb2, H*(1/2)+scale_H/3, 6);
-            Screen('DrawLine', theWindow, white, rb2, H*(1/2)-scale_H/3, rb2, H*(1/2)+scale_H/2, 6);
+            Screen('DrawLine', theWindow, white, rb2, H*(1/2)-scale_H/3, rb2, H*(1/2)+scale_H/3, 6);
             Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/2, x, H*(1/2)+scale_H/2, 6); %rating bar
             Screen('Flip', theWindow);
             
@@ -450,9 +450,9 @@ try
             DrawFormattedText(theWindow, double(msgtxt), 'center', H*(1/4), orange);
             Screen('DrawLine', theWindow, white, W/2, H*(1/2)-scale_H/3, W/2, H*(1/2)+scale_H/3, 6);
             DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 불쾌'), lb1-scale_H, H*(1/2)+scale_H, white,[],[],[],1.5);
-            Screen('DrawLine', theWindow, white, lb1, H*(1/2)-scale_H/2, lb1, H*(1/2)+scale_H/2, 6);
+            Screen('DrawLine', theWindow, white, lb1, H*(1/2)-scale_H/3, lb1, H*(1/2)+scale_H/3, 6);
             DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 유쾌'), rb1-scale_H, H*(1/2)+scale_H, white,[],[],[],1.5);
-            Screen('DrawLine', theWindow, white, rb1, H*(1/2)-scale_H/2, rb1, H*(1/2)+scale_H/2, 6);
+            Screen('DrawLine', theWindow, white, rb1, H*(1/2)-scale_H/3, rb1, H*(1/2)+scale_H/3, 6);
             Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/2, x, H*(1/2)+scale_H/2, 6); %rating bar
             
             run_cur_t = GetSecs;

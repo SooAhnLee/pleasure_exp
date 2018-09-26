@@ -203,8 +203,8 @@ try
                 Screen('DrawLine', theWindow, white, anchor_lms(1,i), H*(1/2)-scale_H/4, anchor_lms(1,i), H*(1/2)+scale_H/4, 2);
                 Screen('DrawLine', theWindow, white, anchor_lms(2,i), H*(1/2)-scale_H/4, anchor_lms(2,i), H*(1/2)+scale_H/4, 2);
             end
-            DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 불쾌'), lb1-scale_H, H*(1/2)+scale_H, white,[],[],[],1.5);
-            DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 유쾌'), rb1-scale_H, H*(1/2)+scale_H, white,[],[],[],1.5);
+            DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 불쾌'), lb1-scale_H, H*(1/2)+scale_H/1.2, white,[],[],[],1.2);
+            DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 유쾌'), rb1-scale_H, H*(1/2)+scale_H/1.2, white,[],[],[],1.2);
             DrawFormattedText(theWindow, double('중립'), W/2-scale_H/2.8, H*(1/2)+scale_H);
             Screen('DrawLine', theWindow, white, W/2, H*(1/2)-scale_H/3, W/2, H*(1/2)+scale_H/3, 6);
             Screen('DrawLine', theWindow, white, lb1, H*(1/2)-scale_H/3, lb1, H*(1/2)+scale_H/3, 6);
@@ -213,12 +213,12 @@ try
             DrawFormattedText(theWindow, double('약함'), anchor_lms(1,2)-scale_H/2.8, H*(1/2)+scale_H/2, white);
             DrawFormattedText(theWindow, double('중간'), anchor_lms(1,3)-scale_H/2.8, H*(1/2)+scale_H/2, white);
             DrawFormattedText(theWindow, double('강함'), anchor_lms(1,4)-scale_H/2.8, H*(1/2)+scale_H/2, white);
-            DrawFormattedText(theWindow, double('매우 강함'), anchor_lms(1,5)-scale_H/2.8, H*(1/2)+scale_H/2, white, 2,[],[],1);
+            DrawFormattedText(theWindow, double('매우 강함'), anchor_lms(1,5)-scale_H/2.8, H*(1/2)+scale_H/2, white, 2,[],[],1.2);
             
             DrawFormattedText(theWindow, double('약함'), anchor_lms(2,2)-scale_H/2.8, H*(1/2)+scale_H/2, white);
             DrawFormattedText(theWindow, double('중간'), anchor_lms(2,3)-scale_H/2.8, H*(1/2)+scale_H/2, white);
             DrawFormattedText(theWindow, double('강함'), anchor_lms(2,4)-scale_H/2.8, H*(1/2)+scale_H/2, white);
-            DrawFormattedText(theWindow, double('매우 강함'), anchor_lms(2,5)-scale_H/2.8, H*(1/2)+scale_H/2, white, 2,[],[],1);
+            DrawFormattedText(theWindow, double('매우 강함'), anchor_lms(2,5)-scale_H/2.8, H*(1/2)+scale_H/2, white, 2,[],[],1.2);
             
             Screen('Flip', theWindow);
             
@@ -251,8 +251,8 @@ try
             DrawFormattedText(theWindow, double(msgtxt), 'center', H*(1/4), white, [], [], [], 2);
             Screen('DrawLine', theWindow, white, lb2, H*(1/2), rb2, H*(1/2), 4); %rating scale
 
-            DrawFormattedText(theWindow, double('전혀 느껴지지\n      않음'), lb2-scale_H/1.1, H*(1/2)+scale_H/1.2, white,[],[],[],1.5);
-            DrawFormattedText(theWindow, double('상상할 수 있는\n   가장 강한'), rb2-scale_H/1.1, H*(1/2)+scale_H/1.2, white,[],[],[],1.5);
+            DrawFormattedText(theWindow, double('전혀 느껴지지\n      않음'), lb2-scale_H/1.1, H*(1/2)+scale_H/1.2, white,[],[],[],1.2);
+            DrawFormattedText(theWindow, double('상상할 수 있는\n   가장 강한'), rb2-scale_H/1.1, H*(1/2)+scale_H/1.2, white,[],[],[],1.2);
             Screen('DrawLine', theWindow, white, lb2, H*(1/2)-scale_H/3, lb2, H*(1/2)+scale_H/3, 6);
             Screen('DrawLine', theWindow, white, rb2, H*(1/2)-scale_H/3, rb2, H*(1/2)+scale_H/3, 6);
             
@@ -264,7 +264,7 @@ try
             DrawFormattedText(theWindow, double('약함'), lb2+(rb2-lb2)*0.061-scale_H/2.8, H*(1/2)+scale_H/2, white);
             DrawFormattedText(theWindow, double('중간'), lb2+(rb2-lb2)*0.172-scale_H/2.8, H*(1/2)+scale_H/2, white);
             DrawFormattedText(theWindow, double('강함'), lb2+(rb2-lb2)*0.354-scale_H/2.8, H*(1/2)+scale_H/2, white);
-            DrawFormattedText(theWindow, double('매우 강함'), lb2+(rb2-lb2)*0.533-scale_H/2.8, H*(1/2)+scale_H/2, white, 2,[],[],1);
+            DrawFormattedText(theWindow, double('매우 강함'), lb2+(rb2-lb2)*0.533-scale_H/2.8, H*(1/2)+scale_H/2, white, 2,[],[],1.2);
             
             Screen('Flip', theWindow);
             
@@ -449,9 +449,9 @@ try
             msgtxt = '이 경험이 얼마나 유쾌 혹은 불쾌한지를 지속적으로 보고해주세요.';
             DrawFormattedText(theWindow, double(msgtxt), 'center', H*(1/4), orange);
             Screen('DrawLine', theWindow, white, W/2, H*(1/2)-scale_H/3, W/2, H*(1/2)+scale_H/3, 6);
-            DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 불쾌'), lb1-scale_H, H*(1/2)+scale_H, white,[],[],[],1.5);
+            DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 불쾌'), lb1-scale_H, H*(1/2)+scale_H/1.2, white,[],[],[],1.2);
             Screen('DrawLine', theWindow, white, lb1, H*(1/2)-scale_H/3, lb1, H*(1/2)+scale_H/3, 6);
-            DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 유쾌'), rb1-scale_H, H*(1/2)+scale_H, white,[],[],[],1.5);
+            DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 유쾌'), rb1-scale_H, H*(1/2)+scale_H/1.2, white,[],[],[],1.2);
             Screen('DrawLine', theWindow, white, rb1, H*(1/2)-scale_H/3, rb1, H*(1/2)+scale_H/3, 6);
             Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/2, x, H*(1/2)+scale_H/2, 6); %rating bar
             

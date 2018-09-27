@@ -12,11 +12,13 @@ rb = rb2;
 %% Drawing scale
 switch scale
     case 'cont_glms'
+        lb = lb1; % rating scale left bounds 1/6
+        rb = rb1; % rating scale right bounds 5/6
         Screen('DrawLine', theWindow, white, lb, H*(1/2), rb, H*(1/2), 4); % penWidth: 0.125~7.000
         Screen('DrawLine', theWindow, white, W/2, H*(1/2)-scale_H/3, W/2, H*(1/2)+scale_H/3, 6);
-        DrawFormattedText(theWindow, double('불쾌'), lb-scale_H/2.8, H*(1/2)+scale_H/1.2, white);
+        DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 불쾌'), lb-scale_H-10, H*(1/2)+scale_H/1.2, white,[],[],[],1.2);
         Screen('DrawLine', theWindow, white, lb, H*(1/2)-scale_H/3, lb, H*(1/2)+scale_H/3, 6);
-        DrawFormattedText(theWindow, double('유쾌'), rb-scale_H/2.8, H*(1/2)+scale_H/1.2, white);
+        DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 유쾌'), rb-scale_H-10, H*(1/2)+scale_H/1.2, white,[],[],[],1.2);
         Screen('DrawLine', theWindow, white, rb, H*(1/2)-scale_H/3, rb, H*(1/2)+scale_H/3, 6);
         
     case 'overall_glms'
@@ -24,9 +26,9 @@ switch scale
         rb = rb1; % rating scale right bounds 5/6
         Screen('DrawLine', theWindow, white, lb, H*(1/2), rb, H*(1/2), 4); % penWidth: 0.125~7.000
         Screen('DrawLine', theWindow, white, W/2, H*(1/2)-scale_H/3, W/2, H*(1/2)+scale_H/3, 6);
-        DrawFormattedText(theWindow, double('불쾌'), lb-scale_H/2.8, H*(1/2)+scale_H/1.2, white);
+        DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 불쾌'), lb-scale_H-10, H*(1/2)+scale_H/1.2, white,[],[],[],1.2);
         Screen('DrawLine', theWindow, white, lb, H*(1/2)-scale_H/3, lb, H*(1/2)+scale_H/3, 6);
-        DrawFormattedText(theWindow, double('유쾌'), rb-scale_H/2.8, H*(1/2)+scale_H/1.2, white);
+        DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 유쾌'), rb-scale_H-10, H*(1/2)+scale_H/1.2, white,[],[],[],1.2);
         Screen('DrawLine', theWindow, white, rb, H*(1/2)-scale_H/3, rb, H*(1/2)+scale_H/3, 6);
         
     case 'overall_int'  % one-directional
@@ -50,7 +52,7 @@ switch scale
         Screen('DrawLine', theWindow, white, W/2, H*(1/2)-scale_H/3, W/2, H*(1/2)+scale_H/3, 6);
         DrawFormattedText(theWindow, double('전혀 지겹지\n     않음'), lb-scale_H/1.3, H*(1/2)+scale_H/1.2, white,[],[],[],1.2);
         Screen('DrawLine', theWindow, white, lb, H*(1/2)-scale_H/3, lb, H*(1/2)+scale_H/3, 6);
-        DrawFormattedText(theWindow, double('매우 지겨움'), rb-scale_H/1  , H*(1/2)+scale_H/1.2, white);
+        DrawFormattedText(theWindow, double('매우 지겨움'), rb-scale_H/1.5  , H*(1/2)+scale_H/1.2, white);
         Screen('DrawLine', theWindow, white, rb, H*(1/2)-scale_H/3, rb, H*(1/2)+scale_H/3, 6);
         
     case 'overall_alertness'
@@ -82,7 +84,7 @@ switch scale
         Screen('DrawLine', theWindow, white, W/2, H*(1/2)-scale_H/3, W/2, H*(1/2)+scale_H/3, 6);
         DrawFormattedText(theWindow, double('전혀 그렇지\n     않다'), lb-scale_H/1.3, H*(1/2)+scale_H/1.2, white,[],[],[],1.2);
         Screen('DrawLine', theWindow, white, lb, H*(1/2)-scale_H/3, lb, H*(1/2)+scale_H/3, 6);
-        DrawFormattedText(theWindow, double('매우 그렇다'), rb-scale_H/1, H*(1/2)+scale_H/1.2, white);
+        DrawFormattedText(theWindow, double('매우 그렇다'), rb-scale_H/1.5, H*(1/2)+scale_H/1.2, white);
         Screen('DrawLine', theWindow, white, rb, H*(1/2)-scale_H/3, rb, H*(1/2)+scale_H/3, 6);
         
         
@@ -91,7 +93,7 @@ switch scale
         Screen('DrawLine', theWindow, white, W/2, H*(1/2)-scale_H/3, W/2, H*(1/2)+scale_H/3, 6);
         DrawFormattedText(theWindow, double('전혀 그렇지\n     않다'), lb-scale_H/1.3, H*(1/2)+scale_H/1.2, white,[],[],[],1.2);
         Screen('DrawLine', theWindow, white, lb, H*(1/2)-scale_H/3, lb, H*(1/2)+scale_H/3, 6);
-        DrawFormattedText(theWindow, double('매우 그렇다'), rb-scale_H/1, H*(1/2)+scale_H/1.2, white);
+        DrawFormattedText(theWindow, double('매우 그렇다'), rb-scale_H/1.5, H*(1/2)+scale_H/1.2, white);
         Screen('DrawLine', theWindow, white, rb, H*(1/2)-scale_H/3, rb, H*(1/2)+scale_H/3, 6);
         
     case 'overall_resting_myself'
@@ -99,7 +101,7 @@ switch scale
         Screen('DrawLine', theWindow, white, W/2, H*(1/2)-scale_H/3, W/2, H*(1/2)+scale_H/3, 6);
         DrawFormattedText(theWindow, double('전혀 그렇지\n     않다'), lb-scale_H/1.3, H*(1/2)+scale_H/1.2, white,[],[],[],1.2);
         Screen('DrawLine', theWindow, white, lb, H*(1/2)-scale_H/3, lb, H*(1/2)+scale_H/3, 6);
-        DrawFormattedText(theWindow, double('매우 그렇다'), rb-scale_H/1, H*(1/2)+scale_H/1.2, white);
+        DrawFormattedText(theWindow, double('매우 그렇다'), rb-scale_H/1.5, H*(1/2)+scale_H/1.2, white);
         Screen('DrawLine', theWindow, white, rb, H*(1/2)-scale_H/3, rb, H*(1/2)+scale_H/3, 6);
         
     case 'overall_resting_others'
@@ -107,7 +109,7 @@ switch scale
         Screen('DrawLine', theWindow, white, W/2, H*(1/2)-scale_H/3, W/2, H*(1/2)+scale_H/3, 6);
         DrawFormattedText(theWindow, double('전혀 그렇지\n     않다'), lb-scale_H/1.3, H*(1/2)+scale_H/1.2, white,[],[],[],1.2);
         Screen('DrawLine', theWindow, white, lb, H*(1/2)-scale_H/3, lb, H*(1/2)+scale_H/3, 6);
-        DrawFormattedText(theWindow, double('매우 그렇다'), rb-scale_H/1, H*(1/2)+scale_H/1.2, white);
+        DrawFormattedText(theWindow, double('매우 그렇다'), rb-scale_H/1.5, H*(1/2)+scale_H/1.2, white);
         Screen('DrawLine', theWindow, white, rb, H*(1/2)-scale_H/3, rb, H*(1/2)+scale_H/3, 6);
         
     case 'overall_resting_imagery'
@@ -115,7 +117,7 @@ switch scale
         Screen('DrawLine', theWindow, white, W/2, H*(1/2)-scale_H/3, W/2, H*(1/2)+scale_H/3, 6);
         DrawFormattedText(theWindow, double('전혀 그렇지\n     않다'), lb-scale_H/1.3, H*(1/2)+scale_H/1.2, white,[],[],[],1.2);
         Screen('DrawLine', theWindow, white, lb, H*(1/2)-scale_H/3, lb, H*(1/2)+scale_H/3, 6);
-        DrawFormattedText(theWindow, double('매우 그렇다'), rb-scale_H/1, H*(1/2)+scale_H/1.2, white);
+        DrawFormattedText(theWindow, double('매우 그렇다'), rb-scale_H/1.5, H*(1/2)+scale_H/1.2, white);
         Screen('DrawLine', theWindow, white, rb, H*(1/2)-scale_H/3, rb, H*(1/2)+scale_H/3, 6);
         
     case 'overall_resting_present'
@@ -123,7 +125,7 @@ switch scale
         Screen('DrawLine', theWindow, white, W/2, H*(1/2)-scale_H/3, W/2, H*(1/2)+scale_H/3, 6);
         DrawFormattedText(theWindow, double('전혀 그렇지\n     않다'), lb-scale_H/1.3, H*(1/2)+scale_H/1.2, white,[],[],[],1.2);
         Screen('DrawLine', theWindow, white, lb, H*(1/2)-scale_H/3, lb, H*(1/2)+scale_H/3, 6);
-        DrawFormattedText(theWindow, double('매우 그렇다'), rb-scale_H/1, H*(1/2)+scale_H/1.2, white);
+        DrawFormattedText(theWindow, double('매우 그렇다'), rb-scale_H/1.5, H*(1/2)+scale_H/1.2, white);
         Screen('DrawLine', theWindow, white, rb, H*(1/2)-scale_H/3, rb, H*(1/2)+scale_H/3, 6);
         
     case 'overall_resting_past'
@@ -131,7 +133,7 @@ switch scale
         Screen('DrawLine', theWindow, white, W/2, H*(1/2)-scale_H/3, W/2, H*(1/2)+scale_H/3, 6);
         DrawFormattedText(theWindow, double('전혀 그렇지\n     않다'), lb-scale_H/1.3, H*(1/2)+scale_H/1.2, white,[],[],[],1.2);
         Screen('DrawLine', theWindow, white, lb, H*(1/2)-scale_H/3, lb, H*(1/2)+scale_H/3, 6);
-        DrawFormattedText(theWindow, double('매우 그렇다'), rb-scale_H/1, H*(1/2)+scale_H/1.2, white);
+        DrawFormattedText(theWindow, double('매우 그렇다'), rb-scale_H/1.5, H*(1/2)+scale_H/1.2, white);
         Screen('DrawLine', theWindow, white, rb, H*(1/2)-scale_H/3, rb, H*(1/2)+scale_H/3, 6);
         
     case 'overall_resting_future'
@@ -139,7 +141,7 @@ switch scale
         Screen('DrawLine', theWindow, white, W/2, H*(1/2)-scale_H/3, W/2, H*(1/2)+scale_H/3, 6);
         DrawFormattedText(theWindow, double('전혀 그렇지\n     않다'), lb-scale_H/1.3, H*(1/2)+scale_H/1.2, white,[],[],[],1.2);
         Screen('DrawLine', theWindow, white, lb, H*(1/2)-scale_H/3, lb, H*(1/2)+scale_H/3, 6);
-        DrawFormattedText(theWindow, double('매우 그렇다'), rb-scale_H/1, H*(1/2)+scale_H/1.2, white);
+        DrawFormattedText(theWindow, double('매우 그렇다'), rb-scale_H/1.5, H*(1/2)+scale_H/1.2, white);
         Screen('DrawLine', theWindow, white, rb, H*(1/2)-scale_H/3, rb, H*(1/2)+scale_H/3, 6);
         
     case 'overall_resting_bitter_int'  % one-directional

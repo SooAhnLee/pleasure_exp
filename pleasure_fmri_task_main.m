@@ -437,23 +437,12 @@ try
         while GetSecs - run_start_t < S.dur
             
             rec_i = rec_i + 1;
-            [x,~,button] = GetMouse(theWindow);
-            if x < lb1
-                x = lb1;
-            elseif x > rb1
-                x = rb1;
-            end
-            
-            Screen('DrawLine', theWindow, white, lb1, H*(1/2), rb1, H*(1/2), 4); %rating scale
-            % penWidth: 0.125~7.000
+            Screen(theWindow, 'FillRect', bgcolor, window_rect);
+            [lb, rb, start_center] = draw_scale_pls('cont_glms');
             msgtxt = '이 경험이 얼마나 유쾌 혹은 불쾌한지를 지속적으로 보고해주세요.';
             DrawFormattedText(theWindow, double(msgtxt), 'center', H*(1/4), orange);
-            Screen('DrawLine', theWindow, white, W/2, H*(1/2)-scale_H/3, W/2, H*(1/2)+scale_H/3, 6);
-            DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 불쾌'), lb1-scale_H, H*(1/2)+scale_H/1.2, white,[],[],[],1.2);
-            Screen('DrawLine', theWindow, white, lb1, H*(1/2)-scale_H/3, lb1, H*(1/2)+scale_H/3, 6);
-            DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 유쾌'), rb1-scale_H, H*(1/2)+scale_H/1.2, white,[],[],[],1.2);
-            Screen('DrawLine', theWindow, white, rb1, H*(1/2)-scale_H/3, rb1, H*(1/2)+scale_H/3, 6);
-            Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/2, x, H*(1/2)+scale_H/2, 6); %rating bar
+            [x,~,button] = GetMouse(theWindow);
+            if x < lb1; x = lb1; elseif x > rb1; x = rb1; end
             
             run_cur_t = GetSecs;
             data.dat.run_time_fromstart(rec_i,1) = run_cur_t-run_start_t;

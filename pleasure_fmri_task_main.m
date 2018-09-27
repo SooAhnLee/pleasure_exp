@@ -78,8 +78,8 @@ end
 %% SETUP : Create paradigm according to subject information
 
 S.type = type;
-% S.dur = 18*60 - 15; % except disdaq
-S.dur = 5;  %
+% S.dur = 18*60 ; %including disdaq, except 8 secs (time for scanner starting)
+S.dur = 5*60+6;  %
 
 S.changecolor = [10:60:S.dur];
 changecolor_jitter = randi(10, 1, numel(S.changecolor));
@@ -101,7 +101,7 @@ bgcolor = 50;
 screens = Screen('Screens');
 window_num = screens(1);
 Screen('Preference', 'SkipSyncTests', 1);
-screen_mode = 'full';
+screen_mode = 'testmode';
 window_info = Screen('Resolution', window_num);
 switch screen_mode
     case 'full'
@@ -118,7 +118,7 @@ switch screen_mode
         window_rect = [0 0 window_info.width window_info.height]/window_ratio;
         fontsize = 20;
     case 'testmode'
-        window_rect = [0 0 1440 900];  % 1200 800];
+        window_rect = [0 0 1910 1070];  % 1200 800];
         fontsize = 26;
 end
 
@@ -434,7 +434,7 @@ try
         y = H*(1/2);
         SetMouse(x,y)
         
-        while GetSecs - run_start_t < S.dur
+        while GetSecs - run_start_t < S.dur - 15
             
             rec_i = rec_i + 1;
             Screen(theWindow, 'FillRect', bgcolor, window_rect);
@@ -474,9 +474,9 @@ try
         end
         
         % end anyway after run duration + 15 secs(disdaq) (total 18 mins)
-        waitsec_fromstarttime(data.runscan_starttime, S.dur+15)  %run duration + disdaq (+ buffer) (modify!)
+        waitsec_fromstarttime(data.runscan_starttime, S.dur)  %run duration + disdaq 
         
-        data.dat.run_dur = GetSecs - run_start_t;  % should be equal to S.dur
+        data.dat.run_dur = GetSecs - run_start_t;  % should be equal to S.dur - disdaq
         
         if USE_EYELINK
             Eyelink('Message','Run End');

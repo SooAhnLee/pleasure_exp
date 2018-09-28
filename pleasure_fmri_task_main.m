@@ -1,4 +1,4 @@
- function pleasure_fmri_task_main(SID, SubjNum, type, varargin)
+function pleasure_fmri_task_main(SID, SubjNum, type, varargin)
 
 %% SETUP : Basic parameters
 
@@ -29,8 +29,8 @@ for i = 1:length(varargin)
                 practice = true;
             case {'run'}
                 run = true;
-%             case {'savedir'}
-%                 savedir = varargin{i+1};
+                %             case {'savedir'}
+                %                 savedir = varargin{i+1};
             case {'eyelink'}
                 USE_EYELINK = true;
             case {'biopac'}
@@ -78,20 +78,20 @@ end
 %% SETUP : Create paradigm according to subject information
 
 S.type = type;
-% S.dur = 18*60 ; %including disdaq, except 8 secs (time for scanner starting)
-S.dur = 5*60+6;  %
+% run_dur = 18*60; % including disdaq, except 8 secs before trigger
+run_dur = 20;  %
 
-S.changecolor = [10:60:S.dur];
-changecolor_jitter = randi(10, 1, numel(S.changecolor));
-S.changecolor = S.changecolor + changecolor_jitter;
-S.changetime = 1; % duration of color change : 1 sec
+changecolor = [10:60:run_dur];
+changecolor_jitter = randi(10, 1, numel(changecolor));
+changecolor = changecolor + changecolor_jitter;
+changetime = 1; % duration of color change : 1 sec
 
 rating_types_pls = call_ratingtypes_pls;
 
 data.dat.type = S.type;
-data.dat.duration = S.dur;
-data.dat.changecolor = S.changecolor;
-data.dat.changetime = S.changetime;
+data.dat.duration = run_dur;
+data.dat.changecolor = changecolor;
+data.dat.changetime = changetime;
 
 %% SETUP : Screen
 
@@ -106,7 +106,7 @@ window_info = Screen('Resolution', window_num);
 switch screen_mode
     case 'full'
         window_rect = [0 0 window_info.width window_info.height]; % full screen
-        fontsize = 26;
+        fontsize = 32;
     case 'semifull'
         window_rect = [0 0 window_info.width-100 window_info.height-100]; % a little bit distance
     case 'middle'
@@ -118,8 +118,8 @@ switch screen_mode
         window_rect = [0 0 window_info.width window_info.height]/window_ratio;
         fontsize = 20;
     case 'testmode'
-        window_rect = [0 0 1910 1070];  % 1200 800];
-        fontsize = 26;
+        window_rect = [0 0 1440 900];  % 1920 1080]; full screen for window
+        fontsize = 32;
 end
 
 % size
@@ -153,7 +153,7 @@ theWindow = Screen('OpenWindow', window_num, bgcolor, window_rect); % start the 
 % Screen('TextFont', theWindow, font);
 Screen('TextSize', theWindow, fontsize);
 
-Screen(theWindow, 'FillRect', bgcolor, window_rect); % Just getting information, and do not show the scale.
+Screen(theWindow, 'FillRect', bgcolor, window_rect);
 Screen('Flip', theWindow);
 HideCursor;
 
@@ -194,32 +194,11 @@ try
         end
         
         while true % Space
-            
-            msgtxt = '평가 예제 : 실험자는 평가 방법에 대해 충분히 설명한 후, 스페이스바를 눌러주시기 바랍니다.';
-            DrawFormattedText(theWindow, double(msgtxt), 'center', H*(1/4), white, [], [], [], 2);
-            Screen('DrawLine', theWindow, white, lb1, H*(1/2), rb1, H*(1/2), 4); %rating scale
-            % penWidth: 0.125~7.000
-            for i = 2:5
-                Screen('DrawLine', theWindow, white, anchor_lms(1,i), H*(1/2)-scale_H/4, anchor_lms(1,i), H*(1/2)+scale_H/4, 2);
-                Screen('DrawLine', theWindow, white, anchor_lms(2,i), H*(1/2)-scale_H/4, anchor_lms(2,i), H*(1/2)+scale_H/4, 2);
-            end
-            DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 불쾌'), lb1-scale_H+10, H*(1/2)+scale_H/1.2, white,[],[],[],1.4);
-            DrawFormattedText(theWindow, double('상상할 수 있는\n가장 강한 유쾌'), rb1-scale_H+10, H*(1/2)+scale_H/1.2, white,[],[],[],1.4);
-            DrawFormattedText(theWindow, double('중립'), W/2-scale_H/2.8+10, H*(1/2)+scale_H);
-            Screen('DrawLine', theWindow, white, W/2, H*(1/2)-scale_H/3, W/2, H*(1/2)+scale_H/3, 6);
-            Screen('DrawLine', theWindow, white, lb1, H*(1/2)-scale_H/3, lb1, H*(1/2)+scale_H/3, 6);
-            Screen('DrawLine', theWindow, white, rb1, H*(1/2)-scale_H/3, rb1, H*(1/2)+scale_H/3, 6);
-            
-            DrawFormattedText(theWindow, double('약함'), anchor_lms(1,2)-scale_H/2.8+10, H*(1/2)+scale_H/2, white);
-            DrawFormattedText(theWindow, double('중간'), anchor_lms(1,3)-scale_H/2.8+10, H*(1/2)+scale_H/2, white);
-            DrawFormattedText(theWindow, double('강함'), anchor_lms(1,4)-scale_H/2.8+10, H*(1/2)+scale_H/2, white);
-            DrawFormattedText(theWindow, double('매우 강함'), anchor_lms(1,5)-scale_H/2.8+10, H*(1/2)+scale_H/2, white, 2,[],[],1.4);
-            
-            DrawFormattedText(theWindow, double('약함'), anchor_lms(2,2)-scale_H/2.8+10, H*(1/2)+scale_H/2, white);
-            DrawFormattedText(theWindow, double('중간'), anchor_lms(2,3)-scale_H/2.8+10, H*(1/2)+scale_H/2, white);
-            DrawFormattedText(theWindow, double('강함'), anchor_lms(2,4)-scale_H/2.8+10, H*(1/2)+scale_H/2, white);
-            DrawFormattedText(theWindow, double('매우 강함'), anchor_lms(2,5)-scale_H/2.8+10, H*(1/2)+scale_H/2, white, 2,[],[],1.4);
-            
+            Screen(theWindow, 'FillRect', bgcolor, window_rect);
+            cont_rat_scale = imread('gLMS_bidirectional_rating_scale','jpg');
+            [s1, s2, s3] = size(cont_rat_scale);
+            cont_rat_scale_texture = Screen('MakeTexture', theWindow, cont_rat_scale);
+            Screen('DrawTexture', theWindow, cont_rat_scale_texture, [0 0 s2 s1],[0 0 W H]);  %show the continuous rating scale
             Screen('Flip', theWindow);
             
             [~,~,keyCode] = KbCheck;
@@ -242,30 +221,16 @@ try
             end
         end
         
-
+        
         
         % Explain one-directional scale with visualization
         while true % Space
-            
-            msgtxt = '평가 예제 : 실험자는 평가 방법에 대해 충분히 설명한 후, 스페이스바를 눌러주시기 바랍니다.';
-            DrawFormattedText(theWindow, double(msgtxt), 'center', H*(1/4), white, [], [], [], 2);
-            Screen('DrawLine', theWindow, white, lb2, H*(1/2), rb2, H*(1/2), 4); %rating scale
-
-            DrawFormattedText(theWindow, double('전혀 느껴지지\n      않음'), lb2-scale_H/1.1+10, H*(1/2)+scale_H/1.2, white,[],[],[],1.4);
-            DrawFormattedText(theWindow, double('상상할 수 있는\n   가장 강한'), rb2-scale_H/1.1+5, H*(1/2)+scale_H/1.2, white,[],[],[],1.4);
-            Screen('DrawLine', theWindow, white, lb2, H*(1/2)-scale_H/3, lb2, H*(1/2)+scale_H/3, 6);
-            Screen('DrawLine', theWindow, white, rb2, H*(1/2)-scale_H/3, rb2, H*(1/2)+scale_H/3, 6);
-            
-            Screen('DrawLine', theWindow, white, lb2+(rb2-lb2)*0.061, H*(1/2)-scale_H/4, lb2+(rb2-lb2)*0.061, H*(1/2)+scale_H/4, 6);
-            Screen('DrawLine', theWindow, white, lb2+(rb2-lb2)*0.172, H*(1/2)-scale_H/4, lb2+(rb2-lb2)*0.172, H*(1/2)+scale_H/4, 6);
-            Screen('DrawLine', theWindow, white, lb2+(rb2-lb2)*0.354, H*(1/2)-scale_H/4, lb2+(rb2-lb2)*0.354, H*(1/2)+scale_H/4, 6);
-            Screen('DrawLine', theWindow, white, lb2+(rb2-lb2)*0.533, H*(1/2)-scale_H/4, lb2+(rb2-lb2)*0.533, H*(1/2)+scale_H/4, 6);
-            
-            DrawFormattedText(theWindow, double('약함'), lb2+(rb2-lb2)*0.061-scale_H/2.8+10, H*(1/2)+scale_H/2, white);
-            DrawFormattedText(theWindow, double('중간'), lb2+(rb2-lb2)*0.172-scale_H/2.8+10, H*(1/2)+scale_H/2, white);
-            DrawFormattedText(theWindow, double('강함'), lb2+(rb2-lb2)*0.354-scale_H/2.8+10, H*(1/2)+scale_H/2, white);
-            DrawFormattedText(theWindow, double('매우 강함'), lb2+(rb2-lb2)*0.533-scale_H/2.8+10, H*(1/2)+scale_H/2, white, 2,[],[],1.4);
-            
+            Screen(theWindow, 'FillRect', bgcolor, window_rect);
+            overall_rat_scale = imread('gLMS_unidirectional_rating_scale','jpg');
+            [s1, s2, s3] = size(overall_rat_scale);
+            overall_rat_scale_texture = Screen('MakeTexture', theWindow, overall_rat_scale);
+            Screen('DrawTexture', theWindow, overall_rat_scale_texture, [0 0 s2 s1],[0 0 W H]);
+            Screen('PutImage', theWindow, overall_rat_scale); %show the overall rating scale
             Screen('Flip', theWindow);
             
             [~,~,keyCode] = KbCheck;
@@ -292,24 +257,18 @@ try
         while true % button
             msgtxt = '평가 예제 : 참가자는 충분히 평가 방법을 연습한 후, 연습이 끝나면 버튼을 눌러주시기 바랍니다.';
             DrawFormattedText(theWindow, double(msgtxt), 'center', H*(1/4), white, [], [], [], 2);
-            
-            [x,~,button] = GetMouse(theWindow);
-            [~,~,keyCode] = KbCheck;
-            
-            if x < lb1
-                x = lb1;
-            elseif x > rb1
-                x = rb1;
-            end
-            
             Screen('DrawLine', theWindow, white, lb1, H*(1/2), rb1, H*(1/2), 4); %rating scale
             % penWidth: 0.125~7.000
             Screen('DrawLine', theWindow, white, W/2, H*(1/2)-scale_H/3, W/2, H*(1/2)+scale_H/3, 6);
             Screen('DrawLine', theWindow, white, lb1, H*(1/2)-scale_H/3, lb1, H*(1/2)+scale_H/3, 6);
             Screen('DrawLine', theWindow, white, rb1, H*(1/2)-scale_H/3, rb1, H*(1/2)+scale_H/3, 6);
-            Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/2, x, H*(1/2)+scale_H/2, 6); %rating bar
+            Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/3, x, H*(1/2)+scale_H/3, 6); %rating bar
             Screen('Flip', theWindow);
             
+            [x,~,button] = GetMouse(theWindow);
+            if x < lb1; x = lb1; elseif x > rb1; x = rb1; end
+            
+            [~,~,keyCode] = KbCheck;
             if button(1) == 1
                 break
             elseif keyCode(KbName('q')) == 1
@@ -337,23 +296,16 @@ try
         while true % button
             msgtxt = '평가 예제 : 참가자는 충분히 평가 방법을 연습한 후, 연습이 끝나면 버튼을 눌러주시기 바랍니다.';
             DrawFormattedText(theWindow, double(msgtxt), 'center', H*(1/4), white, [], [], [], 2);
-            
-            [x,~,button] = GetMouse(theWindow);
-            [~,~,keyCode] = KbCheck;
-            
-            if x < lb2
-                x = lb2;
-            elseif x > rb2
-                x = rb2;
-            end
-            
             Screen('DrawLine', theWindow, white, lb2, H*(1/2), rb2, H*(1/2), 4); %rating scale
             % penWidth: 0.125~7.000
             Screen('DrawLine', theWindow, white, lb2, H*(1/2)-scale_H/3, lb2, H*(1/2)+scale_H/3, 6);
             Screen('DrawLine', theWindow, white, rb2, H*(1/2)-scale_H/3, rb2, H*(1/2)+scale_H/3, 6);
-            Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/2, x, H*(1/2)+scale_H/2, 6); %rating bar
+            Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/3, x, H*(1/2)+scale_H/3, 6); %rating bar
             Screen('Flip', theWindow);
             
+            [x,~,button] = GetMouse(theWindow);
+            if x < lb2; x = lb2; elseif x > rb2; x = rb2; end
+            [~,~,keyCode] = KbCheck;
             if button(1) == 1
                 break
             elseif keyCode(KbName('q')) == 1
@@ -399,11 +351,11 @@ try
         
         %% For disdaq : 15 secs
         % For disdaq ("시작합니다…") : 5 secs
-        data.runscan_starttime = GetSecs;
+        data.run_starttime = GetSecs;
         Screen(theWindow, 'FillRect', bgcolor, window_rect);
         DrawFormattedText(theWindow, double('시작합니다…'), 'center', 'center', white, [], [], [], 1.2);
         Screen('Flip', theWindow);
-        waitsec_fromstarttime(data.runscan_starttime, 5);
+        waitsec_fromstarttime(data.run_starttime, 5);
         
         % For disdaq (blank / EYELINK & BIOPAC START) : 10 secs
         Screen(theWindow,'FillRect',bgcolor, window_rect);
@@ -422,19 +374,19 @@ try
             BIOPAC_trigger(ljHandle, biopac_channel, 'off');
         end
         
-        waitsec_fromstarttime(data.runscan_starttime, 15);  % 5+10
+        waitsec_fromstarttime(data.run_starttime, 15);  % 5+10
         
         %% Continuous rating
         
-        run_start_t = GetSecs;
-        data.dat.runsession_starttime = run_start_t;
+        cont_rat_start_t = GetSecs;
+        data.dat.cont_rating_starttime = cont_rat_start_t;  %run_starttime + 15 secs
         
         rec_i = 0;
         x = W/2;
         y = H*(1/2);
         SetMouse(x,y)
         
-        while GetSecs - run_start_t < S.dur - 15
+        while GetSecs - cont_rat_start_t < run_dur - 15  % duration of continuous rating
             
             rec_i = rec_i + 1;
             Screen(theWindow, 'FillRect', bgcolor, window_rect);
@@ -444,24 +396,24 @@ try
             [x,~,button] = GetMouse(theWindow);
             if x < lb1; x = lb1; elseif x > rb1; x = rb1; end
             
-            run_cur_t = GetSecs;
-            data.dat.run_time_fromstart(rec_i,1) = run_cur_t-run_start_t;
-            data.dat.run_cont_rating(rec_i,1) = (x-W/2)/(rb1-lb1).*2;
-            data.dat.run_changecolor_response(rec_i,1) = button(1);
+            cont_rat_cur_t = GetSecs;
+            data.dat.cont_rating_time_fromstart(rec_i,1) = cont_rat_cur_t-cont_rat_start_t;
+            data.dat.cont_rating(rec_i,1) = (x-W/2)/(rb1-lb1).*2;
+            data.dat.changecolor_response(rec_i,1) = button(1);
             
             % Behavioral task
-            if any(S.changecolor <= run_cur_t - run_start_t & run_cur_t - run_start_t <= S.changecolor + S.changetime) % It takes 1 sec from the S.changecolor
-                Screen('DrawLine', theWindow, red, x, H*(1/2)-scale_H/2, x, H*(1/2)+scale_H/2, 6); %rating bar turns in red
+            if any(changecolor <= cont_rat_cur_t - cont_rat_start_t & cont_rat_cur_t - cont_rat_start_t <= changecolor + changetime) % It takes 1 sec from the changecolor
+                Screen('DrawLine', theWindow, red, x, H*(1/2)-scale_H/3, x, H*(1/2)+scale_H/3, 6); %rating bar turns in red
                 data.dat.changecolor_stim(rec_i) = 1;
             else
-                Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/2, x, H*(1/2)+scale_H/2, 6); %rating bar returns to its own color
+                Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/3, x, H*(1/2)+scale_H/3, 6); %rating bar returns to its own color
                 data.dat.changecolor_stim(rec_i) = 0;
             end
             
             Screen('Flip', theWindow);
             
             % save data every 1 min
-            if mod(S.dur, 60) == 0
+            if mod(run_dur, 60) == 0
                 save(data.datafile, 'data', '-append')
             end
             
@@ -473,10 +425,10 @@ try
             
         end
         
-        % end anyway after run duration + 15 secs(disdaq) (total 18 mins)
-        waitsec_fromstarttime(data.runscan_starttime, S.dur)  %run duration + disdaq 
+        % end anyway after run duration including disdaq (run_dur; total 18 mins)
+        waitsec_fromstarttime(data.run_starttime, run_dur)  % run duration (with disdaq) except 8 secs
         
-        data.dat.run_dur = GetSecs - run_start_t;  % should be equal to S.dur - disdaq
+        data.dat.cont_rating_dur = GetSecs - cont_rat_start_t;  % should be equal to run_dur - disdaq
         
         if USE_EYELINK
             Eyelink('Message','Run End');
@@ -489,27 +441,24 @@ try
         data.dat.postrun_starttime = all_start_t;
         ratestim = strcmp(rating_types_pls.postallstims, S.type);
         % rating_types_pls.postallstims = {'REST', 'CAPS', 'QUIN', 'SWEET', 'TOUCH'};
+        % 1 appears at the right type of this session
+        % Ex: 'TOUCH' session --> 0 0 0 0 1 (logical)
         scales = rating_types_pls.postalltypes{ratestim};
         
+        Screen(theWindow, 'FillRect', bgcolor, window_rect);
+        msgtxt = [num2str(SubjRun) '번째 세션이 끝났습니다.\n\n잠시 후 질문들이 제시될 것입니다. 참가자분께서는 기다려주시기 바랍니다.'];
+        msgtxt = double(msgtxt);
+        DrawFormattedText(theWindow, msgtxt, 'center', 'center', white, [], [], [], 2);
+        Screen('Flip', theWindow);
+        
+        if USE_EYELINK
+            Eyelink('Message','Postrun Start');
+        end
+        
+        waitsec_fromstarttime(all_start_t, 5)
+                
         
         for scale_i = 1:numel(scales)
-            
-            if scale_i == 1
-                
-                msgtxt = [num2str(SubjRun) '번째 세션이 끝났습니다.\n\n잠시 후 질문들이 제시될 것입니다. 참가자분께서는 기다려주시기 바랍니다.'];
-                msgtxt = double(msgtxt);
-                DrawFormattedText(theWindow, msgtxt, 'center', 'center', white, [], [], [], 2);
-                Screen('Flip', theWindow);
-                waitsec_fromstarttime(all_start_t, 5)
-                
-                Screen(theWindow, 'FillRect', bgcolor, window_rect);
-                Screen('Flip', theWindow);
-                
-                if USE_EYELINK
-                    Eyelink('Message','Postrun Start');
-                end
-                
-            end
             
             scale = scales{scale_i};
             [lb, rb, start_center] = draw_scale_pls(scale);
@@ -521,6 +470,8 @@ try
             
             rec_i = 0;
             ratetype = strcmp(rating_types_pls.alltypes, scale);
+            % corresponding one among all postrun questionnaires
+            % Ex: scale = 'overall_resting_touch_glms' (5th)
             
             % Initial position
             if start_center
@@ -536,8 +487,8 @@ try
                 [lb, rb, start_center] = draw_scale_pls(scale);
                 if x < lb; x = lb; elseif x > rb; x = rb; end
                 
-                DrawFormattedText(theWindow, rating_types_pls.prompts{ratetype}, 'center', H*(1/4), white, [], [], [], 2);
-                Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/2, x, H*(1/2)+scale_H/2, 6); %rating bar
+                DrawFormattedText(theWindow, double(rating_types_pls.prompts{ratetype}), 'center', H*(1/4), white, [], [], [], 2);
+                Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/3, x, H*(1/2)+scale_H/3, 6); %rating bar
                 Screen('Flip', theWindow);
                 
                 if button(1)
@@ -549,20 +500,20 @@ try
                 
                 cur_t = GetSecs;
                 eval(['data.dat.' scale '_time_fromstart(rec_i,1) = cur_t-start_t;']);
-                eval(['data.dat.' scale '_cont_rating(rec_i,1) = (x-lb)/(rb-lb);']);
+                eval(['data.dat.' scale '_rating_trajectory(rec_i,1) = (x-lb)/(rb-lb);']);
                 
             end
             
             end_t = GetSecs;
-            eval(['data.dat.' scale '_rating = (x-lb)/(rb-lb);']);
-            eval(['data.dat.' scale '_RT = end_t - start_t;']);
+            eval(['data.dat.' scale '_rating_end = (x-lb)/(rb-lb);']);
+            eval(['data.dat.' scale '_duration = end_t - start_t;']);
             
             % Freeze the screen 0.5 second with red line if overall type
             freeze_t = GetSecs;
             while true
                 [lb, rb, start_center] = draw_scale_pls(scale);
-                DrawFormattedText(theWindow, rating_types_pls.prompts{ratetype}, 'center', H*(1/4), white, [], [], [], 2);
-                Screen('DrawLine', theWindow, red, x, H*(1/2)-scale_H/2, x, H*(1/2)+scale_H/2, 6);
+                DrawFormattedText(theWindow, double(rating_types_pls.prompts{ratetype}), 'center', H*(1/4), white, [], [], [], 2);
+                Screen('DrawLine', theWindow, red, x, H*(1/2)-scale_H/3, x, H*(1/2)+scale_H/3, 6);
                 Screen('Flip', theWindow);
                 freeze_cur_t = GetSecs;
                 if freeze_cur_t - freeze_t > 0.5
@@ -575,7 +526,7 @@ try
                 msgtxt = double(msgtxt); % korean to double
                 DrawFormattedText(theWindow, msgtxt, 'center', 'center', white, [], [], [], 2);
                 Screen('Flip', theWindow);
-
+                
                 % wait for 2 secs to end
                 postrun_end = GetSecs;
                 waitsec_fromstarttime(postrun_end, 2);

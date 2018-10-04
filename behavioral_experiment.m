@@ -161,7 +161,7 @@ end
 data.dat.time_fromstart(rec_i,1) = cur_t-start_t;
 data.dat.cont_rating(rec_i,1) = (x-W/2)/(rb-lb).*2;
 
-save(data.datafile, '-append', 'data');
+save(data.datafile, 'data', '-append');
 
   
 ShowCursor; 

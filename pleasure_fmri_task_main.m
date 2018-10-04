@@ -56,7 +56,7 @@ SubjDate = sprintf('%.2d%.2d%.2d', nowtime(1), nowtime(2), nowtime(3));
 data.subject = SID;
 data.datafile = fullfile(savedir, [SubjDate, '_', SID, '_PLS', sprintf('%.3d', SubjNum), ...
     '_run', sprintf('%.2d', SubjRun), '.mat']);
-data.version = 'Pleasure_v1_08-27-2018_Cocoanlab';
+data.version = 'Pleasure_v1_10-04-2018_Cocoanlab';  % month-date-year
 data.starttime = datestr(clock, 0);
 data.starttime_getsecs = GetSecs;
 
@@ -363,14 +363,14 @@ try
         
         if USE_EYELINK
             Eyelink('StartRecording');
-            data.dat.eyelink_starttime = GetSecs; % eyelink timestamp
-            Eyelink('Message','Task Run start');
+            data.dat.eyetracker_starttime = GetSecs; % eyelink timestamp
+            Eyelink('Message','Continuous Rating Start');
         end
         
         if USE_BIOPAC
-            data.dat.biopac_starttime = GetSecs; % biopac timestamp
+            data.dat.biopac_triggertime = GetSecs; % biopac timestamp
             BIOPAC_trigger(ljHandle, biopac_channel, 'on');
-            waitsec_fromstarttime(data.dat.biopac_starttime, 0.6);
+            waitsec_fromstarttime(data.dat.biopac_triggertime, 0.6);
             BIOPAC_trigger(ljHandle, biopac_channel, 'off');
         end
         
@@ -431,7 +431,14 @@ try
         data.dat.cont_rating_dur = GetSecs - cont_rat_start_t;  % should be equal to run_dur - disdaq
         
         if USE_EYELINK
-            Eyelink('Message','Run End');
+            Eyelink('Message','Continuous Rating End');
+        end
+        
+        if USE_BIOPAC
+            data.dat.biopac_cont_rat_end = GetSecs; % biopac timestamp
+            BIOPAC_trigger(ljHandle, biopac_channel, 'on');
+            waitsec_fromstarttime(data.dat.biopac_cont_rat_end, 0.8);
+            BIOPAC_trigger(ljHandle, biopac_channel, 'off');
         end
         
         
@@ -452,7 +459,14 @@ try
         Screen('Flip', theWindow);
         
         if USE_EYELINK
-            Eyelink('Message','Postrun Start');
+            Eyelink('Message','Postrun Questionnaires Start');
+        end
+        
+        if USE_BIOPAC
+            data.dat.biopac_postrun_start = GetSecs; % biopac timestamp
+            BIOPAC_trigger(ljHandle, biopac_channel, 'on');
+            waitsec_fromstarttime(data.dat.biopac_postrun_start, 0.3);
+            BIOPAC_trigger(ljHandle, biopac_channel, 'off');
         end
         
         waitsec_fromstarttime(all_start_t, 5)
@@ -466,7 +480,7 @@ try
             Screen(theWindow, 'FillRect', bgcolor, window_rect);
             
             start_t = GetSecs;
-            eval(['data.dat.' scale '_timestamp = start_t;']);
+            eval(['data.dat.' scale '_starttime = start_t;']);
             
             rec_i = 0;
             ratetype = strcmp(rating_types_pls.alltypes, scale);
@@ -505,7 +519,7 @@ try
             end
             
             end_t = GetSecs;
-            eval(['data.dat.' scale '_rating_end = (x-lb)/(rb-lb);']);
+            eval(['data.dat.' scale '_rating_endpoint = (x-lb)/(rb-lb);']);
             eval(['data.dat.' scale '_duration = end_t - start_t;']);
             
             % Freeze the screen 0.5 second with red line if overall type
@@ -543,13 +557,14 @@ try
         
         
         if USE_EYELINK
-            Eyelink('Message','Postrun End');
+            Eyelink('Message','Postrun Questionnaires End');
             eyelink_main(edfFile, 'Shutdown');
         end
+        
         if USE_BIOPAC
-            data.dat.biopac_endtime = GetSecs; % biopac timestamp
+            data.dat.biopac_postrun_end = GetSecs; % biopac timestamp
             BIOPAC_trigger(ljHandle, biopac_channel, 'on');
-            waitsec_fromstarttime(data.dat.biopac_endtime, 0.1);
+            waitsec_fromstarttime(data.dat.biopac_postrun_end, 0.1);
             BIOPAC_trigger(ljHandle, biopac_channel, 'off');
         end
         

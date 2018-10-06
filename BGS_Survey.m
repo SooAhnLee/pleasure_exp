@@ -185,7 +185,7 @@ for stimuli_i = 1:numel(stimuli)
             if x < lb2; x = lb2; elseif x > rb2; x = rb2; end
             [lb, rb, start_center] = draw_scale_pls(scale);
             DrawFormattedText(theWindow, double(stimuli{stimuli_i}), 'center', H*(1/3), white, [], [], [], 2);
-            Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/2, x, H*(1/2)+scale_H/2, 6); %rating bar
+            Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/3, x, H*(1/2)+scale_H/3, 6); %rating bar
             Screen('Flip', theWindow);
             
             if button(1)
@@ -205,7 +205,7 @@ for stimuli_i = 1:numel(stimuli)
         while true
             [lb2, rb2, start_center] = draw_scale_pls(scale);
             DrawFormattedText(theWindow, double(stimuli{stimuli_i}), 'center', H*(1/3), white, [], [], [], 2);
-            Screen('DrawLine', theWindow, red, x, H*(1/2)-scale_H/2, x, H*(1/2)+scale_H/2, 6);
+            Screen('DrawLine', theWindow, red, x, H*(1/2)-scale_H/3, x, H*(1/2)+scale_H/3, 6);
             Screen('Flip', theWindow);
             freeze_cur_t = GetSecs;
             if freeze_cur_t - freeze_t > 0.5
@@ -226,7 +226,7 @@ for stimuli_i = 1:numel(stimuli)
             if x < lb1; x = lb1; elseif x > rb1; x = rb1; end
             [lb, rb, start_center] = draw_scale_pls(scale);
             DrawFormattedText(theWindow, double(stimuli{stimuli_i}), 'center', H*(1/3), white, [], [], [], 2);
-            Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/2, x, H*(1/2)+scale_H/2, 6); %rating bar
+            Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/3, x, H*(1/2)+scale_H/3, 6); %rating bar
             Screen('Flip', theWindow);
             
             if button(1)
@@ -246,7 +246,7 @@ for stimuli_i = 1:numel(stimuli)
         while true
             [lb, rb, start_center] = draw_scale_pls(scale);
             DrawFormattedText(theWindow, double(stimuli{stimuli_i}), 'center', H*(1/3), white, [], [], [], 2);
-            Screen('DrawLine', theWindow, red, x, H*(1/2)-scale_H/2, x, H*(1/2)+scale_H/2, 6);
+            Screen('DrawLine', theWindow, red, x, H*(1/2)-scale_H/3, x, H*(1/2)+scale_H/3, 6);
             Screen('Flip', theWindow);
             freeze_cur_t = GetSecs;
             if freeze_cur_t - freeze_t > 0.5
@@ -268,7 +268,7 @@ for stimuli_i = 1:numel(stimuli)
             if x < lb1; x = lb1; elseif x > rb1; x = rb1; end
             [lb, rb, start_center] = draw_scale_pls(scale);
             DrawFormattedText(theWindow, double(stimuli{stimuli_i}), 'center', H*(1/3), white, [], [], [], 2);
-            Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/2, x, H*(1/2)+scale_H/2, 6); %rating bar
+            Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/3, x, H*(1/2)+scale_H/3, 6); %rating bar
             Screen('Flip', theWindow);
             
             if button(1)
@@ -288,7 +288,7 @@ for stimuli_i = 1:numel(stimuli)
         while true
             [lb, rb, start_center] = draw_scale_pls(scale);
             DrawFormattedText(theWindow, double(stimuli{stimuli_i}), 'center', H*(1/3), white, [], [], [], 2);
-            Screen('DrawLine', theWindow, red, x, H*(1/2)-scale_H/2, x, H*(1/2)+scale_H/2, 6);
+            Screen('DrawLine', theWindow, red, x, H*(1/2)-scale_H/3, x, H*(1/2)+scale_H/3, 6);
             Screen('Flip', theWindow);
             freeze_cur_t = GetSecs;
             if freeze_cur_t - freeze_t > 0.5
@@ -309,7 +309,7 @@ for stimuli_i = 1:numel(stimuli)
             if x < lb2; x = lb2; elseif x > rb2; x = rb2; end
             [lb2, rb2, start_center] = draw_scale_pls(scale);
             DrawFormattedText(theWindow, double(stimuli{stimuli_i}), 'center', H*(1/3), white, [], [], [], 2);
-            Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/2, x, H*(1/2)+scale_H/2, 6); %rating bar
+            Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/3, x, H*(1/2)+scale_H/3, 6); %rating bar
             Screen('Flip', theWindow);
             
             if button(1)
@@ -329,7 +329,7 @@ for stimuli_i = 1:numel(stimuli)
         while true
             [lb, rb, start_center] = draw_scale_pls(scale);
             DrawFormattedText(theWindow, double(stimuli{stimuli_i}), 'center', H*(1/3), white, [], [], [], 2);
-            Screen('DrawLine', theWindow, red, x, H*(1/2)-scale_H/2, x, H*(1/2)+scale_H/2, 6);
+            Screen('DrawLine', theWindow, red, x, H*(1/2)-scale_H/3, x, H*(1/2)+scale_H/3, 6);
             Screen('Flip', theWindow);
             freeze_cur_t = GetSecs;
             if freeze_cur_t - freeze_t > 0.5

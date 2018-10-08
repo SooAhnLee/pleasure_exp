@@ -404,7 +404,7 @@ try
             % Behavioral task
             if any(changecolor <= cont_rat_cur_t - cont_rat_start_t & cont_rat_cur_t - cont_rat_start_t <= changecolor + changetime) % It takes 1 sec from the changecolor
                 Screen('DrawLine', theWindow, red, x, H*(1/2)-scale_H/3, x, H*(1/2)+scale_H/3, 6); %rating bar turns in red
-                data.dat.changecolor_stim(rec_i) = 1;
+                data.dat.changecolor_stim(rec_i,1) = 1;  % check with changecolor_response whether they are the same
             else
                 Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/3, x, H*(1/2)+scale_H/3, 6); %rating bar returns to its own color
                 data.dat.changecolor_stim(rec_i) = 0;

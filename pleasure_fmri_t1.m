@@ -52,7 +52,7 @@ window_ratio = 3;
 screens = Screen('Screens');
 window_num = screens(1);
 Screen('Preference', 'SkipSyncTests', 1);
-screen_mode = 'testmode';
+screen_mode = 'full';
 window_info = Screen('Resolution', window_num);
 switch screen_mode
     case 'full'
@@ -85,7 +85,7 @@ red = [158 1 66];
 orange = [255 164 0];
 
 % font
-font = 'NanumBarunGothic';
+% font = 'NanumBarunGothic';
 Screen('Preference', 'TextEncodingLocale', 'ko_KR.UTF-8');
 
 %% Start : Screen

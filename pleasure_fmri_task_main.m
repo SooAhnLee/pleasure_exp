@@ -84,14 +84,14 @@ run_dur = 20;  %
 changecolor = [10:60:run_dur];
 changecolor_jitter = randi(10, 1, numel(changecolor));
 changecolor = changecolor + changecolor_jitter;
-changetime = 1; % duration of color change : 1 sec
+changedur = 1; % duration of color change : 1 sec
 
 rating_types_pls = call_ratingtypes_pls;
 
 data.dat.type = S.type;
 data.dat.duration = run_dur;
 data.dat.changecolor = changecolor;
-data.dat.changetime = changetime;
+data.dat.changetime = changedur;
 
 %% SETUP : Screen
 
@@ -101,7 +101,7 @@ bgcolor = 50;
 screens = Screen('Screens');
 window_num = screens(1);
 Screen('Preference', 'SkipSyncTests', 1);
-screen_mode = 'testmode';
+screen_mode = 'full';
 window_info = Screen('Resolution', window_num);
 switch screen_mode
     case 'full'
@@ -370,7 +370,7 @@ try
         if USE_BIOPAC
             data.dat.biopac_triggertime = GetSecs; % biopac timestamp
             BIOPAC_trigger(ljHandle, biopac_channel, 'on');
-            waitsec_fromstarttime(data.dat.biopac_triggertime, 0.6);
+            waitsec_fromstarttime(data.dat.biopac_triggertime, 1.5);
             BIOPAC_trigger(ljHandle, biopac_channel, 'off');
         end
         
@@ -402,7 +402,7 @@ try
             data.dat.changecolor_response(rec_i,1) = button(1);
             
             % Behavioral task
-            if any(changecolor <= cont_rat_cur_t - cont_rat_start_t & cont_rat_cur_t - cont_rat_start_t <= changecolor + changetime) % It takes 1 sec from the changecolor
+            if any(changecolor <= cont_rat_cur_t - cont_rat_start_t & cont_rat_cur_t - cont_rat_start_t <= changecolor + changedur) % It takes 1 sec from the changecolor
                 Screen('DrawLine', theWindow, red, x, H*(1/2)-scale_H/3, x, H*(1/2)+scale_H/3, 6); %rating bar turns in red
                 data.dat.changecolor_appear(rec_i,1) = 1;  % check with changecolor_response whether they are the same
             else
@@ -437,7 +437,17 @@ try
         if USE_BIOPAC
             data.dat.biopac_cont_rat_end = GetSecs; % biopac timestamp
             BIOPAC_trigger(ljHandle, biopac_channel, 'on');
-            waitsec_fromstarttime(data.dat.biopac_cont_rat_end, 0.8);
+            if SubjRun == 1
+                waitsec_fromstarttime(data.dat.biopac_cont_rat_end, 0.1);
+            elseif SubjRun == 2
+                waitsec_fromstarttime(data.dat.biopac_cont_rat_end, 0.3);
+            elseif SubjRun == 3
+                waitsec_fromstarttime(data.dat.biopac_cont_rat_end, 0.5);
+            elseif SubjRun == 4
+                waitsec_fromstarttime(data.dat.biopac_cont_rat_end, 0.7);
+            elseif SubjRun == 5
+                waitsec_fromstarttime(data.dat.biopac_cont_rat_end, 0.9);
+            end
             BIOPAC_trigger(ljHandle, biopac_channel, 'off');
         end
         
@@ -465,11 +475,11 @@ try
         if USE_BIOPAC
             data.dat.biopac_postrun_start = GetSecs; % biopac timestamp
             BIOPAC_trigger(ljHandle, biopac_channel, 'on');
-            waitsec_fromstarttime(data.dat.biopac_postrun_start, 0.3);
+            waitsec_fromstarttime(data.dat.biopac_postrun_start, 1);
             BIOPAC_trigger(ljHandle, biopac_channel, 'off');
         end
         
-        waitsec_fromstarttime(all_start_t, 5)
+        waitsec_fromstarttime(all_start_t, 4)
                 
         
         for scale_i = 1:numel(scales)
@@ -564,7 +574,17 @@ try
         if USE_BIOPAC
             data.dat.biopac_postrun_end = GetSecs; % biopac timestamp
             BIOPAC_trigger(ljHandle, biopac_channel, 'on');
-            waitsec_fromstarttime(data.dat.biopac_postrun_end, 0.1);
+            if SubjRun == 1
+                waitsec_fromstarttime(data.dat.biopac_postrun_end, 0.1);
+            elseif SubjRun == 2
+                waitsec_fromstarttime(data.dat.biopac_postrun_end, 0.3);
+            elseif SubjRun == 3
+                waitsec_fromstarttime(data.dat.biopac_postrun_end, 0.5);
+            elseif SubjRun == 4
+                waitsec_fromstarttime(data.dat.biopac_postrun_end, 0.7);
+            elseif SubjRun == 5
+                waitsec_fromstarttime(data.dat.biopac_postrun_end, 0.9);
+            end
             BIOPAC_trigger(ljHandle, biopac_channel, 'off');
         end
         

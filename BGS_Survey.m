@@ -43,7 +43,7 @@ bgcolor = 50;
 screens = Screen('Screens');
 window_num = screens(1);
 Screen('Preference', 'SkipSyncTests', 1);
-screen_mode = 'testmode';
+screen_mode = 'full';
 window_info = Screen('Resolution', window_num);
 switch screen_mode
     case 'full'
@@ -85,7 +85,7 @@ red = [158 1 66];
 orange = [255 164 0];
 
 % font
-font = 'NanumBarunGothic';
+% font = 'NanumBarunGothic';
 Screen('Preference', 'TextEncodingLocale', 'ko_KR.UTF-8');
 
 %% Start : Screen
@@ -106,48 +106,6 @@ data.dat.BGS_Survey_starttime = start_t;
 labels = BGS_questionnaires.stimulus_types_label;
 stimuli = BGS_questionnaires.stimulus_types_content;
 
-% % Explain one-directional scale with visualization
-% while true % Space
-%
-%     msgtxt = '실험자는 평가 방법에 대해 충분히 설명한 후, 스페이스바를 눌러주시기 바랍니다.';
-%     DrawFormattedText(theWindow, double(msgtxt), 'center', H*(1/4), white, [], [], [], 2);
-%     Screen('DrawLine', theWindow, white, lb2, H*(1/2), rb2, H*(1/2), 4); %rating scale
-%
-%     DrawFormattedText(theWindow, double('느낄 수\n  없음'), lb2-scale_H/2, H*(1/2)+scale_H/1.2, white);
-%     DrawFormattedText(theWindow, double('      상상할 수 있는\n가장 강한 정도의 자극'), rb2-scale_H/0.7, H*(1/2)+scale_H/1.2, white);
-%     Screen('DrawLine', theWindow, white, lb2, H*(1/2)-scale_H/3, lb2, H*(1/2)+scale_H/3, 6);
-%     Screen('DrawLine', theWindow, white, rb2, H*(1/2)-scale_H/3, rb2, H*(1/2)+scale_H/3, 6);
-%
-%     Screen('DrawLine', theWindow, white, lb2+(rb2-lb2)*0.061, H*(1/2)-scale_H/4, lb2+(rb2-lb2)*0.061, H*(1/2)+scale_H/4, 6);
-%     Screen('DrawLine', theWindow, white, lb2+(rb2-lb2)*0.172, H*(1/2)-scale_H/4, lb2+(rb2-lb2)*0.172, H*(1/2)+scale_H/4, 6);
-%     Screen('DrawLine', theWindow, white, lb2+(rb2-lb2)*0.354, H*(1/2)-scale_H/4, lb2+(rb2-lb2)*0.354, H*(1/2)+scale_H/4, 6);
-%     Screen('DrawLine', theWindow, white, lb2+(rb2-lb2)*0.533, H*(1/2)-scale_H/4, lb2+(rb2-lb2)*0.533, H*(1/2)+scale_H/4, 6);
-%
-%     DrawFormattedText(theWindow, double('거의 느낄 수\n없을 정도로\n    약함'), lb2+(rb2-lb2)*0.061-scale_H, H*(1/2)+scale_H/2, white);
-%     DrawFormattedText(theWindow, double('보통'), lb2+(rb2-lb2)*0.172-scale_H/2.8, H*(1/2)+scale_H/2, white);
-%     DrawFormattedText(theWindow, double('강함'), lb2+(rb2-lb2)*0.354-scale_H/2.8, H*(1/2)+scale_H/2, white);
-%     DrawFormattedText(theWindow, double('매우 강함'), lb2+(rb2-lb2)*0.533-scale_H/2.8, H*(1/2)+scale_H/2, white, 2,[],[],1);
-%
-%     Screen('Flip', theWindow);
-%
-%     [~,~,keyCode] = KbCheck;
-%     if keyCode(KbName('space')) == 1
-%         break
-%     elseif keyCode(KbName('q')) == 1
-%         abort_experiment('manual');
-%         break
-%     end
-% end
-%
-% % go to the next after space is unpressed
-% while keyCode(KbName('space')) == 1
-%     if keyCode(KbName('space')) == 1
-%         while keyCode(KbName('space')) == 1
-%             [~,~,keyCode] = KbCheck;
-%         end
-%         break
-%     end
-% end
 
 while true
     msgtxt = '지금부터 설문을 시작합니다. (space)';

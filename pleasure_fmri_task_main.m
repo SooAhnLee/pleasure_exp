@@ -162,7 +162,7 @@ HideCursor;
 % need to be revised when the eyelink is here.
 if USE_EYELINK
     
-    edf_filename = ['E_' SID '_' SubjNum]; % name should be equal or less than 8
+    edf_filename = [SID SubjNum SubjRun]; % name should be equal or less than 7
     edfFile = sprintf('%s.EDF', edf_filename);
     eyelink_main(edfFile, 'Init');
     

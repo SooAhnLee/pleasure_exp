@@ -38,4 +38,4 @@ run_i = 5;
 pleasure_fmri_task_main(SID, SubjNum, order(run_i), 'explain', 'practice', 'run', 'eyelink', 'biopac')
 
 %% SEND DATA
-
+Pleasure_Senddata(SID, SubjNum)

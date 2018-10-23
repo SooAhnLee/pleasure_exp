@@ -79,7 +79,7 @@ end
 
 S.type = type;
 % run_dur = 18*60; % including disdaq, except 8 secs before trigger
-run_dur = 20;  %
+run_dur = 18*60;  %
 
 changecolor = [10:60:run_dur];
 changecolor_jitter = randi(10, 1, numel(changecolor));

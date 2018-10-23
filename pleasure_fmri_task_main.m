@@ -368,9 +368,9 @@ try
         end
         
         if USE_BIOPAC
-            data.dat.biopac_triggertime = GetSecs; % biopac timestamp
+            data.dat.biopac_starttime = GetSecs; % biopac timestamp
             BIOPAC_trigger(ljHandle, biopac_channel, 'on');
-            waitsec_fromstarttime(data.dat.biopac_triggertime, 1.5);
+            waitsec_fromstarttime(data.dat.biopac_starttime, 1.5);
             BIOPAC_trigger(ljHandle, biopac_channel, 'off');
         end
         
@@ -434,23 +434,6 @@ try
             Eyelink('Message','Continuous Rating End');
         end
         
-        if USE_BIOPAC
-            data.dat.biopac_cont_rat_end = GetSecs; % biopac timestamp
-            BIOPAC_trigger(ljHandle, biopac_channel, 'on');
-            if SubjRun == 1
-                waitsec_fromstarttime(data.dat.biopac_cont_rat_end, 0.1);
-            elseif SubjRun == 2
-                waitsec_fromstarttime(data.dat.biopac_cont_rat_end, 0.3);
-            elseif SubjRun == 3
-                waitsec_fromstarttime(data.dat.biopac_cont_rat_end, 0.5);
-            elseif SubjRun == 4
-                waitsec_fromstarttime(data.dat.biopac_cont_rat_end, 0.7);
-            elseif SubjRun == 5
-                waitsec_fromstarttime(data.dat.biopac_cont_rat_end, 0.9);
-            end
-            BIOPAC_trigger(ljHandle, biopac_channel, 'off');
-        end
-        
         
         %% MAIN : Postrun questionnaire
         
@@ -470,13 +453,6 @@ try
         
         if USE_EYELINK
             Eyelink('Message','Postrun Questionnaires Start');
-        end
-        
-        if USE_BIOPAC
-            data.dat.biopac_postrun_start = GetSecs; % biopac timestamp
-            BIOPAC_trigger(ljHandle, biopac_channel, 'on');
-            waitsec_fromstarttime(data.dat.biopac_postrun_start, 1);
-            BIOPAC_trigger(ljHandle, biopac_channel, 'off');
         end
         
         waitsec_fromstarttime(all_start_t, 4)
@@ -572,19 +548,10 @@ try
         end
         
         if USE_BIOPAC
-            data.dat.biopac_postrun_end = GetSecs; % biopac timestamp
+            data.dat.biopac_endtime = GetSecs; % biopac timestamp
             BIOPAC_trigger(ljHandle, biopac_channel, 'on');
-            if SubjRun == 1
-                waitsec_fromstarttime(data.dat.biopac_postrun_end, 0.1);
-            elseif SubjRun == 2
-                waitsec_fromstarttime(data.dat.biopac_postrun_end, 0.3);
-            elseif SubjRun == 3
-                waitsec_fromstarttime(data.dat.biopac_postrun_end, 0.5);
-            elseif SubjRun == 4
-                waitsec_fromstarttime(data.dat.biopac_postrun_end, 0.7);
-            elseif SubjRun == 5
-                waitsec_fromstarttime(data.dat.biopac_postrun_end, 0.9);
-            end
+            ending_trigger = 2*SubjRun-1;  % 0.1, 0.3, 0.5, 0.7, 0.9
+            waitsec_fromstarttime(data.dat.biopac_endtime, ending_trigger);
             BIOPAC_trigger(ljHandle, biopac_channel, 'off');
         end
         

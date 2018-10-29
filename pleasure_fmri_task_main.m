@@ -429,6 +429,7 @@ try
         waitsec_fromstarttime(data.run_starttime, run_dur)  % run duration (with disdaq) except 8 secs
         
         data.dat.cont_rating_dur = GetSecs - cont_rat_start_t;  % should be equal to run_dur - disdaq
+        save(data.datafile, 'data', '-append');
         
         if USE_EYELINK
             Eyelink('Message','Continuous Rating End');

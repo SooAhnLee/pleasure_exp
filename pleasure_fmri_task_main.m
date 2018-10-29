@@ -401,16 +401,16 @@ try
             data.dat.cont_rating(rec_i,1) = (x-W/2)/(rb1-lb1).*2;
             data.dat.changecolor_response(rec_i,1) = button(1);
             
-            % Behavioral task
-            if any(changecolor <= cont_rat_cur_t - cont_rat_start_t & cont_rat_cur_t - cont_rat_start_t <= changecolor + changedur) % It takes 1 sec from the changecolor
-                Screen('DrawLine', theWindow, red, x, H*(1/2)-scale_H/3, x, H*(1/2)+scale_H/3, 6); %rating bar turns in red
-                data.dat.changecolor_appear(rec_i,1) = 1;  % check with changecolor_response whether they are the same
-            else
-                Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/3, x, H*(1/2)+scale_H/3, 6); %rating bar returns to its own color
-                data.dat.changecolor_appear(rec_i,1) = 0;
-            end
-            
-            Screen('Flip', theWindow);
+%             % Behavioral task
+%             if any(changecolor <= cont_rat_cur_t - cont_rat_start_t & cont_rat_cur_t - cont_rat_start_t <= changecolor + changedur) % It takes 1 sec from the changecolor
+%                 Screen('DrawLine', theWindow, red, x, H*(1/2)-scale_H/3, x, H*(1/2)+scale_H/3, 6); %rating bar turns in red
+%                 data.dat.changecolor_appear(rec_i,1) = 1;  % check with changecolor_response whether they are the same
+%             else
+%                 Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/3, x, H*(1/2)+scale_H/3, 6); %rating bar returns to its own color
+%                 data.dat.changecolor_appear(rec_i,1) = 0;
+%             end
+%             
+%             Screen('Flip', theWindow);
             
             % save data every 1 min
             if mod(run_dur, 60) == 0

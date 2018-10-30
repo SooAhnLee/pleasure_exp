@@ -81,17 +81,17 @@ S.type = type;
 % run_dur = 18*60; % including disdaq, except 8 secs before trigger
 run_dur = 18*60;  %
 
-changecolor = [10:60:run_dur];
-changecolor_jitter = randi(10, 1, numel(changecolor));
-changecolor = changecolor + changecolor_jitter;
-changedur = 1; % duration of color change : 1 sec
+% changecolor = [10:60:run_dur];
+% changecolor_jitter = randi(10, 1, numel(changecolor));
+% changecolor = changecolor + changecolor_jitter;
+% changedur = 1; % duration of color change : 1 sec
 
 rating_types_pls = call_ratingtypes_pls;
 
 data.dat.type = S.type;
 data.dat.duration = run_dur;
-data.dat.changecolor = changecolor;
-data.dat.changetime = changedur;
+% data.dat.changecolor = changecolor;
+% data.dat.changetime = changedur;
 
 %% SETUP : Screen
 

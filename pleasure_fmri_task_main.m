@@ -81,17 +81,11 @@ S.type = type;
 % run_dur = 18*60; % including disdaq, except 8 secs before trigger
 run_dur = 18*60;  %
 
-% changecolor = [10:60:run_dur];
-% changecolor_jitter = randi(10, 1, numel(changecolor));
-% changecolor = changecolor + changecolor_jitter;
-% changedur = 1; % duration of color change : 1 sec
-
 rating_types_pls = call_ratingtypes_pls;
 
 data.dat.type = S.type;
 data.dat.duration = run_dur;
-% data.dat.changecolor = changecolor;
-% data.dat.changetime = changedur;
+
 
 %% SETUP : Screen
 
@@ -393,24 +387,15 @@ try
             [lb, rb, start_center] = draw_scale_pls('cont_glms');
             msgtxt = '이 경험이 얼마나 유쾌 혹은 불쾌한지를 지속적으로 보고해주세요.';
             DrawFormattedText(theWindow, double(msgtxt), 'center', H*(1/4), orange);
-            [x,~,button] = GetMouse(theWindow);
+            [x,~,~] = GetMouse(theWindow);
             if x < lb1; x = lb1; elseif x > rb1; x = rb1; end
+            Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/3, x, H*(1/2)+scale_H/3, 6);  %rating bar
+            Screen('Flip', theWindow);
             
             cont_rat_cur_t = GetSecs;
             data.dat.cont_rating_time_fromstart(rec_i,1) = cont_rat_cur_t-cont_rat_start_t;
             data.dat.cont_rating(rec_i,1) = (x-W/2)/(rb1-lb1).*2;
-            data.dat.changecolor_response(rec_i,1) = button(1);
-            
-%             % Behavioral task
-%             if any(changecolor <= cont_rat_cur_t - cont_rat_start_t & cont_rat_cur_t - cont_rat_start_t <= changecolor + changedur) % It takes 1 sec from the changecolor
-%                 Screen('DrawLine', theWindow, red, x, H*(1/2)-scale_H/3, x, H*(1/2)+scale_H/3, 6); %rating bar turns in red
-%                 data.dat.changecolor_appear(rec_i,1) = 1;  % check with changecolor_response whether they are the same
-%             else
-%                 Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/3, x, H*(1/2)+scale_H/3, 6); %rating bar returns to its own color
-%                 data.dat.changecolor_appear(rec_i,1) = 0;
-%             end
-%             
-%             Screen('Flip', theWindow);
+              
             
             % save data every 1 min
             if mod(run_dur, 60) == 0
@@ -419,7 +404,11 @@ try
             
             [~,~,keyCode] = KbCheck;
             if keyCode(KbName('q')) == 1
-                abort_experiment('manual');
+                abort_experiment('manual');                
+                                
+                data.dat.cont_rating_dur = GetSecs - cont_rat_start_t;  % should be equal to run_dur - disdaq
+                save(data.datafile, 'data', '-append');  % save the lasting time when aborted
+                
                 break
             end
             
@@ -427,9 +416,6 @@ try
         
         % end anyway after run duration including disdaq (run_dur; total 18 mins)
         waitsec_fromstarttime(data.run_starttime, run_dur)  % run duration (with disdaq) except 8 secs
-        
-        data.dat.cont_rating_dur = GetSecs - cont_rat_start_t;  % should be equal to run_dur - disdaq
-        save(data.datafile, 'data', '-append');
         
         if USE_EYELINK
             Eyelink('Message','Continuous Rating End');

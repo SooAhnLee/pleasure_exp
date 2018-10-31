@@ -407,7 +407,7 @@ try
                 abort_experiment('manual');                
                                 
                 data.dat.cont_rating_dur = GetSecs - cont_rat_start_t;  % should be equal to run_dur - disdaq
-                save(data.datafile, 'data', '-append');  % save the lasting time when aborted
+                save(data.datafile, 'data', '-append');  % also save the lasting time when aborted
                 
                 break
             end
@@ -416,6 +416,9 @@ try
         
         % end anyway after run duration including disdaq (run_dur; total 18 mins)
         waitsec_fromstarttime(data.run_starttime, run_dur)  % run duration (with disdaq) except 8 secs
+        
+        data.dat.cont_rating_dur = GetSecs - cont_rat_start_t;  % should be equal to run_dur - disdaq
+        save(data.datafile, 'data', '-append');  % save the lasting time 
         
         if USE_EYELINK
             Eyelink('Message','Continuous Rating End');

@@ -42,7 +42,7 @@ end
 %% SETUP : Create paradigm according to subject information
 
 data.dat.type = 'T1';
-data.dat.duration = 30;  % 15*60 (including disdaq)
+data.dat.duration = 7*60+37;  %including disdaq
 
 %% SETUP : Screen
 
@@ -69,7 +69,7 @@ switch screen_mode
         window_rect = [0 0 window_info.width window_info.height]/window_ratio;
         fontsize = 20;
     case 'testmode'
-        window_rect = [0 0 1440 900];
+        window_rect = [0 0 1440 900];  % 1920 1080]; full screen for window
         fontsize = 32;
 end
 
@@ -156,7 +156,7 @@ if keyCode(KbName('q')) == 1
     abort_experiment('manual');
 end
 
-waitsec_fromstarttime(t1_start_t, 15)  % duration except disdaq
+waitsec_fromstarttime(t1_start_t, data.dat.duration - 15)  % duration except disdaq
 
 
 

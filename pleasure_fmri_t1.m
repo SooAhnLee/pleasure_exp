@@ -42,7 +42,7 @@ end
 %% SETUP : Create paradigm according to subject information
 
 data.dat.type = 'T1';
-data.dat.duration = 7*60+37;  %including disdaq
+data.dat.duration = 7*60+38;
 
 %% SETUP : Screen
 
@@ -116,33 +116,6 @@ while true % Space
 end
 
 
-while true % Ready, s
-    DrawFormattedText(theWindow, double('참가자가 준비되었으면, 이미징을 시작합니다 (s).'), 'center', 'center', white, [], [], [], 2);
-    Screen('Flip', theWindow);
-    
-    [~,~,keyCode] = KbCheck;
-    if keyCode(KbName('s')) == 1
-        break
-    elseif keyCode(KbName('q')) == 1
-        abort_experiment('manual');
-        break
-    end
-end
-
-
-% For disdaq ("시작합니다…") : 5 secs
-data.dat.t1_starttime = GetSecs;
-Screen(theWindow, 'FillRect', bgcolor, window_rect);
-DrawFormattedText(theWindow, double('시작합니다...'), 'center', 'center', white, [], [], [], 1.2);
-Screen('Flip', theWindow);
-waitsec_fromstarttime(data.dat.t1_starttime, 5);
-
-% For disdaq (blank & biopac) : 10 secs
-Screen(theWindow,'FillRect',bgcolor, window_rect);
-Screen('Flip', theWindow);
-waitsec_fromstarttime(data.dat.t1_starttime, 15); % 5+10
-
-
 % Fixation cross
 
 t1_start_t = GetSecs;
@@ -156,7 +129,7 @@ if keyCode(KbName('q')) == 1
     abort_experiment('manual');
 end
 
-waitsec_fromstarttime(t1_start_t, data.dat.duration - 15)  % duration except disdaq
+waitsec_fromstarttime(t1_start_t, data.dat.duration)
 
 
 

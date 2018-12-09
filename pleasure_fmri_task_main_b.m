@@ -1,4 +1,4 @@
-function pleasure_fmri_task_main(SID, SubjNum, type, varargin)
+function pleasure_fmri_task_main_b(SID, SubjNum, type, varargin)
 
 %% SETUP : Basic parameters
 

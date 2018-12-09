@@ -79,12 +79,19 @@ end
 
 S.type = type;
 % run_dur = 18*60; % including disdaq, except 8 secs before trigger
-run_dur = 18*60;  %
+run_dur = 18*60;  
 
 rating_types_pls = call_ratingtypes_pls;
 
+changecolor = [10:60:run_dur];
+changecolor_jitter = randi(10, 1, numel(changecolor));
+changecolor = changecolor + changecolor_jitter;
+changetime = 1;  %lasting time
+
 data.dat.type = S.type;
 data.dat.duration = run_dur;
+data.dat.changecolor = changecolor;
+data.dat.changetime = changetime;
 
 
 %% SETUP : Screen
@@ -387,15 +394,27 @@ try
             [lb, rb, start_center] = draw_scale_pls('cont_glms');
             msgtxt = '이 경험이 얼마나 유쾌 혹은 불쾌한지를 지속적으로 보고해주세요.';
             DrawFormattedText(theWindow, double(msgtxt), 'center', H*(1/4), orange);
-            [x,~,~] = GetMouse(theWindow);
+            [x,~,button] = GetMouse(theWindow);
             if x < lb1; x = lb1; elseif x > rb1; x = rb1; end
-            Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/3, x, H*(1/2)+scale_H/3, 6);  %rating bar
-            Screen('Flip', theWindow);
             
             cont_rat_cur_t = GetSecs;
             data.dat.cont_rating_time_fromstart(rec_i,1) = cont_rat_cur_t-cont_rat_start_t;
             data.dat.cont_rating(rec_i,1) = (x-W/2)/(rb1-lb1).*2;
-              
+            
+            data.dat.changecolor_response(rec_i,1) = button(1);
+            
+            
+            % behavioral task
+            if any(changecolor <= cont_rat_cur_t - cont_rat_start_t & cont_rat_cur_t - cont_rat_start_t <= changecolor + changetime) %changecolor lasts 1 sec
+                Screen('DrawLine', theWindow, red, x, H*(1/2)-scale_H/3, x, H*(1/2)-scale_H/3, 6);  %rating bar with the behavioral task
+                data.dat.changecolor_onset(rec_i,1) = 1;
+            else
+                Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/3, x, H*(1/2)+scale_H/3, 6);  %rating bar without the behavioral task
+                data.dat.changecolor_onset(rec_i,1) = 0;
+            end
+            
+            Screen('Flip', theWindow);
+                        
             
             % save data every 1 min
             if mod(run_dur, 60) == 0

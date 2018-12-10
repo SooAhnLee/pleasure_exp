@@ -81,12 +81,12 @@ S.type = type;
 % run_dur = 18*60; % including disdaq, except 8 secs before trigger
 run_dur = 18*60;  
 
-rating_types_pls = call_ratingtypes_pls;
-
 changecolor = [10:60:run_dur];
 changecolor_jitter = randi(10, 1, numel(changecolor));
 changecolor = changecolor + changecolor_jitter;
 changetime = 1;  %lasting time
+
+rating_types_pls = call_ratingtypes_pls;
 
 data.dat.type = S.type;
 data.dat.duration = run_dur;
@@ -404,13 +404,13 @@ try
             data.dat.changecolor_response(rec_i,1) = button(1);
             
             
-            % behavioral task
-            if any(changecolor <= cont_rat_cur_t - cont_rat_start_t & cont_rat_cur_t - cont_rat_start_t <= changecolor + changetime) %changecolor lasts 1 sec
-                Screen('DrawLine', theWindow, red, x, H*(1/2)-scale_H/3, x, H*(1/2)-scale_H/3, 6);  %rating bar with the behavioral task
-                data.dat.changecolor_onset(rec_i,1) = 1;
+           % Behavioral task
+            if any(changecolor <= cont_rat_cur_t - cont_rat_start_t & cont_rat_cur_t - cont_rat_start_t <= changecolor + changetime) % It takes 1 sec from the changecolor
+                Screen('DrawLine', theWindow, red, x, H*(1/2)-scale_H/3, x, H*(1/2)+scale_H/3, 6); %rating bar turns in red
+                data.dat.changecolor_appear(rec_i,1) = 1;  % check with changecolor_response whether they are the same
             else
-                Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/3, x, H*(1/2)+scale_H/3, 6);  %rating bar without the behavioral task
-                data.dat.changecolor_onset(rec_i,1) = 0;
+                Screen('DrawLine', theWindow, orange, x, H*(1/2)-scale_H/3, x, H*(1/2)+scale_H/3, 6); %rating bar returns to its own color
+                data.dat.changecolor_appear(rec_i,1) = 0;
             end
             
             Screen('Flip', theWindow);

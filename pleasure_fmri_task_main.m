@@ -336,6 +336,10 @@ try
             
             [~,~,keyCode] = KbCheck;
             if keyCode(KbName('s')) == 1
+                savenum = 1;
+                save_timestamp{savenum} = GetSecs;
+                data.dat.cont_rat_save_timestamp = save_timestamp;
+                save(data.datafile, 'data', '-append')
                 break
             elseif keyCode(KbName('q')) == 1
                 abort_experiment('manual');
@@ -395,17 +399,26 @@ try
             cont_rat_cur_t = GetSecs;
             data.dat.cont_rating_time_fromstart(rec_i,1) = cont_rat_cur_t-cont_rat_start_t;
             data.dat.cont_rating(rec_i,1) = (x-W/2)/(rb1-lb1).*2;
-              
             
-            % save data every 1 min
-            if mod(run_dur, 60) == 0
-                save(data.datafile, 'data', '-append')
+            
+            % save data after 9 mins
+            for i = 1
+                k = 0;
+                while GetSecs - data.run_starttime > 9*60-0.5 && GetSecs - data.run_starttime < 9*60+0.5
+                    k = k + 1;
+                    if k == 1
+                        savenum = 2;
+                        save_timestamp{savenum} = GetSecs;
+                        data.dat.cont_rat_save_timestamp = save_timestamp;
+                        save(data.datafile, 'data', '-append')
+                    end
+                end
             end
             
             [~,~,keyCode] = KbCheck;
             if keyCode(KbName('q')) == 1
-                abort_experiment('manual');                
-                                
+                abort_experiment('manual');
+                
                 data.dat.cont_rating_dur = GetSecs - cont_rat_start_t;  % should be equal to run_dur - disdaq
                 save(data.datafile, 'data', '-append');  % also save the lasting time when aborted
                 
@@ -418,12 +431,15 @@ try
         waitsec_fromstarttime(data.run_starttime, run_dur)  % run duration (with disdaq) except 8 secs
         
         data.dat.cont_rating_dur = GetSecs - cont_rat_start_t;  % should be equal to run_dur - disdaq
-        save(data.datafile, 'data', '-append');  % save the lasting time 
+        savenum = 3;
+        save_timestamp{savenum} = GetSecs;
+        data.dat.cont_rat_save_timestamp = save_timestamp;
+        save(data.datafile, 'data', '-append')
         
         if USE_EYELINK
             Eyelink('Message','Continuous Rating End');
-        end        
-                
+        end
+        
         if USE_BIOPAC
             data.dat.biopac_endtime = GetSecs; % biopac timestamp
             BIOPAC_trigger(ljHandle, biopac_channel, 'on');
@@ -454,7 +470,7 @@ try
         end
         
         waitsec_fromstarttime(all_start_t, 4)
-                
+        
         
         for scale_i = 1:numel(scales)
             

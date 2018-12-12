@@ -95,7 +95,7 @@ window_ratio = 3;
 screens = Screen('Screens');
 window_num = screens(1);
 Screen('Preference', 'SkipSyncTests', 1);
-screen_mode = 'full';
+screen_mode = 'test';
 window_info = Screen('Resolution', window_num);
 switch screen_mode
     case 'full'

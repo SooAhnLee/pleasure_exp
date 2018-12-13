@@ -389,7 +389,7 @@ try
             rec_i = rec_i + 1;
             Screen(theWindow, 'FillRect', bgcolor, window_rect);
             [lb, rb, start_center] = draw_scale_pls('cont_glms');
-            msgtxt = '이 경험이 얼마나 유쾌 혹은 불쾌한지를 지속적으로 보고해주세요.';
+            msgtxt = '이 자극이 얼마나 유쾌 혹은 불쾌한지를 지속적으로 보고해주세요.';
             DrawFormattedText(theWindow, double(msgtxt), 'center', H*(1/4), orange);
             [x,~,~] = GetMouse(theWindow);
             if x < lb1; x = lb1; elseif x > rb1; x = rb1; end

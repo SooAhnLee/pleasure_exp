@@ -420,10 +420,10 @@ try
             Screen('Flip', theWindow);
                         
             
-            % save data after 9 mins
+            % save data after 9 mins including disdaq
             for i = 1
                 k = 0;
-                if GetSecs - cont_rat_start_t > 9*60-0.5 && GetSecs - cont_rat_start_t < 9*60+0.5
+                if GetSecs - cont_rat_start_t > 9*60-15.5 && GetSecs - cont_rat_start_t < 9*60-14.5
                     k = k + 1;
                     if k == 1
                         savenum = 2;

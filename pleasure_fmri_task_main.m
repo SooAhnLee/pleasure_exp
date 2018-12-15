@@ -95,7 +95,7 @@ window_ratio = 3;
 screens = Screen('Screens');
 window_num = screens(1);
 Screen('Preference', 'SkipSyncTests', 1);
-screen_mode = 'test';
+screen_mode = 'full';
 window_info = Screen('Resolution', window_num);
 switch screen_mode
     case 'full'
@@ -404,7 +404,7 @@ try
             % save data after 9 mins
             for i = 1
                 k = 0;
-                while GetSecs - data.run_starttime > 9*60-0.5 && GetSecs - data.run_starttime < 9*60+0.5
+                while GetSecs - data.run_starttime > 9*60-15.5 && GetSecs - data.run_starttime < 9*60-14.5
                     k = k + 1;
                     if k == 1
                         savenum = 2;

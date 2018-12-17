@@ -91,7 +91,7 @@ Screen('Preference', 'TextEncodingLocale', 'ko_KR.UTF-8');
 %% Start : Screen
 
 theWindow = Screen('OpenWindow', window_num, bgcolor, window_rect); % start the screen
-Screen('TextFont', theWindow, font);
+% Screen('TextFont', theWindow, font);
 Screen('TextSize', theWindow, fontsize);
 
 Screen(theWindow, 'FillRect', bgcolor, window_rect); % Just getting information, and do not show the scale.

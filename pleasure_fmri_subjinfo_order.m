@@ -11,7 +11,7 @@ cd(basedir); addpath(genpath(basedir));
 % version 1
 rundatdir = fullfile(basedir, 'Pleasure_randomized_run_data_v1.mat');
 load(rundatdir, 'Runs_randomized');
-order = strtrim(Runs_randomized(SubjNum,:));
+order = Runs_randomized(SubjNum,:);
 
 % version 2
 % Runs = {'REST', 'CAPS', 'QUIN', 'SWEET', 'TOUCH'};

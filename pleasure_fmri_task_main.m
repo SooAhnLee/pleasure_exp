@@ -77,13 +77,12 @@ end
 
 %% SETUP : Create paradigm according to subject information
 
-S.type = type;
 % run_dur = 18*60; % including disdaq, except 8 secs before trigger
 run_dur = 18*60;  %
 
 rating_types_pls = call_ratingtypes_pls;
 
-data.dat.type = S.type;
+data.dat.type = type;
 data.dat.duration = run_dur;
 
 
@@ -388,13 +387,15 @@ try
             
             rec_i = rec_i + 1;
             Screen(theWindow, 'FillRect', bgcolor, window_rect);
-            if S.type{1} == 'CAPS' | S.type{1} == 'QUIN'
+
+            if type{1} == 'CAPS ' || type{1} == 'QUIN '
                 [lb, rb, start_center] = draw_scale_pls('cont_glms_unpls');
                 msgtxt = '이 자극이 얼마나 불쾌 혹은 유쾌한지를 지속적으로 보고해주세요.';
             else
                 [lb, rb, start_center] = draw_scale_pls('cont_glms_pls');
                 msgtxt = '이 자극이 얼마나 유쾌 혹은 불쾌한지를 지속적으로 보고해주세요.';
             end
+            
             DrawFormattedText(theWindow, double(msgtxt), 'center', H*(1/4), orange);
             [x,~,~] = GetMouse(theWindow);
             if x < lb1; x = lb1; elseif x > rb1; x = rb1; end
@@ -458,8 +459,8 @@ try
         
         all_start_t = GetSecs;
         data.dat.postrun_starttime = all_start_t;
-        ratestim = strcmp(rating_types_pls.postallstims, S.type);
-        % rating_types_pls.postallstims = {'REST', 'CAPS', 'QUIN', 'SWEET', 'TOUCH'};
+        ratestim = strcmp(rating_types_pls.postallstims, type);
+        % rating_types_pls.postallstims = {'REST ', 'CAPS ', 'QUIN ', 'SWEET', 'TOUCH'};
         % 1 appears at the right type of this session
         % Ex: 'TOUCH' session --> 0 0 0 0 1 (logical)
         scales = rating_types_pls.postalltypes{ratestim};

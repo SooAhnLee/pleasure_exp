@@ -388,7 +388,7 @@ try
             rec_i = rec_i + 1;
             Screen(theWindow, 'FillRect', bgcolor, window_rect);
 
-            if type{1} == 'CAPS ' || type{1} == 'QUIN '
+            if type{1} == 'CAPS ' | type{1} == 'QUIN '
                 [lb, rb, start_center] = draw_scale_pls('cont_glms_unpls');
                 msgtxt = '이 자극이 얼마나 불쾌 혹은 유쾌한지를 지속적으로 보고해주세요.';
             else

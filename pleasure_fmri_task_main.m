@@ -449,7 +449,7 @@ try
         if USE_BIOPAC
             data.dat.biopac_endtime = GetSecs; % biopac timestamp
             BIOPAC_trigger(ljHandle, biopac_channel, 'on');
-            ending_trigger = 2*SubjRun-1;  % 0.1, 0.3, 0.5, 0.7, 0.9
+            ending_trigger = (2*SubjRun-1)/10;  % 0.1, 0.3, 0.5, 0.7, 0.9
             waitsec_fromstarttime(data.dat.biopac_endtime, ending_trigger);
             BIOPAC_trigger(ljHandle, biopac_channel, 'off');
         end

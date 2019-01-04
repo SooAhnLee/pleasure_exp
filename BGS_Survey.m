@@ -10,12 +10,13 @@ addpath(genpath(basedir));
 
 SID = input('\nSubject ID? : ', 's');
 SID = strtrim(SID);
-SubjNum = input('\nSubject number? : ');
+
 
 savedir = fullfile(basedir, 'BGS_Survey');
-
+nowtime = clock;
+Date = sprintf('%.2d%.2d%.2d', nowtime(1), nowtime(2), nowtime(3));
 data.subject = SID;
-data.datafile = fullfile(savedir, [SID, '_PLS', sprintf('%.3d', SubjNum), '.mat']);
+data.datafile = fullfile(savedir, [SID, '_PLS_', Date, '.mat']);
 data.version = 'Pleasure_v1_10-01-2018_Cocoanlab';
 data.starttime = datestr(clock, 0);
 data.starttime_getsecs = GetSecs;

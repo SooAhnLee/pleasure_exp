@@ -18,7 +18,7 @@ nowtime = clock;
 SubjDate = sprintf('%.2d%.2d%.2d', nowtime(1), nowtime(2), nowtime(3));
 
 data.subject = SID;
-data.datafile = fullfile(savedir, [SubjDate, '_', SID, '_subj', sprintf('%.3d', SubjNum), ...
+data.datafile = fullfile(savedir, [SubjDate, '_', SID, '_PLS', sprintf('%.3d', SubjNum), ...
     '_t1', '.mat']);
 data.version = 'Pleasure_v1_08-27-2018_Cocoanlab';
 data.starttime = datestr(clock, 0);
@@ -120,17 +120,18 @@ end
 
 t1_start_t = GetSecs;
 
-
-DrawFormattedText(theWindow, double('+'), 'center', 'center', white);
-Screen('Flip', theWindow);
-
-[~,~,keyCode] = KbCheck;
-if keyCode(KbName('q')) == 1
-    abort_experiment('manual');
+while true
+    DrawFormattedText(theWindow, double('+'), 'center', 'center', white);
+    Screen('Flip', theWindow);
+    
+    [~,~,keyCode] = KbCheck;
+    if keyCode(KbName('q')) == 1
+        abort_experiment('manual');
+    elseif keyCode(KbName('space')) == 1
+        break
+    end
+    
 end
-
-waitsec_fromstarttime(t1_start_t, data.dat.duration)
-
 
 
 data.dat.t1_endtime = GetSecs - data.dat.t1_starttime;

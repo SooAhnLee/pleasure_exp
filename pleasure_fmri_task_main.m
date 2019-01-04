@@ -391,6 +391,9 @@ try
             if type{1} == 'CAPS ' | type{1} == 'QUIN '
                 [lb, rb, start_center] = draw_scale_pls('cont_glms_unpls');
                 msgtxt = '이 자극이 얼마나 불쾌 혹은 유쾌한지를 지속적으로 보고해주세요.';
+            elseif type{1} == 'REST '
+                [lb, rb, start_center] = draw_scale_pls('cont_glms_pls');
+                msgtxt = '현재 상태가 얼마나 유쾌 혹은 불쾌한지를 지속적으로 보고해주세요.';
             else
                 [lb, rb, start_center] = draw_scale_pls('cont_glms_pls');
                 msgtxt = '이 자극이 얼마나 유쾌 혹은 불쾌한지를 지속적으로 보고해주세요.';

@@ -42,7 +42,7 @@ end
 %% SETUP : Create paradigm according to subject information
 
 data.dat.type = 'T1';
-data.dat.duration = 7*60+38;
+% data.dat.duration = 7*60+38;
 
 %% SETUP : Screen
 
@@ -119,6 +119,7 @@ end
 % Fixation cross
 
 t1_start_t = GetSecs;
+data.dat.t1_starttime = t1_start_t;
 
 while true
     DrawFormattedText(theWindow, double('+'), 'center', 'center', white);
@@ -126,15 +127,12 @@ while true
     
     [~,~,keyCode] = KbCheck;
     if keyCode(KbName('q')) == 1
-        abort_experiment('manual');
-    elseif keyCode(KbName('space')) == 1
         break
     end
     
 end
 
-
-data.dat.t1_endtime = GetSecs - data.dat.t1_starttime;
+data.dat.t1_duration = GetSecs - t1_start_t;
 
 save(data.datafile, 'data', '-append')
 

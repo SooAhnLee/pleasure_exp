@@ -54,7 +54,7 @@ nowtime = clock;
 SubjDate = sprintf('%.2d%.2d%.2d', nowtime(1), nowtime(2), nowtime(3));
 
 data.subject = SID;
-data.datafile = fullfile(savedir, [SubjDate, '_', SID, '_PLS', sprintf('%.3d', SubjNum), ...
+data.datafile = fullfile(savedir, [SubjDate, '_PLS', sprintf('%.3d', SubjNum) '_', SID, ...
     '_run', sprintf('%.2d', SubjRun), '.mat']);
 data.version = 'Pleasure_v1_10-04-2018_Cocoanlab';  % month-date-year
 data.starttime = datestr(clock, 0);

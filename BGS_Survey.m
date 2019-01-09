@@ -23,7 +23,7 @@ data.starttime_getsecs = GetSecs;
 
 % if the same file exists, break and retype subject info
 if exist(data.datafile, 'file')
-    fprintf('\n ** EXSITING FILE: %s %s **', data.subject, SubjNum);
+    fprintf('\n ** EXSITING FILE: %s %s **', data.subject);
     cont_or_not = input(['\nYou have already saved data with this subject information.', ...
         '\nWill you discard the data and re-start the survey?', ...
         '\n1: Yes, re-start the survey.  ,   2: No, it`s a mistake. I`ll break.\n:  ']);

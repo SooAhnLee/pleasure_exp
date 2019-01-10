@@ -8,25 +8,17 @@ SubjNum = input('\nSubject number? : ');
 basedir = pwd;
 cd(basedir); addpath(genpath(basedir));
 
-% version 1
-rundatdir = fullfile(basedir, 'Pleasure_randomized_run_data_v1.mat');
-load(rundatdir, 'Runs_randomized');
-order = Runs_randomized(SubjNum,:);
-
-% version 2
-% Runs = {'REST', 'CAPS', 'QUIN', 'SWEET', 'TOUCH'};
-% for i = 1:80
-%     order{i} = Runs(randperm(5)); % produce a randomized order
-% end
-% order = Runs(randperm(5));
+rundatdir = fullfile(basedir, 'Pleasure_randomized_run_data_final.mat');
+load(rundatdir, 'new_runs_randomized');
+order = new_runs_randomized(SubjNum,:);
 
 SubjInfo_Order.SID = SID;
 SubjInfo_Order.SubjNum = SubjNum;
-SubjInfo_Order.order = order; 
+SubjInfo_Order.order = order;
 
 nowtime = clock;
 SubjDate = sprintf('%.2d%.2d%.2d', nowtime(1), nowtime(2), nowtime(3));
-save_subjinfo_order = fullfile(basedir, [SubjDate, '_', SID, '_PLS', sprintf('%.3d', SubjNum), '_SubjInfo_Order.mat']);
+save_subjinfo_order = fullfile(basedir, [SubjDate, '_PLS', sprintf('%.3d', SubjNum), '_', SID, '_SubjInfo_Order.mat']);
 save(save_subjinfo_order, 'SubjInfo_Order');
 
 end

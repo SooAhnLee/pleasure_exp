@@ -18,8 +18,8 @@ nowtime = clock;
 SubjDate = sprintf('%.2d%.2d%.2d', nowtime(1), nowtime(2), nowtime(3));
 
 data.subject = SID;
-data.datafile = fullfile(savedir, [SubjDate, '_', SID, '_PLS', sprintf('%.3d', SubjNum), ...
-    '_t1', '.mat']);
+data.datafile = fullfile(savedir, [SubjDate, '_PLS', sprintf('%.3d', SubjNum), ...
+    '_', SID, '_t1', '.mat']);
 data.version = 'Pleasure_v1_08-27-2018_Cocoanlab';
 data.starttime = datestr(clock, 0);
 data.starttime_getsecs = GetSecs;

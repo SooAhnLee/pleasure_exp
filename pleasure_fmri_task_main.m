@@ -89,7 +89,7 @@ data.dat.duration = run_dur;
 %% SETUP : Screen
 
 bgcolor = 50;
-window_ratio = 3;
+window_ratio = 1.1;
 
 screens = Screen('Screens');
 window_num = screens(1);

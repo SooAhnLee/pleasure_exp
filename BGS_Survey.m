@@ -44,7 +44,7 @@ bgcolor = 50;
 screens = Screen('Screens');
 window_num = screens(1);
 Screen('Preference', 'SkipSyncTests', 1);
-screen_mode = 'testmode';
+screen_mode = 'full';
 window_info = Screen('Resolution', window_num);
 switch screen_mode
     case 'full'
@@ -109,7 +109,7 @@ stimuli = BGS_questionnaires.stimulus_types_content;
 
 
 while true
-    msgtxt = 'Áö±ÝºÎÅÍ ¼³¹®À» ½ÃÀÛÇÕ´Ï´Ù. (space)';
+    msgtxt = 'ï¿½ï¿½ï¿½Ýºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½. (space)';
     DrawFormattedText(theWindow, double(msgtxt), 'center', 'center', white);
     Screen('Flip', theWindow);
     
@@ -301,7 +301,7 @@ end
 
 if stimuli_i == numel(BGS_questionnaires.stimulus_types_content)
     while true
-        msgtxt = '¼³¹®ÀÌ ¸ðµÎ ³¡³µ½À´Ï´Ù.\nÂü°¡ÀÚºÐ²²¼­´Â ½ÇÇèÀÚÀÇ Áö½Ã¿¡ µû¶óÁÖ½Ã±â ¹Ù¶ø´Ï´Ù. (space)';
+        msgtxt = 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.\nï¿½ï¿½ï¿½ï¿½ï¿½ÚºÐ²ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ã¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö½Ã±ï¿½ ï¿½Ù¶ï¿½ï¿½Ï´ï¿½. (space)';
         msgtxt = double(msgtxt); % korean to double
         DrawFormattedText(theWindow, msgtxt, 'center', 'center', white, [], [], [], 2);
         Screen('Flip', theWindow);

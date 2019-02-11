@@ -109,7 +109,7 @@ stimuli = BGS_questionnaires.stimulus_types_content;
 
 
 while true
-    msgtxt = '���ݺ��� ������ �����մϴ�. (space)';
+    msgtxt = '지금부터 설문을 시작합니다. (space)';
     DrawFormattedText(theWindow, double(msgtxt), 'center', 'center', white);
     Screen('Flip', theWindow);
     
@@ -301,7 +301,7 @@ end
 
 if stimuli_i == numel(BGS_questionnaires.stimulus_types_content)
     while true
-        msgtxt = '������ ��� �������ϴ�.\n�����ںв����� �������� ���ÿ� �����ֽñ� �ٶ��ϴ�. (space)';
+        msgtxt = '설문이 모두 끝났습니다.\n참가자분께서는 실험자의 지시에 따라주시기 바랍니다. (space)';
         msgtxt = double(msgtxt); % korean to double
         DrawFormattedText(theWindow, msgtxt, 'center', 'center', white, [], [], [], 2);
         Screen('Flip', theWindow);

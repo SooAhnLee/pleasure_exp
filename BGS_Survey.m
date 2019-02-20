@@ -109,7 +109,7 @@ stimuli = BGS_questionnaires.stimulus_types_content;
 
 
 while true
-    msgtxt = 'ì§€ê¸ˆë¶€í„° ì„¤ë¬¸ì„ ì‹œì‘í•©ë‹ˆë‹¤. (space)';
+    msgtxt = 'Áö±İºÎÅÍ ¼³¹®À» ½ÃÀÛÇÕ´Ï´Ù. (space)';
     DrawFormattedText(theWindow, double(msgtxt), 'center', 'center', white);
     Screen('Flip', theWindow);
     
@@ -301,7 +301,7 @@ end
 
 if stimuli_i == numel(BGS_questionnaires.stimulus_types_content)
     while true
-        msgtxt = 'ì„¤ë¬¸ì´ ëª¨ë‘ ëë‚¬ìŠµë‹ˆë‹¤.\nì°¸ê°€ìë¶„ê»˜ì„œëŠ” ì‹¤í—˜ìì˜ ì§€ì‹œì— ë”°ë¼ì£¼ì‹œê¸° ë°”ëë‹ˆë‹¤. (space)';
+        msgtxt = '¼³¹®ÀÌ ¸ğµÎ ³¡³µ½À´Ï´Ù.\nÂü°¡ÀÚºĞ²²¼­´Â ½ÇÇèÀÚÀÇ Áö½Ã¿¡ µû¶óÁÖ½Ã±â ¹Ù¶ø´Ï´Ù. (space)';
         msgtxt = double(msgtxt); % korean to double
         DrawFormattedText(theWindow, msgtxt, 'center', 'center', white, [], [], [], 2);
         Screen('Flip', theWindow);

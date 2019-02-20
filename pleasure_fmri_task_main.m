@@ -76,9 +76,8 @@ else
 end
 
 %% SETUP : Create paradigm according to subject information
-
-% run_dur = 18*60; % including disdaq, except 8 secs before trigger
-run_dur = 18*60;  %
+ 
+run_dur = 10;  % including disdaq(10s), except 8 secs before trigger
 
 rating_types_pls = call_ratingtypes_pls;
 
@@ -329,7 +328,7 @@ try
         end
         
         while true % Ready, s
-            msgtxt = '참가자가 준비되었으면, 이미징을 시작합니다 (s).';
+            msgtxt = '시작합니다...';
             DrawFormattedText(theWindow, double(msgtxt), 'center', 'center', white, [], [], [], 2);
             Screen('Flip', theWindow);
             
@@ -346,18 +345,6 @@ try
             end
         end
         
-        %% For disdaq : 15 secs
-        % For disdaq ("시작합니다…") : 5 secs
-        data.run_starttime = GetSecs;
-        Screen(theWindow, 'FillRect', bgcolor, window_rect);
-        DrawFormattedText(theWindow, double('시작합니다…'), 'center', 'center', white, [], [], [], 1.2);
-        Screen('Flip', theWindow);
-        waitsec_fromstarttime(data.run_starttime, 5);
-        
-        % For disdaq (blank / EYELINK & BIOPAC START) : 10 secs
-        Screen(theWindow,'FillRect',bgcolor, window_rect);
-        Screen('Flip', theWindow);
-        
         if USE_EYELINK
             Eyelink('StartRecording');
             data.dat.eyetracker_starttime = GetSecs; % eyelink timestamp
@@ -370,20 +357,21 @@ try
             waitsec_fromstarttime(data.dat.biopac_starttime, 1.5);
             BIOPAC_trigger(ljHandle, biopac_channel, 'off');
         end
-        
-        waitsec_fromstarttime(data.run_starttime, 15);  % 5+10
+
         
         %% Continuous rating
+        % This includes disdaq (8~9s), so cut out 10 secs from baseline
+        % (1.5 mins)
         
         cont_rat_start_t = GetSecs;
-        data.dat.cont_rating_starttime = cont_rat_start_t;  %run_starttime + 15 secs
+        data.dat.cont_rating_starttime = cont_rat_start_t;
         
         rec_i = 0;
         x = W/2;
         y = H*(1/2);
         SetMouse(x,y)
         
-        while GetSecs - cont_rat_start_t < run_dur - 15  % duration of continuous rating
+        while GetSecs - cont_rat_start_t < run_dur  % duration of continuous rating
             
             rec_i = rec_i + 1;
             Screen(theWindow, 'FillRect', bgcolor, window_rect);
@@ -413,7 +401,7 @@ try
             % save data after 9 mins
             for i = 1
                 k = 0;
-                while GetSecs - data.run_starttime > 9*60-0.5 && GetSecs - data.run_starttime < 9*60+0.5
+                while GetSecs - data.dat.cont_rating_starttime > 9*60-0.5 && GetSecs - data.run_starttime < 9*60+0.5
                     k = k + 1;
                     if k == 1
                         savenum = 2;
@@ -436,8 +424,8 @@ try
             
         end
         
-        % end anyway after run duration including disdaq (run_dur; total 18 mins)
-        waitsec_fromstarttime(data.run_starttime, run_dur)  % run duration (with disdaq) except 8 secs
+        % end anyway after one session
+        waitsec_fromstarttime(data.dat.cont_rating_starttime, run_dur)  % run duration (with disdaq) except 8 secs
         
         data.dat.cont_rating_dur = GetSecs - cont_rat_start_t;  % should be equal to run_dur - disdaq
         savenum = 3;

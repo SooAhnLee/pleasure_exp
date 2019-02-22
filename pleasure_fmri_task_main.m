@@ -401,7 +401,7 @@ try
             % save data after 9 mins
             for i = 1
                 k = 0;
-                while GetSecs - data.dat.cont_rating_starttime > 9*60-0.5 && GetSecs - data.run_starttime < 9*60+0.5
+                while GetSecs - data.dat.cont_rating_starttime > 7*60-0.5 && GetSecs - data.dat.cont_rating_starttime < 7*60+0.5
                     k = k + 1;
                     if k == 1
                         savenum = 2;

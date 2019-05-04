@@ -8,9 +8,15 @@ SubjNum = input('\nSubject number? : ');
 basedir = pwd;
 cd(basedir); addpath(genpath(basedir));
 
-rundatdir = fullfile(basedir, 'Pleasure_randomized_run_data_final.mat');
-load(rundatdir, 'new_runs_randomized');
-order = new_runs_randomized(SubjNum,:);
+if SubjNum <= 66
+    rundatdir = fullfile(basedir, 'Pleasure_randomized_run_data_final.mat');
+    load(rundatdir, 'new_runs_randomized');
+    order = new_runs_randomized(SubjNum,:);
+else
+    rundatdir = fullfile(basedir, 'Pleasure_randomized_run_data_final2.mat');
+    load(rundatdir, 'new_runs_randomized2');
+    order = new_runs_randomized2(SubjNum-66,:);
+end
 
 SubjInfo_Order.SID = SID;
 SubjInfo_Order.SubjNum = SubjNum;
